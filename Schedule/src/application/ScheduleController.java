@@ -126,18 +126,4 @@ public class ScheduleController {
     		}
     }
 
-    @FXML
-    void add(ActionEvent event) {
-
-    }
-
-    @FXML
-    void lectLengthCBUpdate(ActionEvent event) {
-
-    }
-
-    @FXML
-    void newCourse(ActionEvent event) {
-
-    }
 }
