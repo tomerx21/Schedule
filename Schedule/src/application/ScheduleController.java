@@ -37,7 +37,7 @@ public class ScheduleController {
     @FXML private VBox classVbox;	//Class VBox
     @FXML private TextField classTF;//Class TextField
     @FXML private VBox dayVbox;		//Day VBox
-    @FXML private ComboBox<String> dayCB; //Day ComboBox
+    @FXML private ComboBox<Days> dayCB; //Day ComboBox
     @FXML private VBox startTimeVbox;//Lecture start time VBox
     @FXML private ComboBox<Integer> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
@@ -55,7 +55,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	//ScheduleGrid.add(tempVbox, 7-dayCB.getValue(), startTimeCB.getValue(), 1, 1);
+    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue().getNum(), startTimeCB.getValue(), 1, 1);
     	/*
     	tempVbox = new VBox(5);
     	//tempVbox.setFillWidth(true);
@@ -79,7 +79,7 @@ public class ScheduleController {
     
     //Init all the combo boxes
     public void initializeComboBoxes() {
-    	dayCB.getItems().addAll(days[1].getName(), days[2].getName(), days[3].getName(), days[4].getName(), days[5].getName(), days[6].getName(), days[7].getName());
+    	dayCB.getItems().addAll(days[1], days[2], days[3], days[4], days[5], days[6], days[7]);
     	startTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	endTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	//lectStartTimeCB.getItems().addAll("8:30", "9:30", "10:30", "11:30", "12:40", "13:40", "14:40", "15:40", "16:40" );
