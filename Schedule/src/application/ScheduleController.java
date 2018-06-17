@@ -16,7 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
+//mm
 public class ScheduleController {
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private int length;
