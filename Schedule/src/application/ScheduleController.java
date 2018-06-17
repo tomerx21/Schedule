@@ -30,7 +30,7 @@ public class ScheduleController {
     @FXML private RadioButton labRB; //Lab RadioButton
     @FXML private RadioButton wsRB; //Sadna RadioButton
     @FXML private ComboBox<Integer> lectStartTimeCB;
-
+    @FXML private Label lectLabel;	//Lecture label
     @FXML private VBox ImportentVbox; //CONTAIN ALL OF THE BELOW
     @FXML private VBox lectVbox;	//Lecturer VBox
     @FXML private TextField lectTF; //Lecturer TextField
@@ -87,7 +87,6 @@ public class ScheduleController {
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
-    	//matan
     	//courses.add(new Course());
     }
 
