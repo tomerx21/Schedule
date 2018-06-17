@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class ScheduleController {
-	private ArrayList<Course> courses= new ArrayList<Course>();
+	private ArrayList<Course> courses = new ArrayList<Course>();
 	private int length;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
