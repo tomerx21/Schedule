@@ -19,6 +19,7 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
+	private String endTimeStr, startTimeStr, dayStr;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -83,8 +84,12 @@ public class ScheduleController {
     	courseVbox.setVisible(false);
     	colorCP.setVisible(false);
     	addBtn.setDisable(true);
+    	endTimeStr = endTimeCB.getPromptText();
+    	startTimeStr = startTimeCB.getPromptText();
+    	dayStr = dayCB.getPromptText();
     	//ImportentVbox.setDisable(true);
     	}
+    
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
@@ -94,14 +99,17 @@ public class ScheduleController {
     
     @FXML
     void deleted(ActionEvent event) {
-
+    	courseTF.clear();
+    	lectTF.clear();
+    	classTF.clear();
+    	dayCB.getSelectionModel().clearSelection();
+    	startTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.setPromptText(endTimeStr);
+    	startTimeCB.setPromptText(startTimeStr);
+    	dayCB.setPromptText(dayStr);
     }
-    
-    @FXML
-    void lectLengthCBUpdate(ActionEvent event) {
 
-    } 
-    
     @FXML
     void execAction(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
