@@ -71,11 +71,16 @@ public class ScheduleController {
     	startTimeCB.setPromptText("rte");
     	dayCB.setPromptText("rrtt");
     	deleteBtn.fire();
- 
+
+    	endTimeCB.setPromptText(endTimeStr);
+    	startTimeCB.setPromptText(startTimeStr);
+    	dayCB.setPromptText(dayStr);
     }
+    
     private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
     }
+    
     private int to255Int(double f) {
         return (int) (f * 255);
     }
@@ -99,14 +104,12 @@ public class ScheduleController {
     	endTimeStr = endTimeCB.getPromptText();
     	startTimeStr = startTimeCB.getPromptText();
     	dayStr = dayCB.getPromptText();
-    	//ImportentVbox.setDisable(true);
     	}
     
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
     	colorCP.setVisible(true);
-    	//courses.add(new Course());
     }
     
     @FXML
