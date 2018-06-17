@@ -54,7 +54,7 @@ public class ScheduleController {
     	tempVbox.setMaxHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	tempVbox.setPrefWidth(112);
     	tempVbox.setPrefHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() ));
-    	tempVbox.setAlignment(Pos.CENTER);
+    	tempVbox.setAlignment(Pos.TOP_CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
@@ -67,14 +67,14 @@ public class ScheduleController {
     	dayCB.getSelectionModel().clearSelection();
     	startTimeCB.getSelectionModel().clearSelection();
     	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.setPromptText("ggg");
+    	/*endTimeCB.setPromptText("ggg");
     	startTimeCB.setPromptText("rte");
     	dayCB.setPromptText("rrtt");
     	deleteBtn.fire();
-
     	endTimeCB.setPromptText(endTimeStr);
     	startTimeCB.setPromptText(startTimeStr);
-    	dayCB.setPromptText(dayStr);
+    	dayCB.setPromptText(dayStr);*/
+
     }
     
     private String toRgbString(Color c) {
