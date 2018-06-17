@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 public class ScheduleController {
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private Days days[] = new Days[8];
+	private Times times[] = new Times[10];
 	private int length;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
@@ -39,7 +40,7 @@ public class ScheduleController {
     @FXML private VBox dayVbox;		//Day VBox
     @FXML private ComboBox<Days> dayCB; //Day ComboBox
     @FXML private VBox startTimeVbox;//Lecture start time VBox
-    @FXML private ComboBox<Integer> startTimeCB; //Lecture start time ComboBox
+    @FXML private ComboBox<Times> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
     @FXML private ComboBox<Integer> endTimeCB;	//Lecture end time ComboBox
     
@@ -55,7 +56,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue().getNum(), startTimeCB.getValue(), 1, 1);
+    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
     	/*
     	tempVbox = new VBox(5);
     	//tempVbox.setFillWidth(true);
@@ -72,6 +73,8 @@ public class ScheduleController {
     public void initialize() {
     	for (int i = 0; i < 8; i++)
 			days[i] = new Days(i);
+    	for (int i = 0; i < 10; i++)
+			times[i] = new Times(i);
     	initializeComboBoxes();
     	courseVbox.setVisible(false);
     	//ImportentVbox.setDisable(true);
@@ -80,7 +83,7 @@ public class ScheduleController {
     //Init all the combo boxes
     public void initializeComboBoxes() {
     	dayCB.getItems().addAll(days[1], days[2], days[3], days[4], days[5], days[6], days[7]);
-    	startTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
+    	startTimeCB.getItems().addAll(times[1], times[2], times[3], times[4], times[6], times[7], times[8], times[9]);
     	endTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	//lectStartTimeCB.getItems().addAll("8:30", "9:30", "10:30", "11:30", "12:40", "13:40", "14:40", "15:40", "16:40" );
     }
