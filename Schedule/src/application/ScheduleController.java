@@ -59,7 +59,15 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
-    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
+    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);courseTF.clear();
+    	lectTF.clear();
+    	classTF.clear();
+    	dayCB.getSelectionModel().clearSelection();
+    	startTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.setPromptText("בחר שעה");
+    	startTimeCB.setPromptText("rte");
+    	dayCB.setPromptText("rrtt");
     }
     private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
