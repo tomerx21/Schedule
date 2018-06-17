@@ -38,15 +38,15 @@ public class ScheduleController {
     @FXML private VBox classVbox;	//Class VBox
     @FXML private TextField classTF;//Class TextField
     @FXML private VBox dayVbox;		//Day VBox
-    @FXML private ComboBox<?> dayCB; //Day ComboBox
+    @FXML private ComboBox<Integer> dayCB; //Day ComboBox
     @FXML private VBox startTimeVbox;//Lecture start time VBox
-    @FXML private ComboBox<?> startTimeCB; //Lecture start time ComboBox
+    @FXML private ComboBox<Integer> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
-    @FXML private ComboBox<?> endTimeCB;	//Lecture end time ComboBox
+    @FXML private ComboBox<Integer> endTimeCB;	//Lecture end time ComboBox
     
     @FXML    
     void add(ActionEvent event) {
-
+    	/*
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(false);
     	tempVbox.setMaxWidth(112);
@@ -69,7 +69,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(wsTF.getText().toString()));
     	ScheduleGrid.add(tempVbox, 7-wsDayCB.getValue(), WSLengthCB.getValue(), WSStartTimeCB.getValue(), 1);
-    	/*
+
     	tempVbox = new VBox(5);
     	//tempVbox.setFillWidth(true);
     	VBox.setVgrow(tempVbox, Priority.NEVER);
@@ -90,19 +90,10 @@ public class ScheduleController {
     
     //Init all the combo boxes
     public void initializeComboBoxes() {
-    	lectDayCB.getItems().addAll(1,2,3,4,5,6,7);
-    	lectLengthCB.getItems().addAll(1,2,3,4);
+    	dayCB.getItems().addAll(1,2,3,4,5,6,7);
+    	startTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
+    	endTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	//lectStartTimeCB.getItems().addAll("8:30", "9:30", "10:30", "11:30", "12:40", "13:40", "14:40", "15:40", "16:40" );
-    	lectStartTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
-    	execDayCB.getItems().addAll(1,2,3,4,5,6,7);
-    	execLengthCB.getItems().addAll(1,2,3,4);
-    	execStartTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
-    	labDayCB.getItems().addAll(1,2,3,4,5,6,7);
-    	labLengthCB.getItems().addAll(1,2,3,4);
-    	labStartTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
-    	wsDayCB.getItems().addAll(1,2,3,4,5,6,7);
-    	WSLengthCB.getItems().addAll(1,2,3,4);
-    	WSStartTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     }
     @FXML
     void newCourse(ActionEvent event) {
@@ -112,7 +103,7 @@ public class ScheduleController {
 
     @FXML
     void lectLengthCBUpdate(ActionEvent event) {
-    	length = lectLengthCB.getValue();
+
     } 
     
     void CheckBoxPressed(VBox vbox) {
