@@ -14,17 +14,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+
 import javafx.scene.text.Font;
+
 public class ScheduleController {
 	private ArrayList<Course> courses = new ArrayList<Course>();
+	private ArrayList<Days> days = new ArrayList<Days>(8);
 	private int length;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
     @FXML private TextField courseTF;
+
 // Lectu1re
+
     @FXML private RadioButton lectRB;	//Lecture RadioButton
     @FXML private RadioButton execRB; //Exercise RadioButton
     @FXML private RadioButton labRB; //Lab RadioButton
@@ -45,30 +49,18 @@ public class ScheduleController {
     
     @FXML    
     void add(ActionEvent event) {
-    	/*
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(false);
     	tempVbox.setMaxWidth(112);
     	tempVbox.setMaxHeight(81);
     	tempVbox.setPrefWidth(112);
     	tempVbox.setPrefHeight(81);
+    	tempVbox.setAlignment(Pos.TOP_CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
-    	tempVbox.setAlignment(Pos.TOP_CENTER);
-    	ScheduleGrid.add(tempVbox, 7-lectDayCB.getValue(), lectStartTimeCB.getValue(), lectLengthCB.getValue(), 1);
-    	tempVbox.getChildren().clear();
-    	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
-    	tempVbox.getChildren().add(new Label(execTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-execDayCB.getValue(), execStartTimeCB.getValue(), execLengthCB.getValue(), 1);
-    	tempVbox.getChildren().clear();
-    	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
-    	tempVbox.getChildren().add(new Label(labTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-labDayCB.getValue(), labLengthCB.getValue(), labStartTimeCB.getValue(), 1);
-    	tempVbox.getChildren().clear();
-    	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
-    	tempVbox.getChildren().add(new Label(wsTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-wsDayCB.getValue(), WSLengthCB.getValue(), WSStartTimeCB.getValue(), 1);
-
+    	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
+    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue(), startTimeCB.getValue(), 1, 1);
+    	/*
     	tempVbox = new VBox(5);
     	//tempVbox.setFillWidth(true);
     	VBox.setVgrow(tempVbox, Priority.NEVER);
@@ -82,9 +74,11 @@ public class ScheduleController {
 
     @FXML
     public void initialize() {
+    	for (int i = 0; i < 8; i++)
+			days.add(new Days(i));
     	initializeComboBoxes();
     	courseVbox.setVisible(false);
-    	ImportentVbox.setDisable(true);
+    	//ImportentVbox.setDisable(true);
     	}
     
     //Init all the combo boxes
