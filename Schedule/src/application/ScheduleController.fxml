@@ -109,35 +109,44 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="676.0" prefWidth="422.0">
                <children>
-                  <VBox fx:id="courseVbox" layoutX="2.0" layoutY="70.0" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="268.0" spacing="10.0">
+                  <VBox fx:id="veryImportentVbox" layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="463.0" prefWidth="268.0" spacing="10.0">
                      <children>
-                        <VBox fx:id="lectVbox1" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                        <HBox prefHeight="29.0" prefWidth="258.0" spacing="80.0">
                            <children>
-                              <Label fx:id="courseLabel" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
-                              <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
+                              <Button mnemonicParsing="false" onAction="#newCourse" prefHeight="27.0" prefWidth="85.0" text="קורס חדש" />
+                              <ColorPicker fx:id="colorCP" prefHeight="27.0" prefWidth="96.0" />
                            </children>
-                        </VBox>
-                        <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
-                           <children>
-                              <Group>
-                                 <children>
-                                    <RadioButton fx:id="lectRB" mnemonicParsing="false" onAction="#lectfunc" selected="true" text="הרצאה">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="typeGroup" />
-                                       </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" onAction="#ececfunc" text="תרגול" toggleGroup="$typeGroup" />
-                                    <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" onAction="#labfunc" text="מעבדה" toggleGroup="$typeGroup" />
-                                    <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" onAction="#wsfunc" text="סדנה" toggleGroup="$typeGroup" />
-                                 </children>
-                              </Group>
-                           </children>
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
                         </HBox>
-                        <VBox fx:id="ImportentVbox" spacing="10.0">
+                        <VBox fx:id="courseVbox" spacing="10.0">
                            <children>
+                              <VBox fx:id="courseNameVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                                 <children>
+                                    <Label fx:id="courseLabel" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
+                                    <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
+                                 </children>
+                              </VBox>
+                              <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
+                                 <children>
+                                    <Group>
+                                       <children>
+                                          <RadioButton fx:id="lectRB" mnemonicParsing="false" onAction="#lectfunc" selected="true" text="הרצאה">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="typeGroup" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" onAction="#ececfunc" text="תרגול" toggleGroup="$typeGroup" />
+                                          <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" onAction="#labfunc" text="מעבדה" toggleGroup="$typeGroup" />
+                                          <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" onAction="#wsfunc" text="סדנה" toggleGroup="$typeGroup" />
+                                       </children>
+                                    </Group>
+                                 </children>
+                                 <padding>
+                                    <Insets left="15.0" />
+                                 </padding>
+                              </HBox>
                               <VBox fx:id="lectVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="lectLabel" nodeOrientation="RIGHT_TO_LEFT" text="הרצאה:" />
@@ -168,25 +177,23 @@
                                     <ComboBox fx:id="endTimeCB" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
+                              <HBox spacing="40.0">
+                                 <children>
+                                    <Button fx:id="addBtn" mnemonicParsing="false" onAction="#add" text="הוסף" />
+                                    <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleted" text="מחק" />
+                                    <Button mnemonicParsing="false" onAction="#add" text="הוסף" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                         </VBox>
-                        <HBox spacing="40.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#add" text="הוסף" />
-                              <Button mnemonicParsing="false" onAction="#add" text="הוסף" />
-                              <Button mnemonicParsing="false" onAction="#add" text="הוסף" />
-                           </children>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                        </HBox>
                      </children>
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </VBox>
-                  <Button layoutX="168.0" layoutY="21.0" mnemonicParsing="false" onAction="#newCourse" prefHeight="27.0" prefWidth="85.0" text="קורס חדש" />
-                  <ColorPicker fx:id="colorCP" layoutX="29.0" layoutY="21.0" prefHeight="27.0" prefWidth="96.0" />
                   <VBox fx:id="lectVbox3" layoutX="15.0" layoutY="708.0" maxHeight="110.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="54.0" prefWidth="243.0" spacing="5.0">
                      <children>
                         <HBox spacing="35.0">

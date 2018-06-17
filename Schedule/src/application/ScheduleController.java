@@ -31,9 +31,10 @@ public class ScheduleController {
     @FXML private RadioButton execRB; //Exercise RadioButton
     @FXML private RadioButton labRB; //Lab RadioButton
     @FXML private RadioButton wsRB; //Sadna RadioButton
+    @FXML private VBox courseNameVbox;
     @FXML private ComboBox<Integer> lectStartTimeCB;
     @FXML private Label lectLabel;	//Lecture label
-    @FXML private VBox ImportentVbox; //CONTAIN ALL OF THE BELOW
+    @FXML private VBox veryImportentVbox; //CONTAIN ALL OF THE BELOW
     @FXML private VBox lectVbox;	//Lecturer VBox
     @FXML private TextField lectTF; //Lecturer TextField
     @FXML private VBox classVbox;	//Class VBox
@@ -83,7 +84,10 @@ public class ScheduleController {
     	colorCP.setVisible(true);
     	//courses.add(new Course());
     }
+    @FXML
+    void deleted(ActionEvent event) {
 
+    }
     @FXML
     void lectLengthCBUpdate(ActionEvent event) {
 
