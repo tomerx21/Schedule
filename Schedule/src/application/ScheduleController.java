@@ -24,7 +24,7 @@ public class ScheduleController {
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
     @FXML private TextField courseTF;
-// Lecture
+// Lectu1re
     @FXML private RadioButton lectRB;	//Lecture RadioButton
     @FXML private RadioButton execRB; //Exercise RadioButton
     @FXML private RadioButton labRB; //Lab RadioButton
