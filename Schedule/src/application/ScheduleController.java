@@ -69,8 +69,8 @@ public class ScheduleController {
                     + "," + to255Int(c.getBlue())
              + ")";
     }
-    private int to255Int(double d) {
-        return (int) (d * 255);
+    private int to255Int(double f) {
+        return (int) (f * 255);
     }
     @FXML
     public void initialize() {
