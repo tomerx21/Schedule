@@ -96,19 +96,19 @@ public class ScheduleController {
     } 
     @FXML
     void ececfunc(ActionEvent event) {
-
+        lectLabel.setText("תרגול:");
     }
     @FXML
     void wsfunc(ActionEvent event) {
-
+    	lectLabel.setText("סדנה:");
     }
     @FXML
     void lectfunc(ActionEvent event) {
-
+    	lectLabel.setText("הרצאה:");
     }
     @FXML
     void labfunc(ActionEvent event) {
-
+    	lectLabel.setText("מעבדה:");
     }
 
 }
