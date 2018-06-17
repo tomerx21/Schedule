@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 
 public class ScheduleController {
 	private ArrayList<Course> courses = new ArrayList<Course>();
-	private ArrayList<Days> days = new ArrayList<Days>(8);
+	private Days days[] = new Days[8];
 	private int length;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
@@ -37,7 +37,7 @@ public class ScheduleController {
     @FXML private VBox classVbox;	//Class VBox
     @FXML private TextField classTF;//Class TextField
     @FXML private VBox dayVbox;		//Day VBox
-    @FXML private ComboBox<Integer> dayCB; //Day ComboBox
+    @FXML private ComboBox<String> dayCB; //Day ComboBox
     @FXML private VBox startTimeVbox;//Lecture start time VBox
     @FXML private ComboBox<Integer> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
@@ -55,7 +55,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue(), startTimeCB.getValue(), 1, 1);
+    	//ScheduleGrid.add(tempVbox, 7-dayCB.getValue(), startTimeCB.getValue(), 1, 1);
     	/*
     	tempVbox = new VBox(5);
     	//tempVbox.setFillWidth(true);
@@ -71,7 +71,7 @@ public class ScheduleController {
     @FXML
     public void initialize() {
     	for (int i = 0; i < 8; i++)
-			days.add(new Days(i));
+			days[i] = new Days(i);
     	initializeComboBoxes();
     	courseVbox.setVisible(false);
     	//ImportentVbox.setDisable(true);
@@ -79,7 +79,7 @@ public class ScheduleController {
     
     //Init all the combo boxes
     public void initializeComboBoxes() {
-    	dayCB.getItems().addAll(1,2,3,4,5,6,7);
+    	dayCB.getItems().addAll(days[1].getName(), days[2].getName(), days[3].getName(), days[4].getName(), days[5].getName(), days[6].getName(), days[7].getName());
     	startTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	endTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
     	//lectStartTimeCB.getItems().addAll("8:30", "9:30", "10:30", "11:30", "12:40", "13:40", "14:40", "15:40", "16:40" );
@@ -94,16 +94,5 @@ public class ScheduleController {
     void lectLengthCBUpdate(ActionEvent event) {
 
     } 
-    
-    void CheckBoxPressed(VBox vbox) {
-    	if (vbox.isDisable() == true) {
-    		//vbox.setVisible(true);
-    		vbox.setDisable(false);
-    	}
-    	else {
-    		//vbox.setVisible(false);	
-    		vbox.setDisable(true);
-    		}
-    }
 
 }

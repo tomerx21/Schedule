@@ -41,4 +41,7 @@ public class Days {
 	public int getNum() {
 		return this.num;
 	}
+	public String getName() {
+		return this.name;
+	}
 }
