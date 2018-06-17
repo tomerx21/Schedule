@@ -1,27 +1,24 @@
-/**
- * Sample Skeleton for 'ScheduleController.fxml' Controller Class
- */
-
 package application;
 
-import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+
 public class ScheduleController {
-	private ArrayList<Course> courses = new ArrayList<Course>();
+	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
-	private int length;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -45,6 +42,7 @@ public class ScheduleController {
     @FXML private ComboBox<Times> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
     @FXML private ComboBox<Times> endTimeCB;	//Lecture end time ComboBox
+    @FXML private Button addBtn;
     
     @FXML    
     void add(ActionEvent event) {
@@ -58,20 +56,17 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	String style = "-fx-background-color: "+toRgbString(colorCP.getValue())+";";
-    	  tempVbox.setStyle(style);
+    	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
+    	tempVbox.setStyle(style);
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
     }
     private String toRgbString(Color c) {
-        return "rgb("
-                          + to255Int(c.getRed())
-                    + "," + to255Int(c.getGreen())
-                    + "," + to255Int(c.getBlue())
-             + ")";
+        return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
     }
     private int to255Int(double f) {
         return (int) (f * 255);
     }
+    
     @FXML
     public void initialize() {
     	for (int i = 1; i < 8; i++) {
@@ -95,29 +90,94 @@ public class ScheduleController {
     	colorCP.setVisible(true);
     	//courses.add(new Course());
     }
+    
     @FXML
     void deleted(ActionEvent event) {
 
     }
+    
     @FXML
     void lectLengthCBUpdate(ActionEvent event) {
 
     } 
+    
     @FXML
     void ececfunc(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
     }
+    
     @FXML
     void wsfunc(ActionEvent event) {
     	lectLabel.setText(wsRB.getText()+":");
     }
+    
     @FXML
     void lectfunc(ActionEvent event) {
     	lectLabel.setText(lectRB.getText()+":");
     }
+    
     @FXML
     void labfunc(ActionEvent event) {
     	lectLabel.setText(labRB.getText()+":");
     }
+
+    @FXML
+    void keyTypedClassTF(KeyEvent event) {
+		if (courseTF.getText().trim().equals("")) 
+			courseTFFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			courseTFFlag = true;
+    }
+
+    @FXML
+    void keyTypedCourseTF(KeyEvent event) {
+		if (lectTF.getText().trim().equals("")) 
+			lectTFFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			lectTFFlag = true;
+    }
+
+    @FXML
+    void keyTypedLectTF(KeyEvent event) {
+		if (classTF.getText().trim().equals("")) 
+			classTFFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			classTFFlag = true;
+    }
+    /*
+    @FXML
+    void startHiding(ActionEvent event) {
+		if (startTimeCB.getSelectionModel() == null) 
+			startTimeCBFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			startTimeCBFlag = true;
+    }
+    @FXML
+    void endHiding(ActionEvent event) {
+		if (endTimeCB.getSelectionModel() == null)
+			endTimeCBFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			endTimeCBFlag = true;
+    }
+    @FXML
+    void dayHiding(ActionEvent event) {
+		if (dayCB.getSelectionModel() == null)
+			dayCBFlag = false;
+		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
+			addBtn.setDisable(false);
+		else
+			dayCBFlag = true;
+    }
+    */
 
 }
