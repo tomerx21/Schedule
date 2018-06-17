@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -25,7 +26,7 @@ public class ScheduleController {
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
     @FXML private TextField courseTF;
-    
+    @FXML private ColorPicker colorCP;
     @FXML private RadioButton lectRB;	//Lecture RadioButton
     @FXML private RadioButton execRB; //Exercise RadioButton
     @FXML private RadioButton labRB; //Lab RadioButton
@@ -73,11 +74,13 @@ public class ScheduleController {
     		}
     	}
     	courseVbox.setVisible(false);
+    	colorCP.setVisible(false);
     	//ImportentVbox.setDisable(true);
     	}
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
+    	colorCP.setVisible(true);
     	//courses.add(new Course());
     }
 
