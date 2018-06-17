@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
       <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
         <items>
@@ -118,24 +118,16 @@
                         </VBox>
                         <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
                            <children>
-                              <Group accessibleRole="TOGGLE_BUTTON">
+                              <Group>
                                  <children>
                                     <RadioButton fx:id="lectRB" mnemonicParsing="false" selected="true" text="הרצאה">
                                        <toggleGroup>
-<<<<<<< HEAD
-                                          <ToggleGroup fx:id="TypeGroup" />
-                                       </toggleGroup></RadioButton>
-                                    <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" text="תרגול" toggleGroup="$TypeGroup" />
-                                    <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" text="מעבדה" toggleGroup="$TypeGroup" />
-                                    <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" text="סדנה" toggleGroup="$TypeGroup" />
-=======
                                           <ToggleGroup fx:id="typeGroup" />
                                        </toggleGroup>
                                     </RadioButton>
                                     <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" text="תרגול" toggleGroup="$typeGroup" />
                                     <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" text="מעבדה" toggleGroup="$typeGroup" />
                                     <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" text="סדנה" toggleGroup="$typeGroup" />
->>>>>>> branch 'Version-2' of https://github.com/tomerx21/Schedule.git
                                  </children>
                               </Group>
                            </children>
