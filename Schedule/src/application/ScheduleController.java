@@ -42,7 +42,7 @@ public class ScheduleController {
     @FXML private VBox startTimeVbox;//Lecture start time VBox
     @FXML private ComboBox<Times> startTimeCB; //Lecture start time ComboBox
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
-    @FXML private ComboBox<Integer> endTimeCB;	//Lecture end time ComboBox
+    @FXML private ComboBox<Times> endTimeCB;	//Lecture end time ComboBox
     
     @FXML    
     void add(ActionEvent event) {
@@ -61,22 +61,20 @@ public class ScheduleController {
 
     @FXML
     public void initialize() {
-    	for (int i = 0; i < 8; i++)
+    	for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
-    	for (int i = 0; i < 10; i++)
+			dayCB.getItems().add(days[i]);
+    	}
+    	for (int i = 1; i < 10; i++) {
+    		if (i != 5) {
 			times[i] = new Times(i);
-    	initializeComboBoxes();
+			startTimeCB.getItems().add(times[i]);
+			endTimeCB.getItems().add(times[i]);
+    		}
+    	}
     	courseVbox.setVisible(false);
     	//ImportentVbox.setDisable(true);
     	}
-    
-    //Init all the combo boxes
-    public void initializeComboBoxes() {
-    	dayCB.getItems().addAll(days[1], days[2], days[3], days[4], days[5], days[6], days[7]);
-    	startTimeCB.getItems().addAll(times[1], times[2], times[3], times[4], times[6], times[7], times[8], times[9]);
-    	endTimeCB.getItems().addAll(1,2,3,4,5,6,7,8,9);
-    	//lectStartTimeCB.getItems().addAll("8:30", "9:30", "10:30", "11:30", "12:40", "13:40", "14:40", "15:40", "16:40" );
-    }
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
