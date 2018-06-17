@@ -7,31 +7,31 @@ public class Days {
 	public Days(int num) {
 		if (num == 1) {
 			this.num = num;
-			this.name = "ראשון";
+			this.name = new String("ראשון");
 		}
 		else if (num == 2) {
 			this.num = num;
-			this.name = "שני";
+			this.name = new String("שני");
 		}
 		else if (num == 3) {
 			this.num = num;
-			this.name = "שלישי";
+			this.name = new String("שלישי");
 		}
 		else if (num == 4) {
 			this.num = num;
-			this.name = "רביעי";
+			this.name = new String("רביעי");
 		}
 		else if (num == 5) {
 			this.num = num;
-			this.name = "חמישי";
+			this.name = new String("חמישי");
 		}
 		else if (num == 6) {
 			this.num = num;
-			this.name = "שישי";
+			this.name = new String("שישי");
 		}
 		else if (num == 7) {
 			this.num = num;
-			this.name = "שבת";
+			this.name = new String("שבת");
 		}
 	}
 }
