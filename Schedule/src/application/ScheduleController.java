@@ -52,7 +52,7 @@ public class ScheduleController {
     	tempVbox.setMaxHeight(81);
     	tempVbox.setPrefWidth(112);
     	tempVbox.setPrefHeight(81);
-    	tempVbox.setAlignment(Pos.TOP_CENTER);
+    	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
