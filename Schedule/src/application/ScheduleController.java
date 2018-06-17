@@ -83,19 +83,9 @@ public class ScheduleController {
 
     @FXML
     public void initialize() {
-    	/*
-    	courseVbox.setVisible(false);
-    	lectVbox.setVisible(false);
-    	execVbox.setVisible(false);
-    	labVbox.setVisible(false);
-    	wsVbox.setVisible(false);
-    	*/
     	initializeComboBoxes();
     	courseVbox.setVisible(false);
-    	lectVbox.setDisable(true);
-    	execVbox.setDisable(true);
-    	labVbox.setDisable(true);
-    	wsVbox.setDisable(true);
+    	ImportentVbox.setDisable(true);
     	}
     
     //Init all the combo boxes
@@ -135,35 +125,19 @@ public class ScheduleController {
     		vbox.setDisable(true);
     		}
     }
-    @FXML
-    void lectCBPress(ActionEvent event) {
-    	CheckBoxPressed(lectVbox);
-    }
-    @FXML
-    void execCBPress(ActionEvent event) {
-    	CheckBoxPressed(execVbox);
-    }
-    @FXML
-    void labCBPress(ActionEvent event) {
-    	CheckBoxPressed(labVbox);
-    }
-    @FXML
-    void wsCBPress(ActionEvent event) {
-    	CheckBoxPressed(wsVbox);
-    }
 
     @FXML
-    void execLenghtCBUpdate(ActionEvent event) {
+    void add(ActionEvent event) {
 
     }
 
     @FXML
-    void labLenghtCBUpdate(ActionEvent event) {
+    void lectLengthCBUpdate(ActionEvent event) {
 
     }
 
     @FXML
-    void wsLenghtCBUpdate(ActionEvent event) {
+    void newCourse(ActionEvent event) {
 
     }
 }
