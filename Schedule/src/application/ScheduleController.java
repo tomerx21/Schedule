@@ -63,7 +63,7 @@ public class ScheduleController {
 
     @FXML
     public void initialize() {
-    	for (int i = 0; i < 8; i++) {
+    	for (int i = 1; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
     	}
