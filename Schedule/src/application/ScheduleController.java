@@ -47,7 +47,7 @@ public class ScheduleController {
     @FXML    
     void add(ActionEvent event) {
     	tempVbox = new VBox(5);
-    	tempVbox.setFillWidth(false);
+    	tempVbox.setFillWidth(true);
     	tempVbox.setMaxWidth(112);
     	tempVbox.setMaxHeight(81);
     	tempVbox.setPrefWidth(112);
@@ -56,17 +56,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	ScheduleGrid.add(tempVbox, 7-dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
-    	/*
-    	tempVbox = new VBox(5);
-    	//tempVbox.setFillWidth(true);
-    	VBox.setVgrow(tempVbox, Priority.NEVER);
-    	tempVbox.getChildren().addAll(new Label("VERY"), new Label("BIG"), new Label("BOOBS"));
-    	tempVbox.setAlignment(Pos.TOP_CENTER);
-    	tempVbox.setMaxWidth(112);
-    	tempVbox.setMaxHeight(81);
-    	VBox.setVgrow(tempVbox, Priority.NEVER);
-    	ScheduleGrid.add(tempVbox, 2, 2, 1, 1);*/
+    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
     }
 
     @FXML
