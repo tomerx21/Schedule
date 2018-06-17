@@ -16,7 +16,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.paint.Color;
 public class ScheduleController {
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private Days days[] = new Days[8];
@@ -58,9 +58,20 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
+    	String style = "-fx-background-color: "+toRgbString(colorCP.getValue())+";";
+    	  tempVbox.setStyle(style);
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);
     }
-
+    private String toRgbString(Color c) {
+        return "rgb("
+                          + to255Int(c.getRed())
+                    + "," + to255Int(c.getGreen())
+                    + "," + to255Int(c.getBlue())
+             + ")";
+    }
+    private int to255Int(double d) {
+        return (int) (d * 255);
+    }
     @FXML
     public void initialize() {
     	for (int i = 0; i < 8; i++) {
