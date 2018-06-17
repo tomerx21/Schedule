@@ -103,22 +103,22 @@ public class ScheduleController {
     } 
     
     @FXML
-    void ececfunc(ActionEvent event) {
+    void execAction(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
     }
     
     @FXML
-    void wsfunc(ActionEvent event) {
+    void wsAction(ActionEvent event) {
     	lectLabel.setText(wsRB.getText()+":");
     }
     
     @FXML
-    void lectfunc(ActionEvent event) {
+    void lectAction(ActionEvent event) {
     	lectLabel.setText(lectRB.getText()+":");
     }
     
     @FXML
-    void labfunc(ActionEvent event) {
+    void labAction(ActionEvent event) {
     	lectLabel.setText(labRB.getText()+":");
     }
 

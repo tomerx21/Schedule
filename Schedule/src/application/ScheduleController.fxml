@@ -141,14 +141,14 @@
                                  <children>
                                     <Group>
                                        <children>
-                                          <RadioButton fx:id="lectRB" mnemonicParsing="false" onAction="#lectfunc" selected="true" text="הרצאה">
+                                          <RadioButton fx:id="lectRB" mnemonicParsing="false" onAction="#lectAction" selected="true" text="הרצאה">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="typeGroup" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" onAction="#ececfunc" text="תרגול" toggleGroup="$typeGroup" />
-                                          <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" onAction="#labfunc" text="מעבדה" toggleGroup="$typeGroup" />
-                                          <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" onAction="#wsfunc" text="סדנה" toggleGroup="$typeGroup" />
+                                          <RadioButton fx:id="execRB" layoutX="67.20000171661377" mnemonicParsing="false" onAction="#execAction" text="תרגול" toggleGroup="$typeGroup" />
+                                          <RadioButton fx:id="labRB" layoutX="127.19999408721924" mnemonicParsing="false" onAction="#labAction" text="מעבדה" toggleGroup="$typeGroup" />
+                                          <RadioButton fx:id="wsRB" layoutX="192.4000062942505" mnemonicParsing="false" onAction="#wsAction" text="סדנה" toggleGroup="$typeGroup" />
                                        </children>
                                     </Group>
                                  </children>
