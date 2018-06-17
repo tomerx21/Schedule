@@ -30,6 +30,7 @@ public class ScheduleController {
     @FXML private RadioButton labRB; //Lab RadioButton
     @FXML private RadioButton wsRB; //Sadna RadioButton
     @FXML private VBox courseNameVbox;
+    @FXML private Button deleteBtn;
     @FXML private ComboBox<Integer> lectStartTimeCB;
     @FXML private Label lectLabel;	//Lecture label
     @FXML private VBox veryImportentVbox; //CONTAIN ALL OF THE BELOW
@@ -50,24 +51,27 @@ public class ScheduleController {
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(true);
     	tempVbox.setMaxWidth(112);
-    	tempVbox.setMaxHeight(81);
+    	tempVbox.setMaxHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	tempVbox.setPrefWidth(112);
-    	tempVbox.setPrefHeight(81);
+    	tempVbox.setPrefHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() ));
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
-    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, 1);courseTF.clear();
+    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
+    	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
     	dayCB.getSelectionModel().clearSelection();
     	startTimeCB.getSelectionModel().clearSelection();
     	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.setPromptText("בחר שעה");
+    	endTimeCB.setPromptText("ggg");
     	startTimeCB.setPromptText("rte");
     	dayCB.setPromptText("rrtt");
+    	deleteBtn.fire();
+ 
     }
     private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
