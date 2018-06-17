@@ -82,6 +82,7 @@ public class ScheduleController {
     	}
     	courseVbox.setVisible(false);
     	colorCP.setVisible(false);
+    	addBtn.setDisable(true);
     	//ImportentVbox.setDisable(true);
     	}
     @FXML
@@ -125,59 +126,69 @@ public class ScheduleController {
     void keyTypedClassTF(KeyEvent event) {
 		if (courseTF.getText().trim().equals("")) 
 			courseTFFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			courseTFFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
 
     @FXML
     void keyTypedCourseTF(KeyEvent event) {
 		if (lectTF.getText().trim().equals("")) 
 			lectTFFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			lectTFFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
 
     @FXML
     void keyTypedLectTF(KeyEvent event) {
 		if (classTF.getText().trim().equals("")) 
 			classTFFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			classTFFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
-    /*
     @FXML
     void startHiding(ActionEvent event) {
 		if (startTimeCB.getSelectionModel() == null) 
 			startTimeCBFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			startTimeCBFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
     @FXML
     void endHiding(ActionEvent event) {
 		if (endTimeCB.getSelectionModel() == null)
 			endTimeCBFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			endTimeCBFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
     @FXML
     void dayHiding(ActionEvent event) {
 		if (dayCB.getSelectionModel() == null)
 			dayCBFlag = false;
-		else if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag = true) && (endTimeCBFlag == true) && (dayCBFlag = true))
-			addBtn.setDisable(false);
 		else
 			dayCBFlag = true;
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
     }
-    */
 
 }

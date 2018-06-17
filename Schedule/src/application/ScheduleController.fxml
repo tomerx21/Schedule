@@ -171,19 +171,19 @@
                               <VBox fx:id="dayVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="dayLabel" text="יום:" />
-                                    <ComboBox fx:id="dayCB" prefHeight="25.0" prefWidth="270.0" promptText="בחר יום" />
+                                    <ComboBox fx:id="dayCB" onAction="#startHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר יום" />
                                  </children>
                               </VBox>
                               <VBox fx:id="startTimeVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="startTimeLabel" text="שעת התחלה:" />
-                                    <ComboBox fx:id="startTimeCB" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
+                                    <ComboBox fx:id="startTimeCB" onAction="#endHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
                               <VBox fx:id="endTimeVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="endTimeLabel" text="שעת סיום:" />
-                                    <ComboBox fx:id="endTimeCB" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
+                                    <ComboBox fx:id="endTimeCB" onAction="#dayHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
                               <HBox spacing="40.0">
