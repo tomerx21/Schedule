@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -25,31 +26,25 @@ public class ScheduleController {
     @FXML private VBox courseVbox; //Course VBox
     @FXML private TextField courseTF;
 // Lecture
-    @FXML private VBox lectVbox;	//Lecture VBox
-    @FXML private TextField lectTF; //Lecture TextField
-    @FXML private ComboBox<Integer> lectDayCB;
-    @FXML private ComboBox<Integer> lectLengthCB;
+    @FXML private RadioButton lectRB;	//Lecture RadioButton
+    @FXML private RadioButton execRB; //Exercise RadioButton
+    @FXML private RadioButton labRB; //Lab RadioButton
+    @FXML private RadioButton wsRB; //Sadna RadioButton
     @FXML private ComboBox<Integer> lectStartTimeCB;
-// Exercise
-    @FXML private VBox execVbox;	//Exercise VBox
-    @FXML private TextField execTF; //Exercise TextField
-    @FXML private ComboBox<Integer> execDayCB;
-    @FXML private ComboBox<Integer> execLengthCB;
-    @FXML private ComboBox<Integer> execStartTimeCB;
-// Lab
-    @FXML private VBox labVbox;	//Lab VBox
-    @FXML private TextField labTF; //Lab TextField
-    @FXML private ComboBox<Integer> labDayCB;
-    @FXML private ComboBox<Integer> labLengthCB;
-    @FXML private ComboBox<Integer> labStartTimeCB;
-// Workshop
-    @FXML private VBox wsVbox;	//Workdshop TextField
-    @FXML private TextField wsTF; //Workdshop TextField
-    @FXML private ComboBox<Integer> wsDayCB;
-    @FXML private ComboBox<Integer> WSLengthCB;
-    @FXML private ComboBox<Integer> WSStartTimeCB;
+
+    @FXML private VBox ImportentVbox; //CONTAIN ALL OF THE BELOW
+    @FXML private VBox lectVbox;	//Lecturer VBox
+    @FXML private TextField lectTF; //Lecturer TextField
+    @FXML private VBox classVbox;	//Class VBox
+    @FXML private TextField classTF;//Class TextField
+    @FXML private VBox dayVbox;		//Day VBox
+    @FXML private ComboBox<?> dayCB; //Day ComboBox
+    @FXML private VBox startTimeVbox;//Lecture start time VBox
+    @FXML private ComboBox<?> startTimeCB; //Lecture start time ComboBox
+    @FXML private VBox endTimeVbox;		 //Lecture end time VBox
+    @FXML private ComboBox<?> endTimeCB;	//Lecture end time ComboBox
     
-    @FXML
+    @FXML    
     void add(ActionEvent event) {
 
     	tempVbox = new VBox(5);
