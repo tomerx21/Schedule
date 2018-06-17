@@ -94,5 +94,21 @@ public class ScheduleController {
     void lectLengthCBUpdate(ActionEvent event) {
 
     } 
+    @FXML
+    void ececfunc(ActionEvent event) {
+
+    }
+    @FXML
+    void wsfunc(ActionEvent event) {
+
+    }
+    @FXML
+    void lectfunc(ActionEvent event) {
+
+    }
+    @FXML
+    void labfunc(ActionEvent event) {
+
+    }
 
 }
