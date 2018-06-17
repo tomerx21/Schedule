@@ -146,16 +146,19 @@ public class ScheduleController {
 			addBtn.setDisable(true);
     }
 
+    public void checkIfDisableBtn() {
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
+    }
     @FXML
     void keyTypedLectTF(KeyEvent event) {
 		if (classTF.getText().trim().equals("")) 
 			classTFFlag = false;
 		else
 			classTFFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
     @FXML
     void startHiding(ActionEvent event) {
@@ -163,10 +166,7 @@ public class ScheduleController {
 			startTimeCBFlag = false;
 		else
 			startTimeCBFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
     @FXML
     void endHiding(ActionEvent event) {
@@ -174,10 +174,7 @@ public class ScheduleController {
 			endTimeCBFlag = false;
 		else
 			endTimeCBFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
     @FXML
     void dayHiding(ActionEvent event) {
@@ -185,10 +182,7 @@ public class ScheduleController {
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
 
 }
