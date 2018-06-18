@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -48,6 +51,7 @@ public class ScheduleController {
     @FXML private ComboBox<Times> endTimeCB;	//Lecture end time ComboBox
     @FXML private Button addBtn;
     @FXML private Label colorLabel;
+    @FXML private ToggleGroup typeGroup;
     
     @FXML    
     void add(ActionEvent event) {
@@ -57,20 +61,34 @@ public class ScheduleController {
     	//tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	//tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
-    	tempVbox.setOnMouseClicked( ( e ) ->
-        {
-        	courseTF.setText(tempVbox.getChildren().get(0).toString().substring(40, tempVbox.getChildren().get(0).toString().length()-1));
-        } );
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
+    	
+   
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
     	courseTF.clear();
+    	
     	lectTF.clear();
     	classTF.clear();
     	Tempvbox.add(tempVbox);
+    	for(int i=0; i<Tempvbox.size();i++){
+    		int j=Tempvbox.get(i).getChildren().get(0).toString().indexOf(':');
+    		String tempCorStr =Tempvbox.get(i).getChildren().get(0).toString().substring(j+2, Tempvbox.get(i).getChildren().get(0).toString().length()-1);
+    		j=Tempvbox.get(i).getChildren().get(1).toString().indexOf('\'');
+    		String tempLecStr =Tempvbox.get(i).getChildren().get(1).toString().substring(j+1, Tempvbox.get(i).getChildren().get(1).toString().length()-1);
+    		j=Tempvbox.get(i).getChildren().get(2).toString().indexOf('\'');
+    		String tempclassStr =Tempvbox.get(i).getChildren().get(2).toString().substring(j+1, Tempvbox.get(i).getChildren().get(2).toString().length()-1);
+    		Tempvbox.get(i).setOnMouseClicked( ( e ) ->
+        { 
+        	classTF.setText(tempclassStr);
+        	lectTF.setText(tempLecStr);
+        	courseTF.setText(tempCorStr);
+        } );
+    	}
+    	
          delete();
     }
     
