@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -25,51 +23,35 @@ public class ScheduleController {
 	private Times times[] = new Times[10];
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
-    @FXML private GridPane ScheduleGrid;
-    @FXML private VBox courseVbox; //Course VBox
-    @FXML private TextField courseTF;
-    @FXML private ColorPicker colorCP;
-    @FXML private RadioButton lectRB;	//Lecture RadioButton
-    @FXML private RadioButton execRB; //Exercise RadioButton
-    @FXML private RadioButton labRB; //Lab RadioButton
-    @FXML private RadioButton wsRB; //Sadna RadioButton
-    @FXML private VBox courseNameVbox;
-    @FXML private Button deleteBtn;
-    @FXML private ComboBox<Integer> lectStartTimeCB;
-    @FXML private Label lectLabel;	//Lecture label
-    @FXML private VBox veryImportentVbox; //CONTAIN ALL OF THE BELOW
-    @FXML private VBox lectVbox;	//Lecturer VBox
-    @FXML private TextField lectTF; //Lecturer TextField
-    @FXML private VBox classVbox;	//Class VBox
-    @FXML private TextField classTF;//Class TextField
-    @FXML private VBox dayVbox;		//Day VBox
-    @FXML private ComboBox<Days> dayCB; //Day ComboBox
-    @FXML private VBox startTimeVbox;//Lecture start time VBox
-    @FXML private ComboBox<Times> startTimeCB; //Lecture start time ComboBox
-    @FXML private VBox endTimeVbox;		 //Lecture end time VBox
+    @FXML private GridPane ScheduleGrid;		//All the GridPane
+    @FXML private VBox courseVbox; 				//Course VBox
+    @FXML private ColorPicker colorCP; 			//Color
+    @FXML private RadioButton lectRB;			//Lecture RadioButton
+    @FXML private RadioButton execRB; 			//Exercise RadioButton
+    @FXML private RadioButton labRB; 			//Lab RadioButton
+    @FXML private RadioButton wsRB; 			//Sadna RadioButton
+    @FXML private Label lectLabel;				//Lecture label
+    @FXML private TextField courseTF;			//Course TextField
+    @FXML private TextField lectTF; 			//Lecturer TextField
+    @FXML private TextField classTF;			//Class TextField
+    @FXML private ComboBox<Days> dayCB; 		//Day ComboBox
+    @FXML private ComboBox<Times> startTimeCB; 	//Lecture start time ComboBox
     @FXML private ComboBox<Times> endTimeCB;	//Lecture end time ComboBox
-    @FXML private Button addBtn;
-    @FXML private Label colorLabel;
-    @FXML private ToggleGroup typeGroup;
+    @FXML private Button addBtn;				//Add button
+    @FXML private Button deleteBtn;				//Delete button
+    @FXML private Label colorLabel;				//Color label
     
-    @FXML    
-    void add(ActionEvent event) {
+    //If add button pressed
+    @FXML void add(ActionEvent event) {
     	tempVbox = new VBox(5);
-    	//tempVbox.setFillWidth(true);
-    	//tempVbox.setMaxWidth(112.6);
-    	//tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
-    	//tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-    	
-   
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
     	courseTF.clear();
-    	
     	lectTF.clear();
     	classTF.clear();
     	VboxArr.add(tempVbox);
@@ -99,6 +81,17 @@ public class ScheduleController {
          delete();
     }
     
+    //Function for changing color.
+	private String toRgbString(Color c) {
+        return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
+    }
+	
+	//Function for changing color.
+    private int to255Int(double f) {
+        return (int) (f * 255);
+    }
+    
+    //Function to reset all the fields.
     private void delete() {
     	courseTF.clear();
     	lectTF.clear();
@@ -108,17 +101,8 @@ public class ScheduleController {
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
 	}
     
-
-	private String toRgbString(Color c) {
-        return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
-    }
-    
-    private int to255Int(double f) {
-        return (int) (f * 255);
-    }
-    
-    @FXML
-    public void initialize() {
+    //Initialize.
+    @FXML public void initialize() {
     	for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
@@ -135,7 +119,8 @@ public class ScheduleController {
     	colorCP.setVisible(false);
     	addBtn.setDisable(true);
     }
-    
+   
+    //Function to re-set the starting and the ending time ComboBoxes.
     public void setTimeCB(int startIndex, ComboBox<Times> CB) {
     CB.getItems().clear();
     CB.getItems().add(times[0] = new Times(0));
@@ -143,44 +128,46 @@ public class ScheduleController {
 		if (i != 5) {
 		times[i] = new Times(i);
 		CB.getItems().add(times[i]);
-		}
+			}
 		CB.setValue(CB.getItems().get(0));
-	}
+		}
     }
-    @FXML
-    void newCourse(ActionEvent event) {
+    
+    //The button new course pressed.
+    @FXML void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
     	colorCP.setVisible(true);
     	colorLabel.setVisible(true);
     }
     
-    @FXML
-    void deleted(ActionEvent event) {
+    //The button delete pressed.
+    @FXML void deleted(ActionEvent event) {
     	delete();
     }
-
-    @FXML
-    void execAction(ActionEvent event) {
+    
+    //If exercise radio button pressed.
+    @FXML void execAction(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
     }
     
-    @FXML
-    void wsAction(ActionEvent event) {
+    //If sadna radio button pressed.
+    @FXML void wsAction(ActionEvent event) {
     	lectLabel.setText(wsRB.getText()+":");
     }
-    
-    @FXML
-    void lectAction(ActionEvent event) {
+     
+    //If lecture radio button pressed.
+    @FXML void lectAction(ActionEvent event) {
     	lectLabel.setText(lectRB.getText()+":");
     }
-    
-    @FXML
-    void labAction(ActionEvent event) {
+     
+    //If lab radio button pressed.
+    @FXML void labAction(ActionEvent event) {
     	lectLabel.setText(labRB.getText()+":");
     }
-
-    @FXML
-    void keyTypedClassTF(KeyEvent event) {
+    //***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
+    
+    //If course name filled.
+    @FXML void keyTypedClassTF(KeyEvent event) {
 		if (courseTF.getText().trim().equals("")) 
 			courseTFFlag = false;
 		else
@@ -190,9 +177,9 @@ public class ScheduleController {
 		else
 			addBtn.setDisable(true);
     }
-
-    @FXML
-    void keyTypedCourseTF(KeyEvent event) {
+    
+    //If lecture name filled.
+    @FXML void keyTypedCourseTF(KeyEvent event) {
 		if (lectTF.getText().trim().equals("")) 
 			lectTFFlag = false;
 		else
@@ -202,49 +189,53 @@ public class ScheduleController {
 		else
 			addBtn.setDisable(true);
     }
-
-    public void checkIfDisableBtn() {
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
-    }
-    @FXML
-    void keyTypedLectTF(KeyEvent event) {
+     
+    //If lecturer name filled.
+    @FXML void keyTypedLectTF(KeyEvent event) {
 		if (classTF.getText().trim().equals("")) 
 			classTFFlag = false;
 		else
 			classTFFlag = true;
 		checkIfDisableBtn();
     }
-    @FXML
-    void startHiding(ActionEvent event) {
-		if (startTimeCB.getValue()==null||startTimeCB.getValue().getNum() == 0) {
+     
+    //If start time were chosen.
+    @FXML void startHiding(ActionEvent event) {
+		if ((startTimeCB.getValue()==null) || (startTimeCB.getValue().getNum() == 0)) {
 			startTimeCBFlag = false;
-			setTimeCB(1, endTimeCB);
+			setTimeCB(1, endTimeCB); //Re-set the ending times in the Combobox for all the options.
 		}
 			
 		else {
 			startTimeCBFlag = true;
-			setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB);
+			setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB); //Re-set the ending times in the Combobox from start time till the end.
 		}
 		checkIfDisableBtn();
     }
-    @FXML
+    @FXML //If end time were chosen.
     void endHiding(ActionEvent event) {
-		if (endTimeCB.getValue()==null||endTimeCB.getValue().getNum() == 0) 
+		if ((endTimeCB.getValue()==null) || (endTimeCB.getValue().getNum() == 0)) 
 			endTimeCBFlag = false;
 		else
 			endTimeCBFlag = true;
 		checkIfDisableBtn();
     }
-    @FXML
-    void dayHiding(ActionEvent event) {
-		if (dayCB.getValue()==null||dayCB.getValue().getNum() == 7) 
+     
+    //If day were chosen.
+    @FXML void dayHiding(ActionEvent event) {
+		if ((dayCB.getValue() == null) || (dayCB.getValue().getNum() == 7)) 
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;
 		checkIfDisableBtn();
     }
-
+    
+    //Function checks according to flags from the all the fields if the add button needs to be endabled or disabled.
+    public void checkIfDisableBtn() {
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
+			addBtn.setDisable(false);
+		else
+			addBtn.setDisable(true);
+    }
+    //***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
 }
