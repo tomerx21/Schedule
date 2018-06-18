@@ -101,6 +101,9 @@ public class ScheduleController {
 			endTimeCB.getItems().add(times[i]);
     		}
     	}
+    	dayCB.setValue(dayCB.getItems().get(0));
+    	endTimeCB.setValue(endTimeCB.getItems().get(0));
+    	startTimeCB.setValue(startTimeCB.getItems().get(0));
     	 colorCP.getStyleClass().add("split-button");
     	colorCP.setStyle("-fx-color-label-visible: false ;");
     	colorLabel.setVisible(false);
@@ -181,7 +184,7 @@ public class ScheduleController {
     }
     @FXML
     void startHiding(ActionEvent event) {
-		if (startTimeCB.getSelectionModel() == null) 
+		if (startTimeCB.getSelectionModel().getSelectedItem().getNum() == 0) 
 			startTimeCBFlag = false;
 		else
 			startTimeCBFlag = true;
@@ -189,7 +192,7 @@ public class ScheduleController {
     }
     @FXML
     void endHiding(ActionEvent event) {
-		if (endTimeCB.getSelectionModel() == null)
+		if (endTimeCB.getSelectionModel().getSelectedItem().getNum() == 0) 
 			endTimeCBFlag = false;
 		else
 			endTimeCBFlag = true;
@@ -197,7 +200,7 @@ public class ScheduleController {
     }
     @FXML
     void dayHiding(ActionEvent event) {
-		if (dayCB.getSelectionModel() == null)
+		if (dayCB.getSelectionModel().getSelectedItem().getNum() == 0) 
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;

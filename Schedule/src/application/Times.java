@@ -8,7 +8,7 @@ public class Times {
 	public Times(int num) {
 		if (num == 0) {
 			this.num = num;
-			this.name = new String("áçø ùòä");
+			this.name = new String("×‘×—×¨ ×©×¢×”");
 		}
 		if (num == 1) {
 			this.num = num;
