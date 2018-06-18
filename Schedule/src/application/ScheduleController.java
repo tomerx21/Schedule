@@ -1,8 +1,8 @@
 package application;
 
 
-import java.awt.Font;
 
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -21,6 +21,7 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
+	private ArrayList<VBox> Tempvbox=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -56,6 +57,10 @@ public class ScheduleController {
     	//tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	//tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
+    	tempVbox.setOnMouseClicked( ( e ) ->
+        {
+        	courseTF.setText(tempVbox.getChildren().get(0).toString().substring(40, tempVbox.getChildren().get(0).toString().length()-1));
+        } );
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
@@ -65,6 +70,7 @@ public class ScheduleController {
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
+    	Tempvbox.add(tempVbox);
          delete();
     }
     
