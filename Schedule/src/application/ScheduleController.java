@@ -1,6 +1,8 @@
 package application;
 
 
+import java.awt.Font;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -14,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.FontWeight;
 
 public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
@@ -49,12 +52,12 @@ public class ScheduleController {
     @FXML    
     void add(ActionEvent event) {
     	tempVbox = new VBox(5);
-    	tempVbox.setFillWidth(true);
-    	tempVbox.setMaxWidth(112.6);
-    	tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
-    	tempVbox.setPrefWidth(112.5);
+    	//tempVbox.setFillWidth(true);
+    	//tempVbox.setMaxWidth(112.6);
+    	//tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
+    ///	tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
-    	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
+    	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
@@ -75,6 +78,7 @@ public class ScheduleController {
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
 		
 	}
+    
 
 	private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
