@@ -67,7 +67,6 @@ public class ScheduleController {
     	dayCB.getSelectionModel().clearSelection();
     	startTimeCB.getSelectionModel().clearSelection();
     	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.valueProperty().set(null);
     	endTimeCB.setPromptText("ggg");
     	startTimeCB.setPromptText("rte");
     	dayCB.setPromptText("rrtt");
