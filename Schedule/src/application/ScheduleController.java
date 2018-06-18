@@ -16,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.FontWeight;
 
 public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
@@ -55,7 +54,7 @@ public class ScheduleController {
     	//tempVbox.setFillWidth(true);
     	//tempVbox.setMaxWidth(112.6);
     	//tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
-    ///	tempVbox.setPrefWidth(112.5);
+    	//tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
@@ -76,7 +75,6 @@ public class ScheduleController {
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
-		
 	}
     
 
@@ -94,24 +92,30 @@ public class ScheduleController {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
     	}
-    	for (int i = 0; i < 10; i++) {
-    		if (i != 5) {
-			times[i] = new Times(i);
-			startTimeCB.getItems().add(times[i]);
-			endTimeCB.getItems().add(times[i]);
-    		}
-    	}
+    	setTimeCB(1, startTimeCB);
+    	setTimeCB(1, endTimeCB);
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
-    	 colorCP.getStyleClass().add("split-button");
+    	colorCP.getStyleClass().add("split-button");
     	colorCP.setStyle("-fx-color-label-visible: false ;");
     	colorLabel.setVisible(false);
     	courseVbox.setVisible(false);
     	colorCP.setVisible(false);
     	addBtn.setDisable(true);
-    	}
+    }
     
+    public void setTimeCB(int startIndex, ComboBox<Times> CB) {
+    CB.getItems().clear();
+    CB.getItems().add(times[0]);
+	for (int i = startIndex; i < 10; i++) {
+		if (i != 5) {
+		times[i] = new Times(i);
+		CB.getItems().add(times[i]);
+		}
+		CB.setValue(CB.getItems().get(0));
+	}
+    }
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
@@ -184,15 +188,16 @@ public class ScheduleController {
     }
     @FXML
     void startHiding(ActionEvent event) {
-		if (startTimeCB.getSelectionModel().getSelectedItem().getNum() == 0) 
+		if (startTimeCB.getValue().getNum() == 0) 
 			startTimeCBFlag = false;
 		else
 			startTimeCBFlag = true;
+		setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB);
 		checkIfDisableBtn();
     }
     @FXML
     void endHiding(ActionEvent event) {
-		if (endTimeCB.getSelectionModel().getSelectedItem().getNum() == 0) 
+		if (endTimeCB.getValue().getNum() == 0) 
 			endTimeCBFlag = false;
 		else
 			endTimeCBFlag = true;
@@ -200,7 +205,7 @@ public class ScheduleController {
     }
     @FXML
     void dayHiding(ActionEvent event) {
-		if (dayCB.getSelectionModel().getSelectedItem().getNum() == 0) 
+		if (dayCB.getValue().getNum() == 0) 
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;
