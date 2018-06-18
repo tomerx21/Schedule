@@ -19,7 +19,6 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
-  static	Days temp1=new Days(0);
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -51,9 +50,9 @@ public class ScheduleController {
     void add(ActionEvent event) {
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(true);
-    	tempVbox.setMaxWidth(113.5);
-    	tempVbox.setMaxHeight(81.5*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
-    	tempVbox.setPrefWidth(112);
+    	tempVbox.setMaxWidth(112.6);
+    	tempVbox.setMaxHeight(81.7*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
+    	tempVbox.setPrefWidth(112.5);
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
@@ -71,7 +70,7 @@ public class ScheduleController {
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
-    	dayCB.setValue(temp1);
+    	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
 		
@@ -87,7 +86,7 @@ public class ScheduleController {
     
     @FXML
     public void initialize() {
-    	for (int i = 1; i < 8; i++) {
+    	for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
     	}
