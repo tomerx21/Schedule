@@ -107,7 +107,7 @@ public class ScheduleController {
     
     public void setTimeCB(int startIndex, ComboBox<Times> CB) {
     CB.getItems().clear();
-    CB.getItems().add(times[0]);
+    CB.getItems().add(times[0] = new Times(0));
 	for (int i = startIndex; i < 10; i++) {
 		if (i != 5) {
 		times[i] = new Times(i);
@@ -188,16 +188,20 @@ public class ScheduleController {
     }
     @FXML
     void startHiding(ActionEvent event) {
-		if (startTimeCB.getValue().getNum() == 0) 
+		if (startTimeCB.getValue()==null||startTimeCB.getValue().getNum() == 0) {
 			startTimeCBFlag = false;
-		else
+			setTimeCB(1, endTimeCB);
+		}
+			
+		else {
 			startTimeCBFlag = true;
-		setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB);
+			setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB);
+		}
 		checkIfDisableBtn();
     }
     @FXML
     void endHiding(ActionEvent event) {
-		if (endTimeCB.getValue().getNum() == 0) 
+		if (endTimeCB.getValue()==null||endTimeCB.getValue().getNum() == 0) 
 			endTimeCBFlag = false;
 		else
 			endTimeCBFlag = true;
@@ -205,7 +209,7 @@ public class ScheduleController {
     }
     @FXML
     void dayHiding(ActionEvent event) {
-		if (dayCB.getValue().getNum() == 0) 
+		if (dayCB.getValue()==null||dayCB.getValue().getNum() == 0) 
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;
