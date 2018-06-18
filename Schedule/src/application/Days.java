@@ -5,6 +5,10 @@ public class Days {
 	private int num;
 
 	public Days(int num) {
+		if (num == 0) {
+			this.num = 7-num;
+			this.name = new String("בחר יום");
+		}
 		if (num == 1) {
 			this.num = 7-num;
 			this.name = new String("ראשון");

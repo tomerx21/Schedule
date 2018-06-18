@@ -19,7 +19,7 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
-	private String endTimeStr, startTimeStr, dayStr;
+  static	Days temp1=new Days(0);
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -45,16 +45,16 @@ public class ScheduleController {
     @FXML private VBox endTimeVbox;		 //Lecture end time VBox
     @FXML private ComboBox<Times> endTimeCB;	//Lecture end time ComboBox
     @FXML private Button addBtn;
+    @FXML private Label colorLabel;
     
     @FXML    
     void add(ActionEvent event) {
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(true);
-    	tempVbox.setMaxWidth(113);
-    	tempVbox.setMaxHeight(82*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
+    	tempVbox.setMaxWidth(113.5);
+    	tempVbox.setMaxHeight(81.5*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	tempVbox.setPrefWidth(112);
-    	//tempVbox.setPrefHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() ));
-    	tempVbox.setAlignment(Pos.TOP_CENTER);
+    	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
@@ -64,26 +64,16 @@ public class ScheduleController {
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
-    	dayCB.getSelectionModel().clearSelection();
-    	startTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.setPromptText("ggg");
-    	startTimeCB.setPromptText("rte");
-    	dayCB.setPromptText("rrtt");
-        //delete();
-
+         delete();
     }
     
     private void delete() {
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
-    	dayCB.getSelectionModel().clearSelection();
-    	startTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.setPromptText(endTimeStr);
-    	startTimeCB.setPromptText(startTimeStr);
-    	dayCB.setPromptText(dayStr);
+    	dayCB.setValue(temp1);
+    	endTimeCB.setValue(endTimeCB.getItems().get(0));
+    	startTimeCB.setValue(startTimeCB.getItems().get(0));
 		
 	}
 
@@ -101,25 +91,26 @@ public class ScheduleController {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
     	}
-    	for (int i = 1; i < 10; i++) {
+    	for (int i = 0; i < 10; i++) {
     		if (i != 5) {
 			times[i] = new Times(i);
 			startTimeCB.getItems().add(times[i]);
 			endTimeCB.getItems().add(times[i]);
     		}
     	}
+    	 colorCP.getStyleClass().add("split-button");
+    	colorCP.setStyle("-fx-color-label-visible: false ;");
+    	colorLabel.setVisible(false);
     	courseVbox.setVisible(false);
     	colorCP.setVisible(false);
     	addBtn.setDisable(true);
-    	endTimeStr = endTimeCB.getPromptText();
-    	startTimeStr = startTimeCB.getPromptText();
-    	dayStr = dayCB.getPromptText();
     	}
     
     @FXML
     void newCourse(ActionEvent event) {
     	courseVbox.setVisible(true);
     	colorCP.setVisible(true);
+    	colorLabel.setVisible(true);
     }
     
     @FXML

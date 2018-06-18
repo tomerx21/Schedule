@@ -6,6 +6,10 @@ public class Times {
 	private String name;
 	
 	public Times(int num) {
+		if (num == 0) {
+			this.num = num;
+			this.name = new String("בחר שעה");
+		}
 		if (num == 1) {
 			this.num = num;
 			this.name = new String("8:30");

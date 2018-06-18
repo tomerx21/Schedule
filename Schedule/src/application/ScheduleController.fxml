@@ -120,10 +120,15 @@
                <children>
                   <VBox fx:id="veryImportentVbox" layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="463.0" prefWidth="268.0" spacing="10.0">
                      <children>
-                        <HBox prefHeight="29.0" prefWidth="258.0" spacing="80.0">
+                        <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="30.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#newCourse" prefHeight="27.0" prefWidth="85.0" text="קורס חדש" />
-                              <ColorPicker fx:id="colorCP" prefHeight="27.0" prefWidth="96.0" />
+                              <AnchorPane>
+                                 <children>
+                                    <Label fx:id="colorLabel" graphicTextGap="2.0" layoutX="20.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="58.0" text="בחר צבע:" />
+                                    <ColorPicker fx:id="colorCP" layoutX="73.60000610351562" prefHeight="26.0" prefWidth="45.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                            <VBox.margin>
                               <Insets top="5.0" />
@@ -133,8 +138,8 @@
                            <children>
                               <VBox fx:id="courseNameVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
-                                    <Label fx:id="courseLabel" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
                                     <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedClassTF" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
+                                    <Label fx:id="courseLabel1" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
                                  </children>
                               </VBox>
                               <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
