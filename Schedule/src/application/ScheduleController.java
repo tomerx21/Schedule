@@ -212,8 +212,9 @@ public class ScheduleController {
 		}
 		checkIfDisableBtn();
     }
-    @FXML //If end time were chosen.
-    void endHiding(ActionEvent event) {
+    
+    //If end time were chosen.
+    @FXML void endHiding(ActionEvent event) {
 		if ((endTimeCB.getValue()==null) || (endTimeCB.getValue().getNum() == 0)) 
 			endTimeCBFlag = false;
 		else
