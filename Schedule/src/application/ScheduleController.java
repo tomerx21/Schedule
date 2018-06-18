@@ -81,12 +81,18 @@ public class ScheduleController {
     		j=VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
     		String tempclassStr =VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
     		int colNum= GridPane.getColumnIndex(VboxArr.get(i));
+    		int rowNum= GridPane.getRowIndex(VboxArr.get(i));
+    		int spanNum= GridPane.getRowSpan(VboxArr.get(i));
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
-        { 
+        { 	
+      
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
-        	dayCB.setValue(new Days(7-colNum));
+        	startTimeCB.setValue(times[rowNum]);
+        	dayCB.setValue(days[7-colNum]);
+        	endTimeCB.setValue(times[spanNum+rowNum]);
+        	
         } );
     	}
     	
@@ -234,7 +240,7 @@ public class ScheduleController {
     }
     @FXML
     void dayHiding(ActionEvent event) {
-		if (dayCB.getValue()==null||dayCB.getValue().getNum() == 0) 
+		if (dayCB.getValue()==null||dayCB.getValue().getNum() == 7) 
 			dayCBFlag = false;
 		else
 			dayCBFlag = true;
