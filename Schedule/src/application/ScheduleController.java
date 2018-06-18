@@ -13,7 +13,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -24,7 +23,7 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
-	private ArrayList<VBox> Tempvbox=new ArrayList<VBox>();
+	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;
     @FXML private VBox courseVbox; //Course VBox
@@ -73,19 +72,21 @@ public class ScheduleController {
     	
     	lectTF.clear();
     	classTF.clear();
-    	Tempvbox.add(tempVbox);
-    	for(int i=0; i<Tempvbox.size();i++){
-    		int j=Tempvbox.get(i).getChildren().get(0).toString().indexOf(':');
-    		String tempCorStr =Tempvbox.get(i).getChildren().get(0).toString().substring(j+2, Tempvbox.get(i).getChildren().get(0).toString().length()-1);
-    		j=Tempvbox.get(i).getChildren().get(1).toString().indexOf('\'');
-    		String tempLecStr =Tempvbox.get(i).getChildren().get(1).toString().substring(j+1, Tempvbox.get(i).getChildren().get(1).toString().length()-1);
-    		j=Tempvbox.get(i).getChildren().get(2).toString().indexOf('\'');
-    		String tempclassStr =Tempvbox.get(i).getChildren().get(2).toString().substring(j+1, Tempvbox.get(i).getChildren().get(2).toString().length()-1);
-    		Tempvbox.get(i).setOnMouseClicked( ( e ) ->
+    	VboxArr.add(tempVbox);
+    	for(int i=0; i<VboxArr.size();i++){
+    		int j=VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
+    		String tempCorStr =VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
+    		j=VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
+    		String tempLecStr =VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
+    		j=VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
+    		String tempclassStr =VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
+    		int colNum= GridPane.getColumnIndex(VboxArr.get(i));
+    		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
+        	dayCB.setValue(new Days(7-colNum));
         } );
     	}
     	
