@@ -50,10 +50,10 @@ public class ScheduleController {
     void add(ActionEvent event) {
     	tempVbox = new VBox(5);
     	tempVbox.setFillWidth(true);
-    	tempVbox.setMaxWidth(112);
-    	tempVbox.setMaxHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
+    	tempVbox.setMaxWidth(113);
+    	tempVbox.setMaxHeight(82*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum()));
     	tempVbox.setPrefWidth(112);
-    	tempVbox.setPrefHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() ));
+    	//tempVbox.setPrefHeight(81*(endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() ));
     	tempVbox.setAlignment(Pos.TOP_CENTER);
     	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
@@ -67,17 +67,28 @@ public class ScheduleController {
     	dayCB.getSelectionModel().clearSelection();
     	startTimeCB.getSelectionModel().clearSelection();
     	endTimeCB.getSelectionModel().clearSelection();
-    	/*endTimeCB.setPromptText("ggg");
+    	endTimeCB.valueProperty().set(null);
+    	endTimeCB.setPromptText("ggg");
     	startTimeCB.setPromptText("rte");
     	dayCB.setPromptText("rrtt");
-    	deleteBtn.fire();
-    	endTimeCB.setPromptText(endTimeStr);
-    	startTimeCB.setPromptText(startTimeStr);
-    	dayCB.setPromptText(dayStr);*/
+        //delete();
 
     }
     
-    private String toRgbString(Color c) {
+    private void delete() {
+    	courseTF.clear();
+    	lectTF.clear();
+    	classTF.clear();
+    	dayCB.getSelectionModel().clearSelection();
+    	startTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.getSelectionModel().clearSelection();
+    	endTimeCB.setPromptText(endTimeStr);
+    	startTimeCB.setPromptText(startTimeStr);
+    	dayCB.setPromptText(dayStr);
+		
+	}
+
+	private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
     }
     
@@ -114,15 +125,7 @@ public class ScheduleController {
     
     @FXML
     void deleted(ActionEvent event) {
-    	courseTF.clear();
-    	lectTF.clear();
-    	classTF.clear();
-    	dayCB.getSelectionModel().clearSelection();
-    	startTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.getSelectionModel().clearSelection();
-    	endTimeCB.setPromptText(endTimeStr);
-    	startTimeCB.setPromptText(startTimeStr);
-    	dayCB.setPromptText(dayStr);
+    	delete();
     }
 
     @FXML
