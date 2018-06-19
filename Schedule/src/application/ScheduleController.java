@@ -55,16 +55,16 @@ public class ScheduleController {
     	lectTF.clear();
     	classTF.clear();
     	VboxArr.add(tempVbox);
-    	for(int i=0; i<VboxArr.size();i++){
-    		int j=VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
-    		String tempCorStr =VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
+    	for(int i=0; i < VboxArr.size(); i++){
+    		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
+    		String tempCorStr = VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
     		j=VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
-    		String tempLecStr =VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
+    		String tempLecStr = VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
     		j=VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
-    		String tempclassStr =VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
-    		int colNum= GridPane.getColumnIndex(VboxArr.get(i));
-    		int rowNum= GridPane.getRowIndex(VboxArr.get(i));
-    		int spanNum= GridPane.getRowSpan(VboxArr.get(i));
+    		String tempclassStr = VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
+    		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
+    		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
+    		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
         	
