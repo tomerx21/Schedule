@@ -43,11 +43,32 @@ public class ScheduleController {
     @FXML private Button deleteBtn;				//Delete button
     @FXML private Label colorLabel;				//Color label
     @FXML private ToggleGroup typeGroup;		//Radio buttons group
-    
+    @FXML private Button endBtn;               //And button
+      
+    	//Initialize.
+        @FXML public void initialize() {
+    	for (int i = 0; i < 8; i++) {
+			days[i] = new Days(i);
+			dayCB.getItems().add(days[i]);
+    	}
+    	for (int i = 0; i < 10; i++) {
+    		times[i] = new Times(i);
+    	} 
+    	setTimeCB(1, startTimeCB);
+    	setTimeCB(1, endTimeCB);
+    	dayCB.setValue(dayCB.getItems().get(0));
+    	endTimeCB.setValue(endTimeCB.getItems().get(0));
+    	startTimeCB.setValue(startTimeCB.getItems().get(0));
+    	colorCP.getStyleClass().add("split-button");
+    	colorCP.setStyle("-fx-color-label-visible: false ;");
+    	colorLabel.setVisible(false);
+    	courseVbox.setVisible(false);
+    	colorCP.setVisible(false);
+    	endBtn.setVisible(false);
+    	addBtn.setDisable(true);
+    }
     //If add button pressed
     @FXML void add(ActionEvent event) {
-    	
-    	
     	addBtn.setText("הוסף");
     	deleteBtn.setText("מחק");
     	tempVbox = new VBox(5);
@@ -61,6 +82,7 @@ public class ScheduleController {
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
     	if(addBtnFlag==1) {
     		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+    		endBtn.setVisible(false);
     		delete();
     	}
     	addBtnFlag=0;
@@ -69,7 +91,6 @@ public class ScheduleController {
     	lectTF.clear();
     	classTF.clear();
     	VboxArr.add(tempVbox);
-    	
     	for( i=0; i < VboxArr.size(); i++){
     		final int tempVboxIndex = i;
     		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
@@ -88,6 +109,7 @@ public class ScheduleController {
         	removeBtnFlag=1;
         	addBtn.setText("ערוך");
         	deleteBtn.setText("מחק קורס");
+        	endBtn.setVisible(true);
         	finalVboxIndex = tempVboxIndex;
         	typeGroup.selectToggle(tempRB);
         	classTF.setText(tempclassStr);
@@ -101,7 +123,36 @@ public class ScheduleController {
     	
          delete();
     }
-    
+    @FXML
+    //The button end pressed
+    void end(ActionEvent event) {
+    	delete();
+    	endBtn.setVisible(false);
+    }
+    //The button delete pressed. 
+    @FXML void deleted(ActionEvent event) { 
+    	if(removeBtnFlag==1)
+    		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+    	endBtn.setVisible(false);
+    	delete();
+    }
+    //The button new course pressed.
+    @FXML void newCourse(ActionEvent event) {
+    	courseVbox.setVisible(true);
+    	colorCP.setVisible(true);
+    	colorLabel.setVisible(true);
+    } 
+    //Function to re-set the starting and the ending time ComboBoxes.
+    public void setTimeCB(int startIndex, ComboBox<Times> CB) {
+    CB.getItems().clear();
+    CB.getItems().add(times[0] = new Times(0));
+	for (int i = startIndex; i < 10; i++) {
+		if (i != 5) {
+		CB.getItems().add(times[i]);
+			}
+		CB.setValue(CB.getItems().get(0));
+		}
+    }
     //Function for changing color.
 	private String toRgbString(Color c) {
         return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
@@ -114,8 +165,6 @@ public class ScheduleController {
     
     //Function to reset all the fields.
     private void delete() {
-    	
-    	
     	addBtnFlag=0;
     	removeBtnFlag=0;
     	addBtn.setText("הוסף");
@@ -128,54 +177,8 @@ public class ScheduleController {
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
     	typeGroup.selectToggle(lectRB);
 	}
-    
-    //Initialize.
-    @FXML public void initialize() {
-    	for (int i = 0; i < 8; i++) {
-			days[i] = new Days(i);
-			dayCB.getItems().add(days[i]);
-    	}
-    	for (int i = 0; i < 10; i++) {
-    		times[i] = new Times(i);
-    	} 
-    	setTimeCB(1, startTimeCB);
-    	setTimeCB(1, endTimeCB);
-    	dayCB.setValue(dayCB.getItems().get(0));
-    	endTimeCB.setValue(endTimeCB.getItems().get(0));
-    	startTimeCB.setValue(startTimeCB.getItems().get(0));
-    	colorCP.getStyleClass().add("split-button");
-    	colorCP.setStyle("-fx-color-label-visible: false ;");
-    	colorLabel.setVisible(false);
-    	courseVbox.setVisible(false);
-    	colorCP.setVisible(false);
-    	addBtn.setDisable(true);
-    }
-   
-    //Function to re-set the starting and the ending time ComboBoxes.
-    public void setTimeCB(int startIndex, ComboBox<Times> CB) {
-    CB.getItems().clear();
-    CB.getItems().add(times[0] = new Times(0));
-	for (int i = startIndex; i < 10; i++) {
-		if (i != 5) {
-		CB.getItems().add(times[i]);
-			}
-		CB.setValue(CB.getItems().get(0));
-		}
-    }
-    
-    //The button new course pressed.
-    @FXML void newCourse(ActionEvent event) {
-    	courseVbox.setVisible(true);
-    	colorCP.setVisible(true);
-    	colorLabel.setVisible(true);
-    }
-    
-    //The button delete pressed.
-    @FXML void deleted(ActionEvent event) { 
-    	if(removeBtnFlag==1)
-    		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
-    	delete();
-    }
+          
+ 
     
     //If exercise radio button pressed.
     @FXML void execAction(ActionEvent event) {
