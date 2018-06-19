@@ -1,7 +1,5 @@
 package application;
 
-
-
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +21,8 @@ public class ScheduleController {
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
 	private int finalVboxIndex;
+	private int addBtnFlag=0;
+	private int removeBtnFlag=0;
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;		//All the GridPane
@@ -46,6 +46,10 @@ public class ScheduleController {
     
     //If add button pressed
     @FXML void add(ActionEvent event) {
+    	
+    	
+    	addBtn.setText("הוסף");
+    	deleteBtn.setText("מחק");
     	tempVbox = new VBox(5);
     	int i;
     	tempVbox.setAlignment(Pos.CENTER);
@@ -55,10 +59,17 @@ public class ScheduleController {
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
     	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
+    	if(addBtnFlag==1) {
+    		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+    		delete();
+    	}
+    	addBtnFlag=0;
+    	removeBtnFlag=0;
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
     	VboxArr.add(tempVbox);
+    	
     	for( i=0; i < VboxArr.size(); i++){
     		final int tempVboxIndex = i;
     		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
@@ -73,6 +84,10 @@ public class ScheduleController {
     		RadioButton tempRB = (RadioButton) typeGroup.getSelectedToggle();
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
+        	addBtnFlag=1;
+        	removeBtnFlag=1;
+        	addBtn.setText("ערוך");
+        	deleteBtn.setText("מחק קורס");
         	finalVboxIndex = tempVboxIndex;
         	typeGroup.selectToggle(tempRB);
         	classTF.setText(tempclassStr);
@@ -99,6 +114,12 @@ public class ScheduleController {
     
     //Function to reset all the fields.
     private void delete() {
+    	
+    	
+    	addBtnFlag=0;
+    	removeBtnFlag=0;
+    	addBtn.setText("הוסף");
+    	deleteBtn.setText("מחק");
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
@@ -150,8 +171,9 @@ public class ScheduleController {
     }
     
     //The button delete pressed.
-    @FXML void deleted(ActionEvent event) {
-    	ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+    @FXML void deleted(ActionEvent event) { 
+    	if(removeBtnFlag==1)
+    		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
     	delete();
     }
     
