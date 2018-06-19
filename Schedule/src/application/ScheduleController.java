@@ -43,7 +43,6 @@ public class ScheduleController {
     
     //If add button pressed
     @FXML void add(ActionEvent event) {
-    	addBtn.setText("הוסף");
     	tempVbox = new VBox(5);
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
@@ -68,15 +67,13 @@ public class ScheduleController {
     		int spanNum= GridPane.getRowSpan(VboxArr.get(i));
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
-        	addBtn.setText("ערוך");
+        	
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
         	startTimeCB.setValue(times[rowNum]);
         	dayCB.setValue(days[7-colNum]);
         	endTimeCB.setValue(times[spanNum+rowNum]);
-        	//startTimeCB.setValue(times[rowNum]);
-        	
         } );
     	}
     	
@@ -111,7 +108,7 @@ public class ScheduleController {
     	}
     	for (int i = 0; i < 10; i++) {
     		times[i] = new Times(i);
-    	}
+    	} 
     	setTimeCB(1, startTimeCB);
     	setTimeCB(1, endTimeCB);
     	dayCB.setValue(dayCB.getItems().get(0));
