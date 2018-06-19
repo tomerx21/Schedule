@@ -22,6 +22,7 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times times[] = new Times[10];
+	private int n;
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;		//All the GridPane
@@ -46,6 +47,7 @@ public class ScheduleController {
     //If add button pressed
     @FXML void add(ActionEvent event) {
     	tempVbox = new VBox(5);
+    	int i;
     	tempVbox.setAlignment(Pos.CENTER);
     	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
@@ -57,7 +59,8 @@ public class ScheduleController {
     	lectTF.clear();
     	classTF.clear();
     	VboxArr.add(tempVbox);
-    	for(int i=0; i < VboxArr.size(); i++){
+    	for( i=0; i < VboxArr.size(); i++){
+    		final int h=i;
     		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
     		String tempCorStr = VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
     		j=VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
@@ -70,6 +73,7 @@ public class ScheduleController {
     		RadioButton tempRB = (RadioButton) typeGroup.getSelectedToggle();
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
+        	n=h;
         	typeGroup.selectToggle(tempRB);
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
@@ -147,6 +151,7 @@ public class ScheduleController {
     
     //The button delete pressed.
     @FXML void deleted(ActionEvent event) {
+    	ScheduleGrid.getChildren().remove(VboxArr.get(n));
     	delete();
     }
     
