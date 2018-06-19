@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,7 @@ public class ScheduleController {
     @FXML private Button addBtn;				//Add button
     @FXML private Button deleteBtn;				//Delete button
     @FXML private Label colorLabel;				//Color label
+    @FXML private ToggleGroup typeGroup;		//Radio buttons group
     
     //If add button pressed
     @FXML void add(ActionEvent event) {
@@ -65,9 +67,10 @@ public class ScheduleController {
     		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
     		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
     		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
+    		RadioButton tempRB = (RadioButton) typeGroup.getSelectedToggle();
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
-        	
+        	typeGroup.selectToggle(tempRB);
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
@@ -98,6 +101,7 @@ public class ScheduleController {
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
+    	typeGroup.selectToggle(lectRB);
 	}
     
     //Initialize.
