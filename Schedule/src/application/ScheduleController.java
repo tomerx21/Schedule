@@ -19,7 +19,8 @@ import javafx.scene.paint.Color;
 public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
-	private Times times[] = new Times[10];
+	private Times StartTimes[] = new Times[10];
+	private Times EndTimes[] = new Times[10];
 	private int finalVboxIndex;
 	private int addBtnFlag=0;
 	private int removeBtnFlag=0;
@@ -53,13 +54,11 @@ public class ScheduleController {
 			dayCB.getItems().add(days[i]);
     	}
     	for (int i = 0; i < 10; i++) {
-    		times[i] = new Times(i, 1);
+    		StartTimes[i] = new Times(i, 1);
+    		EndTimes[i] = new Times(i, 2);
     	} 
-    	setTimeCB(1, startTimeCB, 1);
-    	for (int i = 0; i < 10; i++) {
-    		times[i] = new Times(i, 2);
-    	} 
-    	setTimeCB(1, endTimeCB, 2);
+    	setTimeCB(1, startTimeCB, StartTimes);
+    	setTimeCB(1, endTimeCB, EndTimes);
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
@@ -83,7 +82,7 @@ public class ScheduleController {
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
     	tempVbox.setStyle(style);
-    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
+    	ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1, endTimeCB.getValue().getNum()-startTimeCB.getValue().getNum() );
     	if(addBtnFlag==1) {
     		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
     		endBtn.setVisible(false);
@@ -99,9 +98,9 @@ public class ScheduleController {
     		final int tempVboxIndex = i;
     		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
     		String tempCorStr = VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
-    		j=VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
+    		j = VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
     		String tempLecStr = VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
-    		j=VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
+    		j = VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
     		String tempclassStr = VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
     		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
     		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
@@ -119,9 +118,9 @@ public class ScheduleController {
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
-        	startTimeCB.setValue(times[rowNum]);
+        	startTimeCB.setValue(StartTimes[rowNum]);
         	dayCB.setValue(days[7-colNum]);
-        	endTimeCB.setValue(times[spanNum+rowNum]);
+        	endTimeCB.setValue(EndTimes[spanNum+rowNum-1]);
         } );
     	}
     	
@@ -147,15 +146,13 @@ public class ScheduleController {
     	colorLabel.setVisible(true);
     } 
     //Function to re-set the starting and the ending time ComboBoxes.
-    public void setTimeCB(int startIndex, ComboBox<Times> CB, int startOrEndFlag) {
-    int endForIndex = lectTime;
+    public void setTimeCB(int startIndex, ComboBox<Times> CB, Times arr[]) {
     CB.getItems().clear();
-    CB.getItems().add(times[0] = new Times(0, 1));
-    if (startOrEndFlag == 1)
-    	endForIndex = lectTime - 1;
-	for (int i = startIndex; i < endForIndex; i++) {
+    CB.getItems().add(arr[0] = new Times(0, 1));
+
+	for (int i = startIndex; i < lectTime; i++) {
 		if (i != 5) {
-		CB.getItems().add(times[i]);
+		CB.getItems().add(arr[i]);
 			}
 		CB.setValue(CB.getItems().get(0));
 		}
@@ -245,12 +242,12 @@ public class ScheduleController {
     @FXML void startHiding(ActionEvent event) {
 		if ((startTimeCB.getValue()==null) || (startTimeCB.getValue().getNum() == 0)) {
 			startTimeCBFlag = false;
-			setTimeCB(1, endTimeCB, 2); //Re-set the ending times in the Combobox for all the options.
+			setTimeCB(1, endTimeCB, EndTimes); //Re-set the ending times in the Combobox for all the options.
 		}
 			
 		else {
 			startTimeCBFlag = true;
-			setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, 2); //Re-set the ending times in the Combobox from start time till the end.
+			setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, EndTimes); //Re-set the ending times in the Combobox from start time till the end.
 		}
 		checkIfDisableBtn();
     }

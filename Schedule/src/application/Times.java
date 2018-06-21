@@ -13,11 +13,11 @@ public class Times {
 			}
 			if ((num > 0) && (num < 5)) {
 				this.num = num;
-				this.name = new String( + (num + 7) + ":30");
+				this.name = new String((num + 7) + ":30");
 			}
 			else if ((num > 5) && (num < 10)) {
 				this.num = num;
-				this.name = new String( + (num + 7) + ":50");
+				this.name = new String((num + 7 -1) + ":50");
 			}
 		}
 		else if (startOrEndFlag == 2) { //Ending time
@@ -26,12 +26,12 @@ public class Times {
 					this.name = new String("בחר שעה");
 				}
 				if ((num > 0) && (num < 5)) {
-					this.num = num;
-					this.name = new String( + (num + 7 + 1) + ":20");
+					this.num = num + 1;
+					this.name = new String((num + 7 + 1) + ":20");
 				}
 				else if ((num > 5) && (num < 11)) {
-					this.num = num;
-					this.name = new String( + (num + 7) + ":40");
+					this.num = num + 1;
+					this.name = new String((num + 7) + ":40");
 				}
 			}
 		}
