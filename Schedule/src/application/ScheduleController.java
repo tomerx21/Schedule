@@ -23,6 +23,7 @@ public class ScheduleController {
 	private int finalVboxIndex;
 	private int addBtnFlag=0;
 	private int removeBtnFlag=0;
+	private static final int lectTime = 10; 
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;		//All the GridPane
@@ -45,17 +46,20 @@ public class ScheduleController {
     @FXML private ToggleGroup typeGroup;		//Radio buttons group
     @FXML private Button endBtn;               //And button
       
-    	//Initialize.
-        @FXML public void initialize() {
+	//Initialize.
+    @FXML public void initialize() {
     	for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
     	}
     	for (int i = 0; i < 10; i++) {
-    		times[i] = new Times(i);
+    		times[i] = new Times(i, 1);
     	} 
-    	setTimeCB(1, startTimeCB);
-    	setTimeCB(1, endTimeCB);
+    	setTimeCB(1, startTimeCB, 1);
+    	for (int i = 0; i < 10; i++) {
+    		times[i] = new Times(i, 2);
+    	} 
+    	setTimeCB(1, endTimeCB, 2);
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
@@ -143,10 +147,13 @@ public class ScheduleController {
     	colorLabel.setVisible(true);
     } 
     //Function to re-set the starting and the ending time ComboBoxes.
-    public void setTimeCB(int startIndex, ComboBox<Times> CB) {
+    public void setTimeCB(int startIndex, ComboBox<Times> CB, int startOrEndFlag) {
+    int endForIndex = lectTime;
     CB.getItems().clear();
-    CB.getItems().add(times[0] = new Times(0));
-	for (int i = startIndex; i < 10; i++) {
+    CB.getItems().add(times[0] = new Times(0, 1));
+    if (startOrEndFlag == 1)
+    	endForIndex = lectTime - 1;
+	for (int i = startIndex; i < endForIndex; i++) {
 		if (i != 5) {
 		CB.getItems().add(times[i]);
 			}
@@ -238,12 +245,12 @@ public class ScheduleController {
     @FXML void startHiding(ActionEvent event) {
 		if ((startTimeCB.getValue()==null) || (startTimeCB.getValue().getNum() == 0)) {
 			startTimeCBFlag = false;
-			setTimeCB(1, endTimeCB); //Re-set the ending times in the Combobox for all the options.
+			setTimeCB(1, endTimeCB, 2); //Re-set the ending times in the Combobox for all the options.
 		}
 			
 		else {
 			startTimeCBFlag = true;
-			setTimeCB(startTimeCB.getValue().getNum() + 1, endTimeCB); //Re-set the ending times in the Combobox from start time till the end.
+			setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, 2); //Re-set the ending times in the Combobox from start time till the end.
 		}
 		checkIfDisableBtn();
     }

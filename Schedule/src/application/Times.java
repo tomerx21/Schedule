@@ -5,44 +5,37 @@ public class Times {
 	private int num;
 	private String name;
 	
-	public Times(int num) {
-		if (num == 0) {
-			this.num = num;
-			this.name = new String("בחר שעה");
+	public Times(int num, int startOrEndFlag) {
+		if (startOrEndFlag == 1) { //Starting time
+			if (num == 0) {
+				this.num = num;
+				this.name = new String("בחר שעה");
+			}
+			if ((num > 0) && (num < 5)) {
+				this.num = num;
+				this.name = new String( + (num + 7) + ":30");
+			}
+			else if ((num > 5) && (num < 10)) {
+				this.num = num;
+				this.name = new String( + (num + 7) + ":50");
+			}
 		}
-		if (num == 1) {
-			this.num = num;
-			this.name = new String("8:30");
+		else if (startOrEndFlag == 2) { //Ending time
+				if (num == 0) {
+					this.num = num;
+					this.name = new String("בחר שעה");
+				}
+				if ((num > 0) && (num < 5)) {
+					this.num = num;
+					this.name = new String( + (num + 7 + 1) + ":20");
+				}
+				else if ((num > 5) && (num < 11)) {
+					this.num = num;
+					this.name = new String( + (num + 7) + ":40");
+				}
+			}
 		}
-		else if (num == 2) {
-			this.num = num;
-			this.name = new String("9:30");
-		}
-		else if (num == 3) {
-			this.num = num;
-			this.name = new String("10:30");
-		}
-		else if (num == 4) {
-			this.num = num;
-			this.name = new String("11:30");
-		}
-		else if (num == 6) {
-			this.num = num;
-			this.name = new String("12:50");
-		}
-		else if (num == 7) {
-			this.num = num;
-			this.name = new String("13:50");
-		}
-		else if (num == 8) {
-			this.num = num;
-			this.name = new String("14:50");
-		}
-		else if (num == 9) {
-			this.num = num;
-			this.name = new String("15:50");
-		}
-	}
+	
 	public String toString() {
 		return this.name;
 	}
