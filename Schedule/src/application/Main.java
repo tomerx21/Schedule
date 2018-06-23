@@ -1,11 +1,6 @@
 package application;
-	
 import java.io.IOException;
-
 import java.net.URL;
-
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -21,8 +16,7 @@ public class Main extends Application {
 	    URL url = getClass().getResource("ScheduleController.fxml");
 	    AnchorPane pane = FXMLLoader.load( url );
 	    Scene scene = new Scene( pane );
-	    Image image=new Image("/icons/date_and_time_clock-512.png");
-	    primaryStage.getIcons().add(image);
+	    primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icons/date_and_time_clock-512.png")));
 	    // setting the stage
 	    primaryStage.setScene( scene );
 	    primaryStage.setTitle( "Schedule" );
