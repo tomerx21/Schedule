@@ -78,7 +78,7 @@ public class ScheduleController {
     @FXML void add(ActionEvent event) {
     	addBtn.setText("הוסף");
     	deleteBtn.setText("מחק");
-    	tempVbox = new VBox(5);
+    	tempVbox = new VBox(4);
     	int i;
     	tempVbox.setAlignment(Pos.CENTER);
     	Label L1 = new Label(lectLabel.getText());
@@ -191,6 +191,7 @@ public class ScheduleController {
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
     	lectLabel.setText(lectRB.getText()+":");
     	typeGroup.selectToggle(lectRB);
+    	classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = false;
 	}
           
  
