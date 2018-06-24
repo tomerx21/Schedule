@@ -1,5 +1,7 @@
 package application;
 
+
+
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+
 public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
@@ -26,6 +29,7 @@ public class ScheduleController {
 	private int removeBtnFlag=0;
 	private static final int lectTime = 10; 
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
+	private ArrayList<RadioButton> RBArr=new ArrayList<RadioButton>();
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;		//All the GridPane
     @FXML private VBox courseVbox; 				//Course VBox
@@ -77,7 +81,10 @@ public class ScheduleController {
     	tempVbox = new VBox(5);
     	int i;
     	tempVbox.setAlignment(Pos.CENTER);
-    	tempVbox.getChildren().add(new Label(lectLabel.getText()+" "+courseTF.getText().toString()));
+    	Label L1 = new Label(lectLabel.getText());
+    	L1.setStyle("-fx-font-weight: bold;");
+    	tempVbox.getChildren().add(L1);
+    	tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
     	tempVbox.getChildren().add(new Label(classTF.getText().toString()));
     	String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
@@ -86,35 +93,38 @@ public class ScheduleController {
     	if(addBtnFlag==1) {
     		ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
     		endBtn.setVisible(false);
-    		delete();
     	}
     	addBtnFlag=0;
     	removeBtnFlag=0;
     	courseTF.clear();
     	lectTF.clear();
     	classTF.clear();
+    	RBArr.add((RadioButton) typeGroup.getSelectedToggle());
     	VboxArr.add(tempVbox);
     	for( i=0; i < VboxArr.size(); i++){
     		final int tempVboxIndex = i;
-    		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf(':');
-    		String tempCorStr = VboxArr.get(i).getChildren().get(0).toString().substring(j+2, VboxArr.get(i).getChildren().get(0).toString().length()-1);
+    		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf('\'');
+    		String tempTypeStr = VboxArr.get(i).getChildren().get(0).toString().substring(j+1, VboxArr.get(i).getChildren().get(0).toString().length()-1);
     		j = VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
-    		String tempLecStr = VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
-    		j = VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
-    		String tempclassStr = VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
+    		String tempCorStr = VboxArr.get(i).getChildren().get(1).toString().substring(j+1, VboxArr.get(i).getChildren().get(1).toString().length()-1);
+    		 j = VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
+    		String tempLecStr = VboxArr.get(i).getChildren().get(2).toString().substring(j+1, VboxArr.get(i).getChildren().get(2).toString().length()-1);
+    		j = VboxArr.get(i).getChildren().get(3).toString().indexOf('\'');
+    		String tempclassStr = VboxArr.get(i).getChildren().get(3).toString().substring(j+1, VboxArr.get(i).getChildren().get(3).toString().length()-1);
     		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
     		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
     		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
-    		RadioButton tempRB = (RadioButton) typeGroup.getSelectedToggle();
+    		RadioButton tempRB = RBArr.get(i);
     		VboxArr.get(i).setOnMouseClicked( ( e ) ->
         { 	
+        	typeGroup.selectToggle(tempRB);
         	addBtnFlag=1;
         	removeBtnFlag=1;
         	addBtn.setText("ערוך");
         	deleteBtn.setText("מחק קורס");
         	endBtn.setVisible(true);
         	finalVboxIndex = tempVboxIndex;
-        	typeGroup.selectToggle(tempRB);
+        	lectLabel.setText(tempTypeStr);
         	classTF.setText(tempclassStr);
         	lectTF.setText(tempLecStr);
         	courseTF.setText(tempCorStr);
@@ -179,11 +189,11 @@ public class ScheduleController {
     	dayCB.setValue(dayCB.getItems().get(0));
     	endTimeCB.setValue(endTimeCB.getItems().get(0));
     	startTimeCB.setValue(startTimeCB.getItems().get(0));
+    	lectLabel.setText(lectRB.getText()+":");
     	typeGroup.selectToggle(lectRB);
 	}
           
  
-    
     //If exercise radio button pressed.
     @FXML void execAction(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
@@ -211,10 +221,7 @@ public class ScheduleController {
 			courseTFFlag = false;
 		else
 			courseTFFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
     
     //If lecture name filled.
@@ -223,10 +230,7 @@ public class ScheduleController {
 			lectTFFlag = false;
 		else
 			lectTFFlag = true;
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
-			addBtn.setDisable(false);
-		else
-			addBtn.setDisable(true);
+		checkIfDisableBtn();
     }
      
     //If lecturer name filled.
