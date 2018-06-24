@@ -49,7 +49,7 @@ public class ScheduleController {
     @FXML private Button deleteBtn;				//Delete button
     @FXML private Label colorLabel;				//Color label
     @FXML private ToggleGroup typeGroup;		//Radio buttons group
-    @FXML private Button endBtn;               //And button
+    @FXML private Button endBtn;                //And button
       
 	//Initialize.
     @FXML public void initialize() {
