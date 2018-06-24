@@ -217,7 +217,7 @@ public class ScheduleController {
     //***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
     
     //If course name filled.
-    @FXML void keyTypedClassTF(KeyEvent event) {
+    @FXML void keyTypedCourseTF(KeyEvent event) {
 		if (courseTF.getText().trim().equals("")) 
 			courseTFFlag = false;
 		else
@@ -226,7 +226,7 @@ public class ScheduleController {
     }
     
     //If lecture name filled.
-    @FXML void keyTypedCourseTF(KeyEvent event) {
+    @FXML void keyTypedLectTF(KeyEvent event) {
 		if (lectTF.getText().trim().equals("")) 
 			lectTFFlag = false;
 		else
@@ -235,7 +235,7 @@ public class ScheduleController {
     }
      
     //If lecturer name filled.
-    @FXML void keyTypedLectTF(KeyEvent event) {
+    @FXML void keyTypedClassTF(KeyEvent event) {
 		if (classTF.getText().trim().equals("")) 
 			classTFFlag = false;
 		else
