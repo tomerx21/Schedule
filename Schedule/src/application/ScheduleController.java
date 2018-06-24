@@ -131,14 +131,16 @@ public class ScheduleController {
         	startTimeCB.setValue(StartTimes[rowNum]);
         	dayCB.setValue(days[7-colNum]);
         	endTimeCB.setValue(EndTimes[spanNum+rowNum-1]);
+        	classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;     	
+        	addBtn.setDisable(false);
         } );
     	}
     	
          delete();
     }
-    @FXML
+    
     //The button end pressed
-    void end(ActionEvent event) {
+    @FXML void end(ActionEvent event) {
     	delete();
     	endBtn.setVisible(false);
     }
