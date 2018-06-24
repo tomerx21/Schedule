@@ -194,7 +194,6 @@ public class ScheduleController {
     	classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = false;
 	}
           
- 
     //If exercise radio button pressed.
     @FXML void execAction(ActionEvent event) {
         lectLabel.setText(execRB.getText()+":");
