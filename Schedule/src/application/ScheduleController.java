@@ -2,10 +2,18 @@ package application;
 
 
 
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -13,10 +21,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 
 
 public class ScheduleController {
@@ -30,6 +40,7 @@ public class ScheduleController {
 	private static final int lectTime = 10; 
 	private ArrayList<VBox> VboxArr=new ArrayList<VBox>();
 	private ArrayList<RadioButton> RBArr=new ArrayList<RadioButton>();
+	@FXML private Button saveBtn;
 	@FXML private VBox tempVbox;
     @FXML private GridPane ScheduleGrid;		//All the GridPane
     @FXML private VBox courseVbox; 				//Course VBox
@@ -73,10 +84,12 @@ public class ScheduleController {
     	colorCP.setVisible(false);
     	endBtn.setVisible(false);
     	addBtn.setDisable(true);
+    	saveBtn.setVisible(false);
     }
     //If add button pressed
     @FXML void add(ActionEvent event) {
     	addBtn.setText("הוסף");
+    	saveBtn.setVisible(true);
     	deleteBtn.setText("מחק");
     	tempVbox = new VBox(4);
     	int i;
@@ -138,6 +151,32 @@ public class ScheduleController {
     	
          delete();
     }
+    //the button pressed to save image 
+    @FXML
+    void captureAndSaveDisplay(ActionEvent event) {
+    	{
+    	    FileChooser fileChooser = new FileChooser();
+
+    	    //Set extension filter
+    	    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+    	    //Prompt user to select a file
+    	    File file = fileChooser.showSaveDialog(null);
+
+    	    if(file != null){
+    	        try {
+    	            //Pad the capture area
+    	            WritableImage writableImage = new WritableImage((int)ScheduleGrid.getWidth() + 5,
+    	            		(int)ScheduleGrid.getHeight() + 5);
+    	            WritableImage snapshot = ScheduleGrid.snapshot(new SnapshotParameters(), writableImage);
+    	            RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
+    	            //Write the snapshot to the chosen file
+    	            ImageIO.write(renderedImage, "png", file);
+    	        } catch (IOException ex) { ex.printStackTrace(); }
+    	    }
+    	}
+
+    }
+    
     
     //The button end pressed
     @FXML void end(ActionEvent event) {
