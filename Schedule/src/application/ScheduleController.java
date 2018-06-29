@@ -40,7 +40,7 @@ public class ScheduleController {
 	private ArrayList<RadioButton> RBArr = new ArrayList<RadioButton>();
 	@FXML private Button saveBtn;
 	@FXML private VBox tempVbox;
-	@FXML private GridPane ScheduleGrid; 		// All the GridPane
+	@FXML private GridPane ScheduleGrid; 		// All   GridPane
 	@FXML private VBox courseVbox; 				// Course VBox
 	@FXML private ColorPicker colorCP; 			// Color
 	@FXML private RadioButton lectRB; 			// Lecture RadioButton
