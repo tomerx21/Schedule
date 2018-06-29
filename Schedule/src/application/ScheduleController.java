@@ -40,25 +40,25 @@ public class ScheduleController {
 	private ArrayList<RadioButton> RBArr = new ArrayList<RadioButton>();
 	@FXML private Button saveBtn;
 	@FXML private VBox tempVbox;
-	@FXML private GridPane ScheduleGrid; // All the GridPane
-	@FXML private VBox courseVbox; // Course VBox
-	@FXML private ColorPicker colorCP; // Color
-	@FXML private RadioButton lectRB; // Lecture RadioButton
-	@FXML private RadioButton execRB; // Exercise RadioButton
-	@FXML private RadioButton labRB; // Lab RadioButton
-	@FXML private RadioButton wsRB; // Sadna RadioButton
-	@FXML private Label lectLabel; // Lecture label
-	@FXML private TextField courseTF; // Course TextField
-	@FXML private TextField lectTF; // Lecturer TextField
-	@FXML private TextField classTF; // Class TextField
-	@FXML private ComboBox<Days> dayCB; // Day ComboBox
-	@FXML private ComboBox<Times> startTimeCB; // Lecture start time ComboBox
-	@FXML private ComboBox<Times> endTimeCB; // Lecture end time ComboBox
-	@FXML private Button addBtn; // Add button
-	@FXML private Button deleteBtn; // Delete button
-	@FXML private Label colorLabel; // Color label
-	@FXML private ToggleGroup typeGroup; // Radio buttons group
-	@FXML private Button endBtn; // And button
+	@FXML private GridPane ScheduleGrid; 		// All the GridPane
+	@FXML private VBox courseVbox; 				// Course VBox
+	@FXML private ColorPicker colorCP; 			// Color
+	@FXML private RadioButton lectRB; 			// Lecture RadioButton
+	@FXML private RadioButton execRB; 			// Exercise RadioButton
+	@FXML private RadioButton labRB; 			// Lab RadioButton
+	@FXML private RadioButton wsRB; 			// Sadna RadioButton
+	@FXML private Label lectLabel; 				// Lecture label
+	@FXML private TextField courseTF;			// Course TextField
+	@FXML private TextField lectTF; 			// Lecturer TextField
+	@FXML private TextField classTF;			// Class TextField
+	@FXML private ComboBox<Days> dayCB; 		// Day ComboBox
+	@FXML private ComboBox<Times> startTimeCB; 	// Lecture start time ComboBox
+	@FXML private ComboBox<Times> endTimeCB; 	// Lecture end time ComboBox
+	@FXML private Button addBtn; 				// Add button
+	@FXML private Button deleteBtn; 			// Delete button
+	@FXML private Label colorLabel; 			// Color label
+	@FXML private ToggleGroup typeGroup; 		// Radio buttons group
+	@FXML private Button endBtn; 				// And button
 
 	// Initialize.
 	@FXML public void initialize() {
