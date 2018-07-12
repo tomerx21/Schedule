@@ -29,6 +29,8 @@ public class ScheduleController {
 
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false,
 			endTimeCBFlag = false, dayCBFlag = false;
+
+	
 	private Days days[] = new Days[8];
 	private Times StartTimes[] = new Times[10];
 	private Times EndTimes[] = new Times[10];
@@ -60,6 +62,8 @@ public class ScheduleController {
 	@FXML private Label colorLabel; // Color label
 	@FXML private ToggleGroup typeGroup; // Radio buttons group
 	@FXML private Button endBtn; // And button
+			// And button
+
 
 	// Initialize.
 	@FXML public void initialize() {
@@ -119,17 +123,13 @@ public class ScheduleController {
 		VboxArr.add(tempVbox);
 		final int tempVboxIndex = i;
 		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf('\'');
-		String tempTypeStr = VboxArr.get(i).getChildren().get(0).toString().substring(j + 1,
-				VboxArr.get(i).getChildren().get(0).toString().length() - 1);
+		String tempTypeStr = VboxArr.get(i).getChildren().get(0).toString().substring(j + 1, VboxArr.get(i).getChildren().get(0).toString().length() - 1);
 		j = VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
-		String tempCorStr = VboxArr.get(i).getChildren().get(1).toString().substring(j + 1,
-				VboxArr.get(i).getChildren().get(1).toString().length() - 1);
+		String tempCorStr = VboxArr.get(i).getChildren().get(1).toString().substring(j + 1, VboxArr.get(i).getChildren().get(1).toString().length() - 1);
 		j = VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
-		String tempLecStr = VboxArr.get(i).getChildren().get(2).toString().substring(j + 1,
-				VboxArr.get(i).getChildren().get(2).toString().length() - 1);
+		String tempLecStr = VboxArr.get(i).getChildren().get(2).toString().substring(j + 1, VboxArr.get(i).getChildren().get(2).toString().length() - 1);
 		j = VboxArr.get(i).getChildren().get(3).toString().indexOf('\'');
-		String tempclassStr = VboxArr.get(i).getChildren().get(3).toString().substring(j + 1,
-				VboxArr.get(i).getChildren().get(3).toString().length() - 1);
+		String tempclassStr = VboxArr.get(i).getChildren().get(3).toString().substring(j + 1, VboxArr.get(i).getChildren().get(3).toString().length() - 1);
 		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
 		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
 		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
@@ -265,8 +265,7 @@ public class ScheduleController {
 	@FXML void labAction(ActionEvent event) {
 		lectLabel.setText(labRB.getText() + ":");
 	}
-	// ***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE
-	// FILLED TO ENABLE THE ADD BUTTON *****************
+	// ***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
 
 	// If course name filled.
 	@FXML void keyTypedCourseTF(KeyEvent event) {
@@ -328,8 +327,7 @@ public class ScheduleController {
 		checkIfDisableBtn();
 	}
 
-	// Function checks according to flags from the all the fields if the add button
-	// needs to be endabled or disabled.
+	// Function checks according to flags from the all the fields if the add button needs to be endabled or disabled.
 	public void checkIfDisableBtn() {
 		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true)
 				&& (endTimeCBFlag == true) && (dayCBFlag == true))
@@ -337,6 +335,9 @@ public class ScheduleController {
 		else
 			addBtn.setDisable(true);
 	}
+
 	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE
 	// FILLED TO ENABLE THE ADD BUTTON *****************
+	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
+
 }
