@@ -1,3 +1,4 @@
+
 package application;
 
 import java.awt.image.RenderedImage;
@@ -25,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class ScheduleController {
+
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false,
 			endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
@@ -37,52 +39,30 @@ public class ScheduleController {
 	private static final int lectTime = 10;
 	private ArrayList<VBox> VboxArr = new ArrayList<VBox>();
 	private ArrayList<RadioButton> RBArr = new ArrayList<RadioButton>();
-	@FXML
-	private Button saveBtn;
-	@FXML
-	private VBox tempVbox;
-	@FXML
-	private GridPane ScheduleGrid; // All the GridPane
-	@FXML
-	private VBox courseVbox; // Course VBox
-	@FXML
-	private ColorPicker colorCP; // Color
-	@FXML
-	private RadioButton lectRB; // Lecture RadioButton
-	@FXML
-	private RadioButton execRB; // Exercise RadioButton
-	@FXML
-	private RadioButton labRB; // Lab RadioButton
-	@FXML
-	private RadioButton wsRB; // Sadna RadioButton
-	@FXML
-	private Label lectLabel; // Lecture label
-	@FXML
-	private TextField courseTF; // Course TextField
-	@FXML
-	private TextField lectTF; // Lecturer TextField
-	@FXML
-	private TextField classTF; // Class TextField
-	@FXML
-	private ComboBox<Days> dayCB; // Day ComboBox
-	@FXML
-	private ComboBox<Times> startTimeCB; // Lecture start time ComboBox
-	@FXML
-	private ComboBox<Times> endTimeCB; // Lecture end time ComboBox
-	@FXML
-	private Button addBtn; // Add button
-	@FXML
-	private Button deleteBtn; // Delete button
-	@FXML
-	private Label colorLabel; // Color label
-	@FXML
-	private ToggleGroup typeGroup; // Radio buttons group
-	@FXML
-	private Button endBtn; // And button
+	@FXML private Button saveBtn;
+	@FXML private VBox tempVbox;
+	@FXML private GridPane ScheduleGrid; // All the GridPane
+	@FXML private VBox courseVbox; // Course VBox
+	@FXML private ColorPicker colorCP; // Color
+	@FXML private RadioButton lectRB; // Lecture RadioButton
+	@FXML private RadioButton execRB; // Exercise RadioButton
+	@FXML private RadioButton labRB; // Lab RadioButton
+	@FXML private RadioButton wsRB; // Sadna RadioButton
+	@FXML private Label lectLabel; // Lecture label
+	@FXML private TextField courseTF; // Course TextField
+	@FXML private TextField lectTF; // Lecturer TextField
+	@FXML private TextField classTF; // Class TextField
+	@FXML private ComboBox<Days> dayCB; // Day ComboBox
+	@FXML private ComboBox<Times> startTimeCB; // Lecture start time ComboBox
+	@FXML private ComboBox<Times> endTimeCB; // Lecture end time ComboBox
+	@FXML private Button addBtn; // Add button
+	@FXML private Button deleteBtn; // Delete button
+	@FXML private Label colorLabel; // Color label
+	@FXML private ToggleGroup typeGroup; // Radio buttons group
+	@FXML private Button endBtn; // And button
 
 	// Initialize.
-	@FXML
-	public void initialize() {
+	@FXML public void initialize() {
 		for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
@@ -107,13 +87,16 @@ public class ScheduleController {
 	}
 
 	// If add button pressed
-	@FXML
-	void add(ActionEvent event) {
+	@FXML void add(ActionEvent event) {
 		addBtn.setText("הוסף");
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
 		tempVbox = new VBox(4);
 
+		String cssLayout = "-fx-border-color: black;\n" +
+                "-fx-border-width: 1;\n" +
+                "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
+		tempVbox.setStyle(cssLayout);
 		tempVbox.setAlignment(Pos.CENTER);
 		Label L1 = new Label(lectLabel.getText());
 		L1.setStyle("-fx-font-weight: bold;");
@@ -121,8 +104,6 @@ public class ScheduleController {
 		tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
 		tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
 		tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-		String style = "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";";
-		tempVbox.setStyle(style);
 		ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,
 				endTimeCB.getValue().getNum() - startTimeCB.getValue().getNum());
 		if (addBtnFlag == 1) {
@@ -177,8 +158,7 @@ public class ScheduleController {
 	}
 
 	// the button pressed to save image
-	@FXML
-	void captureAndSaveDisplay(ActionEvent event) {
+	@FXML void captureAndSaveDisplay(ActionEvent event) {
 		{
 			FileChooser fileChooser = new FileChooser();
 
@@ -196,7 +176,8 @@ public class ScheduleController {
 					RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
 					// Write the snapshot to the chosen file
 					ImageIO.write(renderedImage, "png", file);
-				} catch (IOException ex) {
+				}
+				catch (IOException ex) {
 					ex.printStackTrace();
 				}
 			}
@@ -205,15 +186,13 @@ public class ScheduleController {
 	}
 
 	// The button end pressed
-	@FXML
-	void end(ActionEvent event) {
+	@FXML void end(ActionEvent event) {
 		delete();
 		endBtn.setVisible(false);
 	}
 
 	// The button delete pressed.
-	@FXML
-	void deleted(ActionEvent event) {
+	@FXML void deleted(ActionEvent event) {
 		if (removeBtnFlag == 1)
 			ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
 		endBtn.setVisible(false);
@@ -221,8 +200,7 @@ public class ScheduleController {
 	}
 
 	// The button new course pressed.
-	@FXML
-	void newCourse(ActionEvent event) {
+	@FXML void newCourse(ActionEvent event) {
 		courseVbox.setVisible(true);
 		colorCP.setVisible(true);
 		colorLabel.setVisible(true);
@@ -269,34 +247,29 @@ public class ScheduleController {
 	}
 
 	// If exercise radio button pressed.
-	@FXML
-	void execAction(ActionEvent event) {
+	@FXML void execAction(ActionEvent event) {
 		lectLabel.setText(execRB.getText() + ":");
 	}
 
 	// If sadna radio button pressed.
-	@FXML
-	void wsAction(ActionEvent event) {
+	@FXML void wsAction(ActionEvent event) {
 		lectLabel.setText(wsRB.getText() + ":");
 	}
 
 	// If lecture radio button pressed.
-	@FXML
-	void lectAction(ActionEvent event) {
+	@FXML void lectAction(ActionEvent event) {
 		lectLabel.setText(lectRB.getText() + ":");
 	}
 
 	// If lab radio button pressed.
-	@FXML
-	void labAction(ActionEvent event) {
+	@FXML void labAction(ActionEvent event) {
 		lectLabel.setText(labRB.getText() + ":");
 	}
 	// ***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE
 	// FILLED TO ENABLE THE ADD BUTTON *****************
 
 	// If course name filled.
-	@FXML
-	void keyTypedCourseTF(KeyEvent event) {
+	@FXML void keyTypedCourseTF(KeyEvent event) {
 		if (courseTF.getText().trim().equals(""))
 			courseTFFlag = false;
 		else
@@ -305,8 +278,7 @@ public class ScheduleController {
 	}
 
 	// If lecture name filled.
-	@FXML
-	void keyTypedLectTF(KeyEvent event) {
+	@FXML void keyTypedLectTF(KeyEvent event) {
 		if (lectTF.getText().trim().equals(""))
 			lectTFFlag = false;
 		else
@@ -315,8 +287,7 @@ public class ScheduleController {
 	}
 
 	// If lecturer name filled.
-	@FXML
-	void keyTypedClassTF(KeyEvent event) {
+	@FXML void keyTypedClassTF(KeyEvent event) {
 		if (classTF.getText().trim().equals(""))
 			classTFFlag = false;
 		else
@@ -325,8 +296,7 @@ public class ScheduleController {
 	}
 
 	// If start time were chosen.
-	@FXML
-	void startHiding(ActionEvent event) {
+	@FXML void startHiding(ActionEvent event) {
 		if ((startTimeCB.getValue() == null) || (startTimeCB.getValue().getNum() == 0)) {
 			startTimeCBFlag = false;
 			setTimeCB(1, endTimeCB, EndTimes); // Re-set the ending times in the Combobox for all the options.
@@ -341,8 +311,7 @@ public class ScheduleController {
 	}
 
 	// If end time were chosen.
-	@FXML
-	void endHiding(ActionEvent event) {
+	@FXML void endHiding(ActionEvent event) {
 		if ((endTimeCB.getValue() == null) || (endTimeCB.getValue().getNum() == 0))
 			endTimeCBFlag = false;
 		else
@@ -351,8 +320,7 @@ public class ScheduleController {
 	}
 
 	// If day were chosen.
-	@FXML
-	void dayHiding(ActionEvent event) {
+	@FXML void dayHiding(ActionEvent event) {
 		if ((dayCB.getValue() == null) || (dayCB.getValue().getNum() == 7))
 			dayCBFlag = false;
 		else
