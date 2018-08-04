@@ -94,10 +94,7 @@ public class ScheduleController {
 		} 
 		else {
 			// creating new course object.
-			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(),
-					lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(),
-					endTimeCB.getValue().getNum(), dayCB.getValue().getNum(),
-					(RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
+			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
 			index = i;
 			addBtn.setText("הוסף");
 			saveBtn.setVisible(true);
