@@ -19,20 +19,10 @@ public class Course {
 	VBox GridPaneVBox = new VBox(4);
 	GridPane ScheduleGrid;
 	
-	public Course(String lectLabel, String courseTF, String lectTF, String classTF, int RowIndex, int ColumnIndex, int RowSpan, RadioButton typeRBtn, Color colorCP, GridPane ScheduleGrid) {
-		this.lectLabel = lectLabel;
-		this.courseTF = courseTF;
-		this.lectTF = lectTF;
-		this.classTF = classTF;
-		this.StartTime = RowIndex;
-		this.EndTime = ColumnIndex;
-		this.Day = RowSpan;
-		this.typeRBtn = typeRBtn;
-		this.colorCP = colorCP;
-		this.ScheduleGrid = ScheduleGrid; 
-		changeGridPaneVBox();
-		addToGrid();
+	public Course(String lectLabel, String courseTF, String lectTF, String classTF, int StartTime, int EndTime, int Day, RadioButton typeRBtn, Color colorCP, GridPane ScheduleGrid) {
+		editInfo(lectLabel, courseTF, lectTF, classTF, StartTime, EndTime, Day, typeRBtn, colorCP, ScheduleGrid);
 	}
+	
 	public void editInfo(String lectLabel, String courseTF, String lectTF, String classTF, int RowIndex, int ColumnIndex, int RowSpan, RadioButton typeRBtn, Color colorCP, GridPane ScheduleGrid) {
 		this.lectLabel = lectLabel;
 		this.courseTF = courseTF;
@@ -94,65 +84,6 @@ public class Course {
 	// Function for changing color.
 	private String toRgbString(Color c) {
 		return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
-	}
-
-	//lectLabel Setter
-	public void setLectLabel(String lectLabel) {
-		this.lectLabel = lectLabel;
-	}
-
-	
-	//courseTF Setter
-	public void setCourseTF(String courseTF) {
-		this.courseTF = courseTF;
-	}
-
-	
-	//lectTF Setter
-	public void setLectTF(String lectTF) {
-		this.lectTF = lectTF;
-	}
-
-	
-	//classTF Setter
-	public void setClassTF(String classTF) {
-		this.classTF = classTF;
-	}
-
-	
-	//startTime Setter
-	public void setStartTime(int startTime) {
-		StartTime = startTime;
-	}
-
-	
-	//endTime Setter
-	public void setEndTime(int endTime) {
-		EndTime = endTime;
-	}
-
-	
-	//day Setter
-	public void setDay(int day) {
-		Day = day;
-	}
-
-	
-	//colorCP Setter
-	public void setColorCP(Color colorCP) {
-		this.colorCP = colorCP;
-	}
-
-	
-	//typeRBtn Setter
-	public void setTypeRBtn(RadioButton typeRBtn) {
-		this.typeRBtn = typeRBtn;
-	}
-
-	
-	//scheduleGrid Setter
-	public void setScheduleGrid(GridPane scheduleGrid) {
-		ScheduleGrid = scheduleGrid;
 	}
 	
 	// Function for changing color.

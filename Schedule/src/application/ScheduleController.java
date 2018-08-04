@@ -83,46 +83,42 @@ public class ScheduleController {
 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
+		final int index;
+		final Course tempCourse;
 		if (editCourseFlag == 1) {
 			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
-			Course editCourse = CourseArr.get(finalVboxIndex);
-			editCourse.editInfo(
-			lectLabel.getText().toString(),
-			courseTF.getText().toString(),
-			lectTF.getText().toString(),
-			classTF.getText().toString(),
-			startTimeCB.getValue().getNum(),
-			endTimeCB.getValue().getNum(),
-			dayCB.getValue().getNum(),
-			(RadioButton) typeGroup.getSelectedToggle(),
-			colorCP.getValue(),
-			ScheduleGrid);
+			tempCourse = CourseArr.get(finalVboxIndex);
+			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
 			endBtn.setVisible(false);
+			index = finalVboxIndex;
 		} 
 		else {
-		// creating new course object.
-		final Course tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum() , endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
-		final int index = i;
-		addBtn.setText("הוסף");
-		saveBtn.setVisible(true);
-		deleteBtn.setText("מחק");
-		CourseArr.add(tempCourse);
-		editCourseFlag = 0;
-		CourseArr.get(i).getVBox().setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
-			editCourseFlag = 1;	// If user wants to edit\delete
+			// creating new course object.
+			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(),
+					lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(),
+					endTimeCB.getValue().getNum(), dayCB.getValue().getNum(),
+					(RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
+			index = i;
+			addBtn.setText("הוסף");
+			saveBtn.setVisible(true);
+			deleteBtn.setText("מחק");
+			CourseArr.add(tempCourse);
+			editCourseFlag = 0;
+		i++;
+		}
+		CourseArr.get(index).getVBox().setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
+			editCourseFlag = 1; // If user wants to edit\delete
 			addBtn.setText("ערוך");
 			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
 			finalVboxIndex = index;
 			tempCourse.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
 			startTimeCB.setValue(StartTimes[tempCourse.getStartTime()]); // set course start time
-			dayCB.setValue(days[7 - tempCourse.getDay()]);	// set course day
+			dayCB.setValue(days[7 - tempCourse.getDay()]); // set course day
 			endTimeCB.setValue(EndTimes[tempCourse.getEndTime() - 1]); // set course end time
 			classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 			addBtn.setDisable(false);
 		});
-		i++;
-		}
 		delete();
 	}
 
