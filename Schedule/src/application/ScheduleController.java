@@ -86,6 +86,7 @@ public class ScheduleController {
 	@FXML void add(ActionEvent event) {
 		// creating new course object.
 		final Course tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum() , endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid, i);
+		final int index = i;
 		addBtn.setText("הוסף");
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
@@ -100,7 +101,7 @@ public class ScheduleController {
 			addBtn.setText("ערוך");
 			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
-			finalVboxIndex = CourseArr.get(i).getIndex();
+			finalVboxIndex = index;
 			tempCourse.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
 			startTimeCB.setValue(StartTimes[tempCourse.getStartTime()]); // set course start time
 			dayCB.setValue(days[7 - tempCourse.getDay()]);	// set course day
