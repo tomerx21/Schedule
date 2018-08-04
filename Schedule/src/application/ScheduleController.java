@@ -92,9 +92,9 @@ public class ScheduleController {
 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
-		addBtn.setText("הוסף");
+		addBtn.setText("׳”׳•׳¡׳£");
 		saveBtn.setVisible(true);
-		deleteBtn.setText("מחק");
+		deleteBtn.setText("׳�׳—׳§");
 		tempVbox = new VBox(4);
 
 		String cssLayout = "-fx-border-color: black;\n" +
@@ -138,8 +138,8 @@ public class ScheduleController {
 			typeGroup.selectToggle(tempRB);
 			addBtnFlag = 1;
 			removeBtnFlag = 1;
-			addBtn.setText("ערוך");
-			deleteBtn.setText("מחק קורס");
+			addBtn.setText("׳¢׳¨׳•׳�");
+			deleteBtn.setText("׳�׳—׳§ ׳§׳•׳¨׳¡");
 			endBtn.setVisible(true);
 			finalVboxIndex = tempVboxIndex;
 			lectLabel.setText(tempTypeStr);
@@ -233,8 +233,8 @@ public class ScheduleController {
 	private void delete() {
 		addBtnFlag = 0;
 		removeBtnFlag = 0;
-		addBtn.setText("הוסף");
-		deleteBtn.setText("מחק");
+		addBtn.setText("׳”׳•׳¡׳£");
+		deleteBtn.setText("׳�׳—׳§");
 		courseTF.clear();
 		lectTF.clear();
 		classTF.clear();
@@ -336,8 +336,6 @@ public class ScheduleController {
 			addBtn.setDisable(true);
 	}
 
-	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE
-	// FILLED TO ENABLE THE ADD BUTTON *****************
 	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
 
 }
