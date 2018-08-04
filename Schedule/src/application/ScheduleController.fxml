@@ -118,7 +118,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="676.0" prefWidth="422.0">
                <children>
-                  <VBox fx:id="veryImportentVbox" layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="463.0" prefWidth="268.0" spacing="10.0">
+                  <VBox layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="798.5454268526449" prefWidth="267.92726343580546" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="30.0">
                            <children>
@@ -136,13 +136,13 @@
                         </HBox>
                         <VBox fx:id="courseVbox" spacing="10.0">
                            <children>
-                              <VBox fx:id="courseNameVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
-                                    <Label fx:id="courseLabel1" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
+                                    <Label nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
                                     <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedCourseTF" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
                                  </children>
                               </VBox>
-                              <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
+                              <HBox spacing="8.0">
                                  <children>
                                     <Group>
                                        <children>
@@ -163,35 +163,40 @@
                               </HBox>
                               <VBox fx:id="lectVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
-                                    <Label fx:id="lectLabel" nodeOrientation="RIGHT_TO_LEFT" text="הרצאה:" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="lectLabel" nodeOrientation="RIGHT_TO_LEFT" text="הרצאה" />
+                                          <Label nodeOrientation="RIGHT_TO_LEFT" text=":" />
+                                       </children>
+                                    </HBox>
                                     <TextField fx:id="lectTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedLectTF" prefHeight="27.0" prefWidth="243.0" promptText="שם המרצה" />
                                  </children>
                               </VBox>
-                              <VBox fx:id="classVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="classLabel" nodeOrientation="RIGHT_TO_LEFT" text="כיתה:" />
                                     <TextField fx:id="classTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedClassTF" prefHeight="27.0" prefWidth="243.0" promptText="הכנס כיתה" />
                                  </children>
                               </VBox>
-                              <VBox fx:id="dayVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="dayLabel" text="יום:" />
                                     <ComboBox fx:id="dayCB" onAction="#dayHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר יום" />
                                  </children>
                               </VBox>
-                              <VBox fx:id="startTimeVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="startTimeLabel" text="שעת התחלה:" />
                                     <ComboBox fx:id="startTimeCB" onAction="#startHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
-                              <VBox fx:id="endTimeVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="endTimeLabel" text="שעת סיום:" />
                                     <ComboBox fx:id="endTimeCB" onAction="#endHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
-                              <HBox fx:id="BtnsHbox" spacing="40.0">
+                              <HBox spacing="40.0">
                                  <children>
                                     <Button fx:id="addBtn" mnemonicParsing="false" onAction="#add" text="הוסף" />
                                     <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleted" text="מחק" />

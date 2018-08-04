@@ -164,31 +164,24 @@ public class ScheduleController {
 		dayCB.setValue(dayCB.getItems().get(0));
 		endTimeCB.setValue(endTimeCB.getItems().get(0));
 		startTimeCB.setValue(startTimeCB.getItems().get(0));
-		lectLabel.setText(lectRB.getText() + ":");
+		lectLabel.setText(lectRB.getText());
 		typeGroup.selectToggle(lectRB);
 		colorCP.setValue(Color.WHITE);
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = false;
 	}
 
 	// If exercise radio button pressed.
-	@FXML void execAction(ActionEvent event) {
-		lectLabel.setText(execRB.getText() + ":");
-	}
+	@FXML void execAction(ActionEvent event) { lectLabel.setText(execRB.getText()); }
 
 	// If sadna radio button pressed.
-	@FXML void wsAction(ActionEvent event) {
-		lectLabel.setText(wsRB.getText() + ":");
-	}
+	@FXML void wsAction(ActionEvent event) { lectLabel.setText(wsRB.getText()); }
 
 	// If lecture radio button pressed.
-	@FXML void lectAction(ActionEvent event) {
-		lectLabel.setText(lectRB.getText() + ":");
-	}
+	@FXML void lectAction(ActionEvent event) { lectLabel.setText(lectRB.getText()); }
 
 	// If lab radio button pressed.
-	@FXML void labAction(ActionEvent event) {
-		lectLabel.setText(labRB.getText() + ":");
-	}
+	@FXML void labAction(ActionEvent event) { lectLabel.setText(labRB.getText()); }
+	
 	// ***************** ALL THE FUNCTIONS BELOW IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
 
 	// If course name filled.
@@ -227,8 +220,7 @@ public class ScheduleController {
 
 		else {
 			startTimeCBFlag = true;
-			setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, EndTimes); // Re-set the ending times in the Combobox
-																				// from start time till the end.
+			setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, EndTimes); // Re-set the ending times in the Combobox from start time till the end.
 		}
 		checkIfDisableBtn();
 	}
