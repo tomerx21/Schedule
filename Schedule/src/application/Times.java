@@ -4,12 +4,12 @@ public class Times {
 	
 	private int num;
 	private String name;
-	
+	  
 	public Times(int num, int startOrEndFlag) {
 		if (startOrEndFlag == 1) { //Starting time
 			if (num == 0) {
 				this.num = num;
-				this.name = new String("áçø ùòä");
+				this.name = new String("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
 			}
 			if ((num > 0) && (num < 5)) {
 				this.num = num;
@@ -23,7 +23,7 @@ public class Times {
 		else if (startOrEndFlag == 2) { //Ending time
 				if (num == 0) {
 					this.num = num;
-					this.name = new String("áçø ùòä");
+					this.name = new String("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½");
 				}
 				if ((num > 0) && (num < 5)) {
 					this.num = num + 1;
