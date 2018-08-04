@@ -94,42 +94,42 @@ public class ScheduleController {
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
 		tempVbox = new VBox(4);
-
-		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";//vbox design 
+		//vbox design 
+		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
 		tempVbox.setStyle(cssLayout);
 		tempVbox.setAlignment(Pos.CENTER);
 		Label L1 = new Label(lectLabel.getText());
 		L1.setStyle("-fx-font-weight: bold;");
+		//add element to the vbox
 		tempVbox.getChildren().add(L1);
 		tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
 		tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
 		tempVbox.getChildren().add(new Label(classTF.getText().toString()));
 		ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,
 				endTimeCB.getValue().getNum() - startTimeCB.getValue().getNum());
+		//in case of editing the vbox
 		if (addBtnFlag == 1) {
 			ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
 			endBtn.setVisible(false);
 		}
 		addBtnFlag = 0;
 		removeBtnFlag = 0;
+		VboxArr.add(tempVbox);
+		//saving element for the mouse click action
+		RBArr.add((RadioButton) typeGroup.getSelectedToggle());
+		final int tempVboxIndex = i;
+		String tempTypeStr = lectLabel.getText();
+		String tempCorStr = courseTF.getText();
+		String tempLecStr = lectTF.getText();
+		String tempclassStr = classTF.getText();
 		courseTF.clear();
 		lectTF.clear();
 		classTF.clear();
-		RBArr.add((RadioButton) typeGroup.getSelectedToggle());
-		VboxArr.add(tempVbox);
-		final int tempVboxIndex = i;
-		int j = VboxArr.get(i).getChildren().get(0).toString().indexOf('\'');
-		String tempTypeStr = VboxArr.get(i).getChildren().get(0).toString().substring(j + 1, VboxArr.get(i).getChildren().get(0).toString().length() - 1);
-		j = VboxArr.get(i).getChildren().get(1).toString().indexOf('\'');
-		String tempCorStr = VboxArr.get(i).getChildren().get(1).toString().substring(j + 1, VboxArr.get(i).getChildren().get(1).toString().length() - 1);
-		j = VboxArr.get(i).getChildren().get(2).toString().indexOf('\'');
-		String tempLecStr = VboxArr.get(i).getChildren().get(2).toString().substring(j + 1, VboxArr.get(i).getChildren().get(2).toString().length() - 1);
-		j = VboxArr.get(i).getChildren().get(3).toString().indexOf('\'');
-		String tempclassStr = VboxArr.get(i).getChildren().get(3).toString().substring(j + 1, VboxArr.get(i).getChildren().get(3).toString().length() - 1);
 		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
 		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
 		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
 		RadioButton tempRB = RBArr.get(i);
+		//on mouse click event copy the content of the vbox to the editing mode or to  delete the vbox 
 		VboxArr.get(i).setOnMouseClicked((e) -> {
 			typeGroup.selectToggle(tempRB);
 			addBtnFlag = 1;
