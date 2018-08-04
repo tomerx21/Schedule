@@ -61,9 +61,7 @@ public class ScheduleController {
 	@FXML private Button deleteBtn; // Delete button
 	@FXML private Label colorLabel; // Color label
 	@FXML private ToggleGroup typeGroup; // Radio buttons group
-	@FXML private Button endBtn; // And button
-			// And button
-
+	@FXML private Button endBtn; // End button
 
 	// Initialize.
 	@FXML public void initialize() {
@@ -92,14 +90,12 @@ public class ScheduleController {
 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
-		addBtn.setText("׳”׳•׳¡׳£");
+		addBtn.setText("הוסף");
 		saveBtn.setVisible(true);
-		deleteBtn.setText("׳�׳—׳§");
+		deleteBtn.setText("מחק");
 		tempVbox = new VBox(4);
 
-		String cssLayout = "-fx-border-color: black;\n" +
-                "-fx-border-width: 1;\n" +
-                "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
+		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
 		tempVbox.setStyle(cssLayout);
 		tempVbox.setAlignment(Pos.CENTER);
 		Label L1 = new Label(lectLabel.getText());
@@ -138,8 +134,8 @@ public class ScheduleController {
 			typeGroup.selectToggle(tempRB);
 			addBtnFlag = 1;
 			removeBtnFlag = 1;
-			addBtn.setText("׳¢׳¨׳•׳�");
-			deleteBtn.setText("׳�׳—׳§ ׳§׳•׳¨׳¡");
+			addBtn.setText("ערוך");
+			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
 			finalVboxIndex = tempVboxIndex;
 			lectLabel.setText(tempTypeStr);
@@ -153,7 +149,6 @@ public class ScheduleController {
 			addBtn.setDisable(false);
 		});
 		i++;
-
 		delete();
 	}
 
@@ -233,8 +228,8 @@ public class ScheduleController {
 	private void delete() {
 		addBtnFlag = 0;
 		removeBtnFlag = 0;
-		addBtn.setText("׳”׳•׳¡׳£");
-		deleteBtn.setText("׳�׳—׳§");
+		addBtn.setText("הוסף");
+		deleteBtn.setText("מחק");
 		courseTF.clear();
 		lectTF.clear();
 		classTF.clear();
