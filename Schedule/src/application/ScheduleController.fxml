@@ -138,8 +138,8 @@
                            <children>
                               <VBox fx:id="courseNameVbox" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
-                                    <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedCourseTF" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
                                     <Label fx:id="courseLabel1" nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
+                                    <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedCourseTF" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
                                  </children>
                               </VBox>
                               <HBox prefHeight="23.0" prefWidth="243.0" spacing="8.0">
@@ -191,7 +191,7 @@
                                     <ComboBox fx:id="endTimeCB" onAction="#endHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר שעה" />
                                  </children>
                               </VBox>
-                              <HBox spacing="40.0">
+                              <HBox fx:id="BtnsHbox" spacing="40.0">
                                  <children>
                                     <Button fx:id="addBtn" mnemonicParsing="false" onAction="#add" text="הוסף" />
                                     <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleted" text="מחק" />

@@ -7,35 +7,35 @@ public class Days {
 	public Days(int num) {
 		if (num == 0) {
 			this.num = 7-num;
-			this.name = new String("Χ‘Χ—Χ¨ Χ™Χ•Χ");
+			this.name = new String("αηψ ιεν");
 		}
 		if (num == 1) {
 			this.num = 7-num;
-			this.name = new String("Χ¨ΧΧ©Χ•Χ");
+			this.name = new String("ψΰωεο");
 		}
 		else if (num == 2) {
 			this.num = 7-num;
-			this.name = new String("Χ©Χ Χ™");
+			this.name = new String("ωπι");
 		}
 		else if (num == 3) {
 			this.num = 7-num;
-			this.name = new String("Χ©ΧΧ™Χ©Χ™");
+			this.name = new String("ωμιωι");
 		}
 		else if (num == 4) {
 			this.num = 7-num;
-			this.name = new String("Χ¨Χ‘Χ™ΧΆΧ™");
+			this.name = new String("ψαιςι");
 		}
 		else if (num == 5) {
 			this.num = 7-num;
-			this.name = new String("Χ—ΧΧ™Χ©Χ™");
+			this.name = new String("ηξιωι");
 		}
 		else if (num == 6) {
 			this.num = 7-num;
-			this.name = new String("Χ©Χ™Χ©Χ™");
+			this.name = new String("ωιωι");
 		}
 		else if (num == 7) {
 			this.num = 7-num;
-			this.name = new String("Χ©Χ‘Χª");
+			this.name = new String("ωαϊ");
 		}
 	}
 	

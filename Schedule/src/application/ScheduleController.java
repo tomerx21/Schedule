@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -27,10 +26,7 @@ import javafx.stage.FileChooser;
 
 public class ScheduleController {
 
-	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false,
-			endTimeCBFlag = false, dayCBFlag = false;
-
-	
+	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	private Days days[] = new Days[8];
 	private Times StartTimes[] = new Times[10];
 	private Times EndTimes[] = new Times[10];
@@ -39,10 +35,8 @@ public class ScheduleController {
 	private int i = 0;
 	private int removeBtnFlag = 0;
 	private static final int lectTime = 10;
-	private ArrayList<VBox> VboxArr = new ArrayList<VBox>();
-	private ArrayList<RadioButton> RBArr = new ArrayList<RadioButton>();
-	@FXML private Button saveBtn;
-	@FXML private VBox tempVbox;
+	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
+	@FXML private Button saveBtn; // Save as image button
 	@FXML private GridPane ScheduleGrid; // All the GridPane
 	@FXML private VBox courseVbox; // Course VBox
 	@FXML private ColorPicker colorCP; // Color
@@ -62,7 +56,7 @@ public class ScheduleController {
 	@FXML private Label colorLabel; // Color label
 	@FXML private ToggleGroup typeGroup; // Radio buttons group
 	@FXML private Button endBtn; // End button
-
+	
 	// Initialize.
 	@FXML public void initialize() {
 		for (int i = 0; i < 8; i++) {
@@ -90,94 +84,32 @@ public class ScheduleController {
 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
+		// creating new course object.
+		final Course tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum() , endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid, i);
 		addBtn.setText("הוסף");
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
-		tempVbox = new VBox(4);
-		//vbox design 
-		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
-		tempVbox.setStyle(cssLayout);
-		tempVbox.setAlignment(Pos.CENTER);
-		Label L1 = new Label(lectLabel.getText());
-		L1.setStyle("-fx-font-weight: bold;");
-		//add element to the vbox
-		tempVbox.getChildren().add(L1);
-		tempVbox.getChildren().add(new Label(courseTF.getText().toString()));
-		tempVbox.getChildren().add(new Label(lectTF.getText().toString()));
-		tempVbox.getChildren().add(new Label(classTF.getText().toString()));
-		ScheduleGrid.add(tempVbox, dayCB.getValue().getNum(), startTimeCB.getValue().getNum(), 1,
-				endTimeCB.getValue().getNum() - startTimeCB.getValue().getNum());
-		//in case of editing the vbox
-		if (addBtnFlag == 1) {
-			ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+		if (addBtnFlag == 1) { // If the course was edited, deleting the old object and adding the new one.
+			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
 			endBtn.setVisible(false);
 		}
-		addBtnFlag = 0;
-		removeBtnFlag = 0;
-		VboxArr.add(tempVbox);
-		//saving element for the mouse click action
-		RBArr.add((RadioButton) typeGroup.getSelectedToggle());
-		final int tempVboxIndex = i;
-		String tempTypeStr = lectLabel.getText();
-		String tempCorStr = courseTF.getText();
-		String tempLecStr = lectTF.getText();
-		String tempclassStr = classTF.getText();
-		courseTF.clear();
-		lectTF.clear();
-		classTF.clear();
-		int colNum = GridPane.getColumnIndex(VboxArr.get(i));
-		int rowNum = GridPane.getRowIndex(VboxArr.get(i));
-		int spanNum = GridPane.getRowSpan(VboxArr.get(i));
-		RadioButton tempRB = RBArr.get(i);
-		//on mouse click event copy the content of the vbox to the editing mode or to  delete the vbox 
-		VboxArr.get(i).setOnMouseClicked((e) -> {
-			typeGroup.selectToggle(tempRB);
-			addBtnFlag = 1;
-			removeBtnFlag = 1;
+		addBtnFlag = removeBtnFlag = 0;
+		CourseArr.add(tempCourse);
+		CourseArr.get(i).getVBox().setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
+			removeBtnFlag = addBtnFlag = 1;	// If user wants to edit\delete
 			addBtn.setText("ערוך");
 			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
-			finalVboxIndex = tempVboxIndex;
-			lectLabel.setText(tempTypeStr);
-			classTF.setText(tempclassStr);
-			lectTF.setText(tempLecStr);
-			courseTF.setText(tempCorStr);
-			startTimeCB.setValue(StartTimes[rowNum]);
-			dayCB.setValue(days[7 - colNum]);
-			endTimeCB.setValue(EndTimes[spanNum + rowNum - 1]);
+			finalVboxIndex = CourseArr.get(i).getIndex();
+			tempCourse.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
+			startTimeCB.setValue(StartTimes[tempCourse.getStartTime()]); // set course start time
+			dayCB.setValue(days[7 - tempCourse.getDay()]);	// set course day
+			endTimeCB.setValue(EndTimes[tempCourse.getEndTime() - 1]); // set course end time
 			classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 			addBtn.setDisable(false);
 		});
 		i++;
 		delete();
-	}
-
-	// the button pressed to save image
-	@FXML void captureAndSaveDisplay(ActionEvent event) {
-		{
-			FileChooser fileChooser = new FileChooser();
-
-			// Set extension filter
-			fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
-			// Prompt user to select a file
-			File file = fileChooser.showSaveDialog(null);
-
-			if (file != null) {
-				try {
-					// Pad the capture area
-					WritableImage writableImage = new WritableImage((int) ScheduleGrid.getWidth() + 5,
-							(int) ScheduleGrid.getHeight() + 5);
-					WritableImage snapshot = ScheduleGrid.snapshot(new SnapshotParameters(), writableImage);
-					RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
-					// Write the snapshot to the chosen file
-					ImageIO.write(renderedImage, "png", file);
-				}
-				catch (IOException ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
-
 	}
 
 	// The button end pressed
@@ -189,7 +121,7 @@ public class ScheduleController {
 	// The button delete pressed.
 	@FXML void deleted(ActionEvent event) {
 		if (removeBtnFlag == 1)
-			ScheduleGrid.getChildren().remove(VboxArr.get(finalVboxIndex));
+			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
 		endBtn.setVisible(false);
 		delete();
 	}
@@ -214,16 +146,6 @@ public class ScheduleController {
 		}
 	}
 
-	// Function for changing color.
-	private String toRgbString(Color c) {
-		return "rgb(" + to255Int(c.getRed()) + "," + to255Int(c.getGreen()) + "," + to255Int(c.getBlue()) + ")";
-	}
-
-	// Function for changing color.
-	private int to255Int(double f) {
-		return (int) (f * 255);
-	}
-
 	// Function to reset all the fields.
 	private void delete() {
 		addBtnFlag = 0;
@@ -238,6 +160,7 @@ public class ScheduleController {
 		startTimeCB.setValue(startTimeCB.getItems().get(0));
 		lectLabel.setText(lectRB.getText() + ":");
 		typeGroup.selectToggle(lectRB);
+		colorCP.setValue(Color.WHITE);
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = false;
 	}
 
@@ -332,5 +255,25 @@ public class ScheduleController {
 	}
 
 	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
-
+	
+	// the button pressed to save image
+	@FXML void captureAndSaveDisplay(ActionEvent event) {
+			FileChooser fileChooser = new FileChooser();
+			// Set extension filter
+			fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+			// Prompt user to select a file
+			File file = fileChooser.showSaveDialog(null);
+			if (file != null) {
+				try {
+					// Pad the capture area
+					WritableImage writableImage = new WritableImage((int) ScheduleGrid.getWidth() + 5,
+							(int) ScheduleGrid.getHeight() + 5);
+					WritableImage snapshot = ScheduleGrid.snapshot(new SnapshotParameters(), writableImage);
+					RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
+					// Write the snapshot to the chosen file
+					ImageIO.write(renderedImage, "png", file);
+				}
+				catch (IOException ex) { ex.printStackTrace(); }
+			}
+	}
 }
