@@ -9,7 +9,7 @@ public class Times {
 		if (startOrEndFlag == 1) { //Starting time
 			if (num == 0) {
 				this.num = num;
-				this.name = new String("áçø ùòä");
+				this.name = new String("×‘×—×¨ ×©×¢×”");
 			}
 			if ((num > 0) && (num < 5)) {
 				this.num = num;
@@ -23,7 +23,7 @@ public class Times {
 		else if (startOrEndFlag == 2) { //Ending time
 				if (num == 0) {
 					this.num = num;
-					this.name = new String("áçø ùòä");
+					this.name = new String("×‘×—×¨ ×©×¢×”");
 				}
 				if ((num > 0) && (num < 5)) {
 					this.num = num + 1;

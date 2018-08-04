@@ -94,8 +94,8 @@ public class ScheduleController {
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
 		tempVbox = new VBox(4);
-		
-		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";
+
+		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP.getValue()) + ";\n";//vbox design 
 		tempVbox.setStyle(cssLayout);
 		tempVbox.setAlignment(Pos.CENTER);
 		Label L1 = new Label(lectLabel.getText());
