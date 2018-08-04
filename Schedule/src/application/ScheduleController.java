@@ -80,7 +80,7 @@ public class ScheduleController {
 		addBtn.setDisable(true);
 		saveBtn.setVisible(false);
 	}
-
+ 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
 		final int index;
