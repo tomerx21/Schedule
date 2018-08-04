@@ -31,9 +31,8 @@ public class ScheduleController {
 	private Times StartTimes[] = new Times[10];
 	private Times EndTimes[] = new Times[10];
 	private int finalVboxIndex;
-	private int addBtnFlag = 0;
+	private int editCourseFlag = 0;
 	private int i = 0;
-	private int removeBtnFlag = 0;
 	private static final int lectTime = 10;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
 	@FXML private Button saveBtn; // Save as image button
@@ -84,20 +83,33 @@ public class ScheduleController {
 
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
+		if (editCourseFlag == 1) {
+			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
+			Course editCourse = CourseArr.get(finalVboxIndex);
+			editCourse.editInfo(
+			lectLabel.getText().toString(),
+			courseTF.getText().toString(),
+			lectTF.getText().toString(),
+			classTF.getText().toString(),
+			startTimeCB.getValue().getNum(),
+			endTimeCB.getValue().getNum(),
+			dayCB.getValue().getNum(),
+			(RadioButton) typeGroup.getSelectedToggle(),
+			colorCP.getValue(),
+			ScheduleGrid);
+			endBtn.setVisible(false);
+		} 
+		else {
 		// creating new course object.
-		final Course tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum() , endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid, i);
+		final Course tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum() , endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
 		final int index = i;
 		addBtn.setText("הוסף");
 		saveBtn.setVisible(true);
 		deleteBtn.setText("מחק");
-		if (addBtnFlag == 1) { // If the course was edited, deleting the old object and adding the new one.
-			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
-			endBtn.setVisible(false);
-		}
-		addBtnFlag = removeBtnFlag = 0;
 		CourseArr.add(tempCourse);
+		editCourseFlag = 0;
 		CourseArr.get(i).getVBox().setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
-			removeBtnFlag = addBtnFlag = 1;	// If user wants to edit\delete
+			editCourseFlag = 1;	// If user wants to edit\delete
 			addBtn.setText("ערוך");
 			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
@@ -110,6 +122,7 @@ public class ScheduleController {
 			addBtn.setDisable(false);
 		});
 		i++;
+		}
 		delete();
 	}
 
@@ -121,7 +134,7 @@ public class ScheduleController {
 
 	// The button delete pressed.
 	@FXML void deleted(ActionEvent event) {
-		if (removeBtnFlag == 1)
+		if (editCourseFlag == 1)
 			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
 		endBtn.setVisible(false);
 		delete();
@@ -149,8 +162,7 @@ public class ScheduleController {
 
 	// Function to reset all the fields.
 	private void delete() {
-		addBtnFlag = 0;
-		removeBtnFlag = 0;
+		editCourseFlag = 0;
 		addBtn.setText("הוסף");
 		deleteBtn.setText("מחק");
 		courseTF.clear();
