@@ -84,7 +84,6 @@ public class ScheduleController {
 	@FXML void add(ActionEvent event) {
 		final Course tempCourse;
 		final VBox tempVBox;
-		int n = 1;
 		if (editCourseFlag == true) {
 			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
 			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
@@ -120,14 +119,8 @@ public class ScheduleController {
 		endBtn.setVisible(true);
 		indexToEdit = checkPos(vbox); // Get the index of the course in the arraylist
 		course.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
-		
-		System.out.println(" " + StartTimes[course.getStartTime()] + " " + course.getStartTime());
-		startTimeCB.setValue(StartTimes[course.getStartTime()]); // set course start time
-		
-		System.out.println(" " + days[7 - course.getDay()] + " " + (7 - course.getDay()));
 		dayCB.setValue(days[7 - course.getDay()]); // set course day
-		
-		System.out.println(" " + EndTimes[course.getEndTime() - 1] + " " + (course.getEndTime() - 1));
+		startTimeCB.setValue(StartTimes[course.getStartTime()]); // set course start time
 		endTimeCB.setValue(EndTimes[course.getEndTime() - 1]); // set course end time
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 		addBtn.setDisable(false);
@@ -267,7 +260,7 @@ public class ScheduleController {
 			endTimeCBFlag = true;
 		checkIfDisableBtn();
 	}
-
+	
 	// If day were chosen.
 	@FXML void dayHiding(ActionEvent event) {
 		if ((dayCB.getValue() == null) || (dayCB.getValue().getNum() == 7))

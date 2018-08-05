@@ -40,7 +40,7 @@ public class Course {
 	
 	public void addToGrid() {
 		
-		if ((StartTime < 5) && (EndTime > 5)) { //If there is a break
+		if (ifDoubleVBox == true) { //If there is a break
 			ScheduleGrid.add(GridPaneVBox1, Day, StartTime, 1, 5 - StartTime);
 			if (Day == 4) //if tuesday
 				ScheduleGrid.add(GridPaneVBox2, Day, 8, 1, EndTime - 8);
