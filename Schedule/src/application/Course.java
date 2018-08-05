@@ -37,6 +37,7 @@ public class Course {
 		changeGridPaneVBox();
 		addToGrid();
 	}
+	
 	public void addToGrid() {
 		ScheduleGrid.add(GridPaneVBox, Day, StartTime, 1, EndTime - StartTime);
 	}

@@ -27,12 +27,11 @@ import javafx.stage.FileChooser;
 public class ScheduleController {
 
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
+	boolean editCourseFlag = false;
 	private Days days[] = new Days[8];
 	private Times StartTimes[] = new Times[10];
 	private Times EndTimes[] = new Times[10];
-	private int finalVboxIndex;
-	private int editCourseFlag = 0;
-	private int i = 0;
+	private int indexToEdit;
 	private static final int lectTime = 10;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
 	@FXML private Button saveBtn; // Save as image button
@@ -83,32 +82,30 @@ public class ScheduleController {
  
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
-		final int index;
 		final Course tempCourse;
-		if (editCourseFlag == 1) {
-			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
-			tempCourse = CourseArr.get(finalVboxIndex);
+		final VBox tempVBox;
+		if (editCourseFlag == true) {
+			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
+			tempCourse = CourseArr.get(indexToEdit);
 			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
 			endBtn.setVisible(false);
-			index = finalVboxIndex;
 		} 
 		else {
 			// creating new course object.
 			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
-			index = i;
 			addBtn.setText("הוסף");
 			saveBtn.setVisible(true);
 			deleteBtn.setText("מחק");
 			CourseArr.add(tempCourse);
-			editCourseFlag = 0;
-		i++;
+			editCourseFlag = false;
 		}
-		CourseArr.get(index).getVBox().setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
-			editCourseFlag = 1; // If user wants to edit\delete
+		tempVBox = tempCourse.getVBox();
+		tempVBox.setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
+			editCourseFlag = true; // If user wants to edit\delete
 			addBtn.setText("ערוך");
 			deleteBtn.setText("מחק");
 			endBtn.setVisible(true);
-			finalVboxIndex = index;
+			indexToEdit = checkPos(tempVBox); // Get the index of the course in the arraylist
 			tempCourse.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
 			startTimeCB.setValue(StartTimes[tempCourse.getStartTime()]); // set course start time
 			dayCB.setValue(days[7 - tempCourse.getDay()]); // set course day
@@ -119,6 +116,17 @@ public class ScheduleController {
 		delete();
 	}
 
+	//Return index of the course in the arraylist
+	private int checkPos(VBox tempVBox) {
+		int i = 0;
+		for (Course course : CourseArr) {
+			if (course.getVBox().equals(tempVBox))
+				return i;
+			i++;
+		}
+		return i;
+	}
+	
 	// The button end pressed
 	@FXML void end(ActionEvent event) {
 		delete();
@@ -127,8 +135,10 @@ public class ScheduleController {
 
 	// The button delete pressed.
 	@FXML void deleted(ActionEvent event) {
-		if (editCourseFlag == 1)
-			ScheduleGrid.getChildren().remove(CourseArr.get(finalVboxIndex).getVBox());
+		if (editCourseFlag == true) {
+			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
+			CourseArr.remove(indexToEdit);
+		}
 		endBtn.setVisible(false);
 		delete();
 	}
@@ -141,7 +151,7 @@ public class ScheduleController {
 	}
 
 	// Function to re-set the starting and the ending time ComboBoxes.
-	public void setTimeCB(int startIndex, ComboBox<Times> CB, Times arr[]) {
+	private void setTimeCB(int startIndex, ComboBox<Times> CB, Times arr[]) {
 		CB.getItems().clear();
 		CB.getItems().add(arr[0] = new Times(0, 1));
 
@@ -155,7 +165,7 @@ public class ScheduleController {
 
 	// Function to reset all the fields.
 	private void delete() {
-		editCourseFlag = 0;
+		editCourseFlag = false;
 		addBtn.setText("הוסף");
 		deleteBtn.setText("מחק");
 		courseTF.clear();
@@ -244,7 +254,7 @@ public class ScheduleController {
 	}
 
 	// Function checks according to flags from the all the fields if the add button needs to be endabled or disabled.
-	public void checkIfDisableBtn() {
+	private void checkIfDisableBtn() {
 		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true)
 				&& (endTimeCBFlag == true) && (dayCBFlag == true))
 			addBtn.setDisable(false);
