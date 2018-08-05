@@ -6,12 +6,12 @@ public class Times {
 	private String name;
 	
 	public Times(int num, int startOrEndFlag) {
-		if (startOrEndFlag == 1) { //Starting time
+		if (startOrEndFlag == 1) { // Starting time
 			if (num == 0) {
 				this.num = num;
 				this.name = new String("בחר שעה");
 			}
-			if ((num > 0) && (num < 5)) {
+			else if ((num > 0) && (num < 5)) {
 				this.num = num;
 				this.name = new String((num + 7) + ":30");
 			}
@@ -20,12 +20,12 @@ public class Times {
 				this.name = new String((num + 7 -1) + ":50");
 			}
 		}
-		else if (startOrEndFlag == 2) { //Ending time
+		else if (startOrEndFlag == 2) { // Ending time
 				if (num == 0) {
 					this.num = num;
 					this.name = new String("בחר שעה");
 				}
-				if ((num > 0) && (num < 5)) {
+				else if ((num > 0) && (num < 5)) {
 					this.num = num + 1;
 					this.name = new String((num + 7 + 1) + ":20");
 				}

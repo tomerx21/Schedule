@@ -84,8 +84,11 @@ public class ScheduleController {
 	@FXML void add(ActionEvent event) {
 		final Course tempCourse;
 		final VBox tempVBox;
+		int n = 1;
 		if (editCourseFlag == true) {
 			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
+			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
+				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
 			tempCourse = CourseArr.get(indexToEdit);
 			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
 			endBtn.setVisible(false);
@@ -99,28 +102,42 @@ public class ScheduleController {
 			CourseArr.add(tempCourse);
 			editCourseFlag = false;
 		}
-		tempVBox = tempCourse.getVBox();
-		tempVBox.setOnMouseClicked((e) -> { // If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
-			editCourseFlag = true; // If user wants to edit\delete
-			addBtn.setText("ערוך");
-			deleteBtn.setText("מחק");
-			endBtn.setVisible(true);
-			indexToEdit = checkPos(tempVBox); // Get the index of the course in the arraylist
-			tempCourse.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
-			startTimeCB.setValue(StartTimes[tempCourse.getStartTime()]); // set course start time
-			dayCB.setValue(days[7 - tempCourse.getDay()]); // set course day
-			endTimeCB.setValue(EndTimes[tempCourse.getEndTime() - 1]); // set course end time
-			classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
-			addBtn.setDisable(false);
-		});
-		delete();
+			tempVBox = tempCourse.getVBox();
+			// If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
+			tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
+			// If course contains 2 VBoxes, lambda for the second VBox (LAMBDA IS BIG SHIT)
+			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true) {
+				final VBox tempVBox2 = tempCourse.getSecondVBox();
+				tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
+			}
+			delete();
+		}
+	
+	private void lambdaMethod(VBox vbox, Course course) {
+		editCourseFlag = true; // If user wants to edit\delete
+		addBtn.setText("ערוך");
+		deleteBtn.setText("מחק");
+		endBtn.setVisible(true);
+		indexToEdit = checkPos(vbox); // Get the index of the course in the arraylist
+		course.setCourse(typeGroup, lectLabel, classTF, lectTF, courseTF, colorCP); // set for display the course info
+		
+		System.out.println(" " + StartTimes[course.getStartTime()] + " " + course.getStartTime());
+		startTimeCB.setValue(StartTimes[course.getStartTime()]); // set course start time
+		
+		System.out.println(" " + days[7 - course.getDay()] + " " + (7 - course.getDay()));
+		dayCB.setValue(days[7 - course.getDay()]); // set course day
+		
+		System.out.println(" " + EndTimes[course.getEndTime() - 1] + " " + (course.getEndTime() - 1));
+		endTimeCB.setValue(EndTimes[course.getEndTime() - 1]); // set course end time
+		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
+		addBtn.setDisable(false);
 	}
-
+	
 	//Return index of the course in the arraylist
 	private int checkPos(VBox tempVBox) {
 		int i = 0;
 		for (Course course : CourseArr) {
-			if (course.getVBox().equals(tempVBox))
+			if ((course.getVBox().equals(tempVBox) == true) || (course.getSecondVBox().equals(tempVBox) == true))
 				return i;
 			i++;
 		}
@@ -137,6 +154,8 @@ public class ScheduleController {
 	@FXML void deleted(ActionEvent event) {
 		if (editCourseFlag == true) {
 			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
+			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
+				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
 			CourseArr.remove(indexToEdit);
 		}
 		endBtn.setVisible(false);
@@ -157,10 +176,15 @@ public class ScheduleController {
 
 		for (int i = startIndex; i < lectTime; i++) {
 			if (i != 5) {
-				CB.getItems().add(arr[i]);
+				if (dayCB.getValue() == null)
+					CB.getItems().add(arr[i]);
+				else {
+					if ((dayCB.getValue().getNum() != 4) || ((i != 6) && (i != 7))) //
+						CB.getItems().add(arr[i]);
+				}
 			}
-			CB.setValue(CB.getItems().get(0));
 		}
+		CB.setValue(CB.getItems().get(0));
 	}
 
 	// Function to reset all the fields.
@@ -248,8 +272,17 @@ public class ScheduleController {
 	@FXML void dayHiding(ActionEvent event) {
 		if ((dayCB.getValue() == null) || (dayCB.getValue().getNum() == 7))
 			dayCBFlag = false;
-		else
+		else {
 			dayCBFlag = true;
+			if (dayCB.getValue().getNum() == 4) { // if tuesday
+				setTimeCB(1, startTimeCB, StartTimes);
+				if (startTimeCB.getValue() != null) // if start time was chosen
+					setTimeCB(startTimeCB.getValue().getNum(), endTimeCB, EndTimes);
+				else {
+					setTimeCB(1, endTimeCB, EndTimes);
+				}
+			}
+		}
 		checkIfDisableBtn();
 	}
 
