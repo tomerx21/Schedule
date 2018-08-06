@@ -38,6 +38,18 @@ public class Course {
 		addToGrid();
 	}
 	
+	@Override
+	public String toString() {
+		return ("lecture type: " + lectLabel + "\n" +
+				"course: " + courseTF + "\n" +
+				"lecturer: " + lectTF + "\n" +
+				"class: " + classTF + "\n" +
+				"start time " + StartTime + "\n" +
+				"end time " + EndTime + "\n" +
+				"day " + Day + "\n" 
+				);
+	}
+	
 	public void addToGrid() {
 		
 		if (ifDoubleVBox == true) { //If there is a break

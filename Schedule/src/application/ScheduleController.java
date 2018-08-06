@@ -104,11 +104,14 @@ public class ScheduleController {
 			tempVBox = tempCourse.getVBox();
 			// If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
 			tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
+			System.out.println("first vbox");
 			// If course contains 2 VBoxes, lambda for the second VBox (LAMBDA IS BIG SHIT)
-			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true) {
+			if (tempCourse.getSecondVBox() != null) {
 				final VBox tempVBox2 = tempCourse.getSecondVBox();
+				System.out.println("Second vbox");
 				tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
 			}
+			System.out.println(tempCourse);
 			delete();
 		}
 	
@@ -126,12 +129,15 @@ public class ScheduleController {
 		addBtn.setDisable(false);
 	}
 	
-	//Return index of the course in the arraylist
+	// Return index of the course in the arraylist
 	private int checkPos(VBox tempVBox) {
 		int i = 0;
 		for (Course course : CourseArr) {
-			if ((course.getVBox().equals(tempVBox) == true) || (course.getSecondVBox().equals(tempVBox) == true))
+			if (course.getVBox().equals(tempVBox) == true)
 				return i;
+			else if (course.getIfDoubleVBox() == true)
+				if (course.getSecondVBox().equals(tempVBox) == true)
+					return i;
 			i++;
 		}
 		return i;
