@@ -25,7 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 public class ScheduleController {
-
+	
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	boolean editCourseFlag = false;
 	private Days days[] = new Days[8];
@@ -75,8 +75,8 @@ public class ScheduleController {
 		colorLabel.setVisible(false);
 		courseVbox.setVisible(false);
 		colorCP.setVisible(false);
-		endBtn.setVisible(false);
-		addBtn.setDisable(true);
+//		endBtn.setVisible(false);
+//		addBtn.setDisable(true);
 		saveBtn.setVisible(false);
 	}
  
@@ -104,15 +104,12 @@ public class ScheduleController {
 			tempVBox = tempCourse.getVBox();
 			// If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
 			tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
-			System.out.println("first vbox");
 			// If course contains 2 VBoxes, lambda for the second VBox (LAMBDA IS BIG SHIT)
 			if (tempCourse.getSecondVBox() != null) {
 				final VBox tempVBox2 = tempCourse.getSecondVBox();
-				System.out.println("Second vbox");
 				tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
 			}
-			System.out.println(tempCourse);
-			delete();
+			clearFields();
 		}
 	
 	private void lambdaMethod(VBox vbox, Course course) {
@@ -145,7 +142,7 @@ public class ScheduleController {
 	
 	// The button end pressed
 	@FXML void end(ActionEvent event) {
-		delete();
+		clearFields();
 		endBtn.setVisible(false);
 	}
 
@@ -158,7 +155,7 @@ public class ScheduleController {
 			CourseArr.remove(indexToEdit);
 		}
 		endBtn.setVisible(false);
-		delete();
+		clearFields();
 	}
 
 	// The button new course pressed.
@@ -187,7 +184,7 @@ public class ScheduleController {
 	}
 
 	// Function to reset all the fields.
-	private void delete() {
+	private void clearFields() {
 		editCourseFlag = false;
 		addBtn.setText("הוסף");
 		deleteBtn.setText("מחק");
