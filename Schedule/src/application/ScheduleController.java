@@ -13,6 +13,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -38,7 +40,8 @@ public class ScheduleController {
 	private int indexToEdit;
 	private static final int lectTime = 10;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
-	@FXML public Button saveBtn; // Save as image button
+	@FXML public Button saveImgBtn; // Save as image button
+	@FXML public Button saveTxtBtn; // Save as image button
 	@FXML public GridPane ScheduleGrid; // All the GridPane
 	@FXML public VBox courseVbox; // Course VBox
 	@FXML public ColorPicker colorCP; // Color
@@ -76,46 +79,59 @@ public class ScheduleController {
 		startTimeCB.setValue(startTimeCB.getItems().get(0));
 		colorCP.getStyleClass().add("split-button");
 		colorCP.setStyle("-fx-color-label-visible: false ;");
-		colorLabel.setVisible(false);
 		courseVbox.setVisible(false);
-		colorCP.setVisible(false);
-		saveBtn.setVisible(false);
+		saveImgBtn.setDisable(true);
+		saveTxtBtn.setDisable(true);
 	}
  
 	// If add button pressed
 	@FXML void add(ActionEvent event) {
+		addCourse(null);
+		}
+	//Method that adds a new course.
+	private void addCourse(Course course) {
 		final Course tempCourse;
 		final VBox tempVBox;
-		if (editCourseFlag == true) {
-			ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox());
-			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
-				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
-			tempCourse = CourseArr.get(indexToEdit);
-			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue(), ScheduleGrid);
-			endBtn.setVisible(false);
-		} 
-		else {
-			// creating new course object.
-			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue().toString(), ScheduleGrid);
-			addBtn.setText("הוסף");
-			saveBtn.setVisible(true);
-			deleteBtn.setText("מחק");
-			CourseArr.add(tempCourse);
-			editCourseFlag = false;
-		}
-			tempVBox = tempCourse.getVBox();
-			tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
-			if (tempCourse.getSecondVBox() != null) {
-				final VBox tempVBox2 = tempCourse.getSecondVBox();
-				tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
+		if (course == null) {
+			if (editCourseFlag == true) {
+				//Removes the old node and add a new edited one.
+				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getVBox()); 
+				if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
+					ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
+				tempCourse = CourseArr.get(indexToEdit);
+				tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue(), ScheduleGrid);
+				endBtn.setVisible(false);
 			}
-			clearFields();
+			else {
+				// creating new course object.
+				tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue().toString(), ScheduleGrid);
+				addBtn.setText("הוסף");
+				deleteBtn.setText("מחק");
+				CourseArr.add(tempCourse);
+				editCourseFlag = false;
+			}
 		}
-	
-//	private void addCourse() {
-//		
-//	}
-	
+		else { //if adding from a txt file.
+			tempCourse = course;
+			CourseArr.add(tempCourse);
+		}
+		if (CourseArr.isEmpty() == false) {
+			saveImgBtn.setDisable(false);
+			saveTxtBtn.setDisable(false);
+		}
+		tempVBox = tempCourse.getVBox();
+		tempVBox.setOnMouseClicked((e) -> {
+			lambdaMethod(tempVBox, tempCourse);
+		});
+		if (tempCourse.getSecondVBox() != null) {
+			final VBox tempVBox2 = tempCourse.getSecondVBox();
+			tempVBox2.setOnMouseClicked((e) -> {
+				lambdaMethod(tempVBox2, tempCourse);
+			});
+		}
+		clearFields();
+	}
+
 	private void lambdaMethod(VBox vbox, Course course) {
 		editCourseFlag = true; // If user wants to edit\delete
 		addBtn.setText("ערוך");
@@ -129,8 +145,8 @@ public class ScheduleController {
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 		addBtn.setDisable(false);
 	}
-    
-	@FXML void saveInfoToFile(ActionEvent event) {
+    //Save the schedule to a txt file.
+	@FXML void saveToFile(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Choose location to Save");
 		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
@@ -146,14 +162,14 @@ public class ScheduleController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			outFile.println("scheduleFile");
 			for (int i = 0; i < CourseArr.size(); i++) {
 				outFile.println(CourseArr.get(i));
 			}
 			outFile.close();
 		}
 	}
-
+	//Load the schedule from a txt file.
 	@FXML void loadFromFile(ActionEvent event) throws FileNotFoundException {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Choose txt file");
@@ -165,19 +181,20 @@ public class ScheduleController {
 			CourseArr.clear();
 			ScheduleGrid.getChildren().removeAll();
 			Scanner inputCustomer = new Scanner(file);
-			while (inputCustomer.hasNext()) {
-				final Course tempCourse;
-				final VBox tempVBox;
-				tempCourse = new Course(inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.next(), inputCustomer.next(), ScheduleGrid);
-				CourseArr.add(tempCourse);
-				tempVBox = tempCourse.getVBox();
-				tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
-				if (tempCourse.getSecondVBox() != null) {
-					final VBox tempVBox2 = tempCourse.getSecondVBox();
-					tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
-				}
-				clearFields();
+			if (inputCustomer.next().equals("scheduleFile")) {
+				while (inputCustomer.hasNext()) {
+					addCourse(new Course(inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.next(), inputCustomer.next(), ScheduleGrid));
+			} }
+			else {
+		        Alert alert = new Alert(AlertType.WARNING);
+		        alert.setTitle("קובץ שגוי");
+		        alert.setHeaderText(null);
+		        alert.setContentText("קובץ לא תואם, בחר אחר.");
+		 
+		        alert.showAndWait();
 			}
+			inputCustomer.close();
+			courseVbox.setVisible(true);
 		}
 	}
 	
@@ -208,6 +225,10 @@ public class ScheduleController {
 			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
 				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
 			CourseArr.remove(indexToEdit);
+		}
+		if (CourseArr.isEmpty() == true) {
+			saveImgBtn.setDisable(true);
+			saveTxtBtn.setDisable(true);
 		}
 		endBtn.setVisible(false);
 		clearFields();
@@ -339,8 +360,7 @@ public class ScheduleController {
 
 	// Function checks according to flags from the all the fields if the add button needs to be endabled or disabled.
 	private void checkIfDisableBtn() {
-		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true)
-				&& (endTimeCBFlag == true) && (dayCBFlag == true))
+		if ((courseTFFlag == true) && (lectTFFlag == true) && (classTFFlag == true) && (startTimeCBFlag == true) && (endTimeCBFlag == true) && (dayCBFlag == true))
 			addBtn.setDisable(false);
 		else
 			addBtn.setDisable(true);

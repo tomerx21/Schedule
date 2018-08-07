@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
       <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
         <items>
@@ -123,12 +123,7 @@
                         <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="30.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#newCourse" prefHeight="27.0" prefWidth="85.0" text="קורס חדש" />
-                              <AnchorPane>
-                                 <children>
-                                    <Label fx:id="colorLabel" graphicTextGap="2.0" layoutX="20.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="58.0" text="בחר צבע:" />
-                                    <ColorPicker fx:id="colorCP" layoutX="73.60000610351562" prefHeight="26.0" prefWidth="45.0" />
-                                 </children>
-                              </AnchorPane>
+                              <Button mnemonicParsing="false" onAction="#loadFromFile" prefHeight="42.0" prefWidth="146.0" text="טען מערכת מקובץ" />
                            </children>
                            <VBox.margin>
                               <Insets top="5.0" />
@@ -206,6 +201,25 @@
                                     <Insets left="20.0" />
                                  </padding>
                               </HBox>
+                              <AnchorPane>
+                                 <children>
+                                    <Label fx:id="colorLabel" graphicTextGap="2.0" layoutX="20.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" prefWidth="58.0" text="בחר צבע:" />
+                                    <ColorPicker fx:id="colorCP" layoutX="73.60000610351562" prefHeight="26.0" prefWidth="45.0" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="60.0" />
+                                 </VBox.margin>
+                              </AnchorPane>
+                              <HBox prefHeight="0.0" prefWidth="260.0" spacing="10.0">
+                                 <children>
+                                    <Button fx:id="saveImgBtn" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור מעכרת כתמונה">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="saveTxtBtn" mnemonicParsing="false" onAction="#saveToFile" text="שמור מערכת כקובץ" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -213,9 +227,6 @@
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </VBox>
-                  <Button fx:id="saveBtn" layoutX="72.0" layoutY="512.0" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור מעכרת כתמונה" />
-                  <Button layoutX="145.0" layoutY="565.0" mnemonicParsing="false" onAction="#saveInfoToFile" text="שמור מערכת" />
-                  <Button layoutX="47.0" layoutY="565.0" mnemonicParsing="false" onAction="#loadFromFile" text="טען מערכת" />
                </children>
             </AnchorPane>
         </items>
