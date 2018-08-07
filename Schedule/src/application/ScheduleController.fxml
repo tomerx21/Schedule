@@ -207,7 +207,7 @@
                                     <ColorPicker fx:id="colorCP" layoutX="73.60000610351562" prefHeight="26.0" prefWidth="45.0" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets left="60.0" />
+                                    <Insets left="26.0" />
                                  </VBox.margin>
                               </AnchorPane>
                               <HBox prefHeight="0.0" prefWidth="260.0" spacing="10.0">
