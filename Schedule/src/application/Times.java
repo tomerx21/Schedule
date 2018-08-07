@@ -15,7 +15,7 @@ public class Times {
 				this.num = num;
 				this.name = new String((num + 7) + ":30");
 			}
-			else if ((num > 5) && (num < 10)) {
+			else if (num > 5) {
 				this.num = num;
 				this.name = new String((num + 7 -1) + ":50");
 			}
@@ -29,7 +29,7 @@ public class Times {
 					this.num = num + 1;
 					this.name = new String((num + 7 + 1) + ":20");
 				}
-				else if ((num > 5) && (num < 11)) {
+				else if (num > 5) {
 					this.num = num + 1;
 					this.name = new String((num + 7) + ":40");
 				}
