@@ -88,6 +88,7 @@ public class ScheduleController {
 	@FXML void add(ActionEvent event) {
 		addCourse(null);
 		}
+	
 	//Method that adds a new course.
 	private void addCourse(Course course) {
 		final Course tempCourse;
@@ -236,9 +237,12 @@ public class ScheduleController {
 
 	// The button new course pressed.
 	@FXML void newCourse(ActionEvent event) {
-		courseVbox.setVisible(true);
-		colorCP.setVisible(true);
-		colorLabel.setVisible(true);
+		if (courseVbox.isVisible() == false)
+			courseVbox.setVisible(true);
+		else {
+			courseVbox.setVisible(false);
+			clearFields();
+		}
 	}
 
 	// Function to re-set the starting and the ending time ComboBoxes.
