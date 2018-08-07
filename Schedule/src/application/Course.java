@@ -1,5 +1,6 @@
 package application;
 
+import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -9,21 +10,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 
 public class Course {
 	
 	private String lectLabel, courseTF, lectTF, classTF;
 	private int StartTime, EndTime, Day;
-	private Color colorCP;
-	private RadioButton typeRBtn;
+	private Color colorCP = new Color(0, 0, 0, 0);
+	private RadioButton typeRBtn = new RadioButton();
 	private VBox GridPaneVBox1, GridPaneVBox2;
 	private GridPane ScheduleGrid;
 	private boolean ifDoubleVBox = false;
-	public Course(String lectLabel, String courseTF, String lectTF, String classTF, int StartTime, int EndTime, int Day, RadioButton typeRBtn, Color colorCP, GridPane ScheduleGrid) {
+	public Course(String lectLabel, String courseTF, String lectTF, String classTF, int StartTime, int EndTime, int Day, String typeRBtn, Color colorCP, GridPane ScheduleGrid) {
 		editInfo(lectLabel, courseTF, lectTF, classTF, StartTime, EndTime, Day, typeRBtn, colorCP, ScheduleGrid);
 	}
-	
-	public void editInfo(String lectLabel, String courseTF, String lectTF, String classTF, int RowIndex, int ColumnIndex, int Day, RadioButton typeRBtn, Color colorCP, GridPane ScheduleGrid) {
+	public Course(String lectLabel, String courseTF, String lectTF, String classTF, int StartTime, int EndTime, int Day, String typeRBtn, String colorCP, GridPane ScheduleGrid) {
+		this.colorCP = Color.valueOf(colorCP);
+		editInfo(lectLabel, courseTF, lectTF, classTF, StartTime, EndTime, Day, typeRBtn, this.colorCP, ScheduleGrid);
+	}
+	public void editInfo(String lectLabel, String courseTF, String lectTF, String classTF, int RowIndex, int ColumnIndex, int Day, String typeRBtn, Color colorCP, GridPane ScheduleGrid) {
 		this.lectLabel = lectLabel;
 		this.courseTF = courseTF;
 		this.lectTF = lectTF;
@@ -31,22 +36,37 @@ public class Course {
 		this.StartTime = RowIndex;
 		this.EndTime = ColumnIndex;
 		this.Day = Day;
-		this.typeRBtn = typeRBtn;
+		this.typeRBtn = new RadioButton(lectLabel);
+		this.typeRBtn.setId(typeRBtn);
 		this.colorCP = colorCP;
 		this.ScheduleGrid = ScheduleGrid; 
 		changeGridPaneVBox();
 		addToGrid();
 	}
+
+//	@Override
+//	public String toString() {
+//		return ("lecture type: " + lectLabel + "\n" +
+//				"course: " + courseTF + "\n" +
+//				"lecturer: " + lectTF + "\n" +
+//				"class: " + classTF + "\n" +
+//				"start time " + StartTime + "\n" +
+//				"end time " + EndTime + "\n" +
+//				"day " + Day + "\n" 
+//				);
+//	}
 	
 	@Override
 	public String toString() {
-		return ("lecture type: " + lectLabel + "\n" +
-				"course: " + courseTF + "\n" +
-				"lecturer: " + lectTF + "\n" +
-				"class: " + classTF + "\n" +
-				"start time " + StartTime + "\n" +
-				"end time " + EndTime + "\n" +
-				"day " + Day + "\n" 
+		return (lectLabel + " " +
+				courseTF + " " +
+				lectTF + " " +
+				classTF + " " +
+				StartTime + " " +
+				EndTime + " " +
+				Day + " " +
+				typeRBtn.getId() + " " +
+				colorCP + " " 
 				);
 	}
 	
@@ -91,7 +111,11 @@ public class Course {
 	}
 	// Set for display the course info
 	public void setCourse(ToggleGroup typeGroup, Label lectLabel, TextField classTF, TextField lectTF, TextField courseTF, ColorPicker colorCP) {
-		typeGroup.selectToggle(typeRBtn);
+		List<Toggle> list = typeGroup.getToggles();
+		for (Toggle toggle : list) {
+			if (((RadioButton) toggle).getId().equals(typeRBtn.getId()))
+				typeGroup.selectToggle((RadioButton) toggle);
+		}
 		lectLabel.setText(this.lectLabel);
 		classTF.setText(this.classTF);
 		lectTF.setText(this.lectTF);

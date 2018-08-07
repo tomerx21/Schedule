@@ -214,6 +214,8 @@
                      </padding>
                   </VBox>
                   <Button fx:id="saveBtn" layoutX="72.0" layoutY="512.0" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור מעכרת כתמונה" />
+                  <Button layoutX="145.0" layoutY="565.0" mnemonicParsing="false" onAction="#saveInfoToFile" text="שמור מערכת" />
+                  <Button layoutX="47.0" layoutY="565.0" mnemonicParsing="false" onAction="#loadFromFile" text="טען מערכת" />
                </children>
             </AnchorPane>
         </items>

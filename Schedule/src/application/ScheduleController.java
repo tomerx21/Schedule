@@ -3,8 +3,11 @@ package application;
 
 import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -23,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ScheduleController {
 	
@@ -34,26 +38,26 @@ public class ScheduleController {
 	private int indexToEdit;
 	private static final int lectTime = 10;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
-	@FXML private Button saveBtn; // Save as image button
-	@FXML private GridPane ScheduleGrid; // All the GridPane
-	@FXML private VBox courseVbox; // Course VBox
-	@FXML private ColorPicker colorCP; // Color
-	@FXML private RadioButton lectRB; // Lecture RadioButton
-	@FXML private RadioButton execRB; // Exercise RadioButton
-	@FXML private RadioButton labRB; // Lab RadioButton
-	@FXML private RadioButton wsRB; // Sadna RadioButton
-	@FXML private Label lectLabel; // Lecture label
-	@FXML private TextField courseTF; // Course TextField
-	@FXML private TextField lectTF; // Lecturer TextField
-	@FXML private TextField classTF; // Class TextField
-	@FXML private ComboBox<Days> dayCB; // Day ComboBox
-	@FXML private ComboBox<Times> startTimeCB; // Lecture start time ComboBox
-	@FXML private ComboBox<Times> endTimeCB; // Lecture end time ComboBox
-	@FXML private Button addBtn; // Add button
-	@FXML private Button deleteBtn; // Delete button
-	@FXML private Label colorLabel; // Color label
-	@FXML private ToggleGroup typeGroup; // Radio buttons group
-	@FXML private Button endBtn; // End button
+	@FXML public Button saveBtn; // Save as image button
+	@FXML public GridPane ScheduleGrid; // All the GridPane
+	@FXML public VBox courseVbox; // Course VBox
+	@FXML public ColorPicker colorCP; // Color
+	@FXML public RadioButton lectRB; // Lecture RadioButton
+	@FXML public RadioButton execRB; // Exercise RadioButton
+	@FXML public RadioButton labRB; // Lab RadioButton
+	@FXML public RadioButton wsRB; // Sadna RadioButton
+	@FXML public Label lectLabel; // Lecture label
+	@FXML public TextField courseTF; // Course TextField
+	@FXML public TextField lectTF; // Lecturer TextField
+	@FXML public TextField classTF; // Class TextField
+	@FXML public ComboBox<Days> dayCB; // Day ComboBox
+	@FXML public ComboBox<Times> startTimeCB; // Lecture start time ComboBox
+	@FXML public ComboBox<Times> endTimeCB; // Lecture end time ComboBox
+	@FXML public Button addBtn; // Add button
+	@FXML public Button deleteBtn; // Delete button
+	@FXML public Label colorLabel; // Color label
+	@FXML public ToggleGroup typeGroup; // Radio buttons group
+	@FXML public Button endBtn; // End button
 	
 	// Initialize.
 	@FXML public void initialize() {
@@ -75,8 +79,6 @@ public class ScheduleController {
 		colorLabel.setVisible(false);
 		courseVbox.setVisible(false);
 		colorCP.setVisible(false);
-//		endBtn.setVisible(false);
-//		addBtn.setDisable(true);
 		saveBtn.setVisible(false);
 	}
  
@@ -89,12 +91,12 @@ public class ScheduleController {
 			if (CourseArr.get(indexToEdit).getIfDoubleVBox() == true)
 				ScheduleGrid.getChildren().remove(CourseArr.get(indexToEdit).getSecondVBox());
 			tempCourse = CourseArr.get(indexToEdit);
-			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
+			tempCourse.editInfo(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue(), ScheduleGrid);
 			endBtn.setVisible(false);
 		} 
 		else {
 			// creating new course object.
-			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), (RadioButton) typeGroup.getSelectedToggle(), colorCP.getValue(), ScheduleGrid);
+			tempCourse = new Course(lectLabel.getText().toString(), courseTF.getText().toString(), lectTF.getText().toString(), classTF.getText().toString(), startTimeCB.getValue().getNum(), endTimeCB.getValue().getNum(), dayCB.getValue().getNum(), ((RadioButton) typeGroup.getSelectedToggle()).getId().toString(), colorCP.getValue().toString(), ScheduleGrid);
 			addBtn.setText("הוסף");
 			saveBtn.setVisible(true);
 			deleteBtn.setText("מחק");
@@ -102,15 +104,17 @@ public class ScheduleController {
 			editCourseFlag = false;
 		}
 			tempVBox = tempCourse.getVBox();
-			// If course was clicked from the grid pane (LAMBDA IS BIG SHIT)
 			tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
-			// If course contains 2 VBoxes, lambda for the second VBox (LAMBDA IS BIG SHIT)
 			if (tempCourse.getSecondVBox() != null) {
 				final VBox tempVBox2 = tempCourse.getSecondVBox();
 				tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
 			}
 			clearFields();
 		}
+	
+//	private void addCourse() {
+//		
+//	}
 	
 	private void lambdaMethod(VBox vbox, Course course) {
 		editCourseFlag = true; // If user wants to edit\delete
@@ -124,6 +128,57 @@ public class ScheduleController {
 		endTimeCB.setValue(EndTimes[course.getEndTime() - 1]); // set course end time
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 		addBtn.setDisable(false);
+	}
+    
+	@FXML void saveInfoToFile(ActionEvent event) {
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Choose location to Save");
+		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		File selectedFile = null;
+		selectedFile = chooser.showSaveDialog(null);
+		if (selectedFile != null) {
+			File file = new File(selectedFile.toString());
+			PrintWriter outFile = null;
+			try {
+				outFile = new PrintWriter(file);
+			}
+			catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			for (int i = 0; i < CourseArr.size(); i++) {
+				outFile.println(CourseArr.get(i));
+			}
+			outFile.close();
+		}
+	}
+
+	@FXML void loadFromFile(ActionEvent event) throws FileNotFoundException {
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Choose txt file");
+		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		File selectedFile = null;
+		selectedFile = chooser.showOpenDialog(null);
+		if (selectedFile != null) {
+			File file = new File(selectedFile.toString());
+			CourseArr.clear();
+			ScheduleGrid.getChildren().removeAll();
+			Scanner inputCustomer = new Scanner(file);
+			while (inputCustomer.hasNext()) {
+				final Course tempCourse;
+				final VBox tempVBox;
+				tempCourse = new Course(inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.next(), inputCustomer.next(), ScheduleGrid);
+				CourseArr.add(tempCourse);
+				tempVBox = tempCourse.getVBox();
+				tempVBox.setOnMouseClicked((e) -> { lambdaMethod(tempVBox, tempCourse); });
+				if (tempCourse.getSecondVBox() != null) {
+					final VBox tempVBox2 = tempCourse.getSecondVBox();
+					tempVBox2.setOnMouseClicked((e) -> { lambdaMethod(tempVBox2, tempCourse); });
+				}
+				clearFields();
+			}
+		}
 	}
 	
 	// Return index of the course in the arraylist
