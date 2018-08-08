@@ -1,6 +1,7 @@
 
 package application;
 
+
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -19,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -38,10 +42,9 @@ public class ScheduleController {
 	private Times StartTimes[] = new Times[10];
 	private Times EndTimes[] = new Times[10];
 	private int indexToEdit;
+	private int GridInitSize;
 	private static final int lectTime = 10;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
-	@FXML public Button saveImgBtn; // Save as image button
-	@FXML public Button saveTxtBtn; // Save as image button
 	@FXML public GridPane ScheduleGrid; // All the GridPane
 	@FXML public VBox courseVbox; // Course VBox
 	@FXML public ColorPicker colorCP; // Color
@@ -61,9 +64,14 @@ public class ScheduleController {
 	@FXML public Label colorLabel; // Color label
 	@FXML public ToggleGroup typeGroup; // Radio buttons group
 	@FXML public Button endBtn; // End button
-	
+	@FXML private MenuButton MenuFile; // File Button	
+	@FXML private MenuItem saveTxtBtn; //In menu save text button
+    @FXML private MenuItem saveImgBtn; //Im menu save image button
+    @FXML private MenuItem newGridBtn; //In menu new button
+   
 	// Initialize.
 	@FXML public void initialize() {
+		GridInitSize = ScheduleGrid.getChildren().size();
 		for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
@@ -82,6 +90,7 @@ public class ScheduleController {
 		courseVbox.setVisible(false);
 		saveImgBtn.setDisable(true);
 		saveTxtBtn.setDisable(true);
+		newGridBtn.setDisable(true);
 	}
  
 	// If add button pressed
@@ -119,6 +128,7 @@ public class ScheduleController {
 		if (CourseArr.isEmpty() == false) {
 			saveImgBtn.setDisable(false);
 			saveTxtBtn.setDisable(false);
+			newGridBtn.setDisable(false);
 		}
 		tempVBox = tempCourse.getVBox();
 		tempVBox.setOnMouseClicked((e) -> {
@@ -146,6 +156,15 @@ public class ScheduleController {
 		classTFFlag = courseTFFlag = dayCBFlag = endTimeCBFlag = lectTFFlag = startTimeCBFlag = true;
 		addBtn.setDisable(false);
 	}
+	
+	 //Clear the grid for new schedule
+	   @FXML void newGrid(ActionEvent event) {
+		   	
+			ScheduleGrid.getChildren().remove(GridInitSize,ScheduleGrid.getChildren().size()); 
+			CourseArr.clear();
+			endBtn.setVisible(false);
+			clearFields();
+	    }
     //Save the schedule to a txt file.
 	@FXML void saveToFile(ActionEvent event) {
 		FileChooser chooser = new FileChooser();
@@ -196,6 +215,7 @@ public class ScheduleController {
 			}
 			inputCustomer.close();
 			courseVbox.setVisible(true);
+			
 		}
 	}
 	
@@ -228,8 +248,9 @@ public class ScheduleController {
 			CourseArr.remove(indexToEdit);
 		}
 		if (CourseArr.isEmpty() == true) {
-			saveImgBtn.setDisable(true);
-			saveTxtBtn.setDisable(true);
+		      saveImgBtn.setDisable(true);
+			  saveTxtBtn.setDisable(true);
+			  newGridBtn.setDisable(true);
 		}
 		endBtn.setVisible(false);
 		clearFields();

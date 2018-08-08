@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
       <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
         <items>
@@ -120,10 +122,17 @@
                <children>
                   <VBox layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="798.5454268526449" prefWidth="267.92726343580546" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="30.0">
+                        <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="110.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#newCourse" prefHeight="27.0" prefWidth="85.0" text="קורס חדש" />
-                              <Button mnemonicParsing="false" onAction="#loadFromFile" prefHeight="42.0" prefWidth="146.0" text="טען מערכת מקובץ" />
+                              <MenuButton fx:id="MenuFile" mnemonicParsing="false" text="קובץ">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#loadFromFile" text="פתח" />
+                                    <MenuItem fx:id="newGridBtn" mnemonicParsing="false" onAction="#newGrid" text="חדש" />
+                                    <MenuItem fx:id="saveTxtBtn" mnemonicParsing="false" onAction="#saveToFile" text="שמור" />
+                                  <MenuItem fx:id="saveImgBtn" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור כתמונה" />
+                                </items>
+                              </MenuButton>
                            </children>
                            <VBox.margin>
                               <Insets top="5.0" />
@@ -210,16 +219,7 @@
                                     <Insets left="26.0" />
                                  </VBox.margin>
                               </AnchorPane>
-                              <HBox prefHeight="0.0" prefWidth="260.0" spacing="10.0">
-                                 <children>
-                                    <Button fx:id="saveImgBtn" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור מעכרת כתמונה">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="saveTxtBtn" mnemonicParsing="false" onAction="#saveToFile" text="שמור מערכת כקובץ" />
-                                 </children>
-                              </HBox>
+                              <HBox prefHeight="0.0" prefWidth="260.0" spacing="10.0" />
                            </children>
                         </VBox>
                      </children>
