@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
       <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
         <items>
@@ -45,6 +45,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -111,6 +116,11 @@
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.rowIndex="5" />
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
                         <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="16:50 - 17:40" GridPane.columnIndex="7" GridPane.rowIndex="10" />
+                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="17:50 - 18:40" GridPane.columnIndex="7" GridPane.rowIndex="11" />
+                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="18:50 - 19:40" GridPane.columnIndex="7" GridPane.rowIndex="12" />
+                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="19:50 - 20:40" GridPane.columnIndex="7" GridPane.rowIndex="13" />
+                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="20:50 - 21:40" GridPane.columnIndex="7" GridPane.rowIndex="14" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -17,7 +17,7 @@ public class Times {
 			}
 			else if (num > 5) {
 				this.num = num;
-				this.name = new String((num + 7 -1) + ":50");
+				this.name = new String((num + 6) + ":50");
 			}
 		}
 		else if (startOrEndFlag == 2) { // Ending time
@@ -27,7 +27,7 @@ public class Times {
 				}
 				else if ((num > 0) && (num < 5)) {
 					this.num = num + 1;
-					this.name = new String((num + 7 + 1) + ":20");
+					this.name = new String((num + 8) + ":20");
 				}
 				else if (num > 5) {
 					this.num = num + 1;

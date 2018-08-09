@@ -42,7 +42,7 @@ public class ScheduleController {
 	private Times EndTimes[] = new Times[10];
 	private int indexToEdit;
 	private int GridInitSize;
-	private static final int lectTime = 10;
+	private int rowsInGrid;
 	private ArrayList<Course> CourseArr = new ArrayList<Course>(); // Course array
 	@FXML public GridPane ScheduleGrid; // All the GridPane
 	@FXML public VBox courseVbox; // Course VBox
@@ -69,12 +69,15 @@ public class ScheduleController {
    
 	// Initialize.
 	@FXML public void initialize() {
+		rowsInGrid = ScheduleGrid.getRowCount();
 		GridInitSize = ScheduleGrid.getChildren().size();
+		StartTimes = new Times[GridInitSize];
+		EndTimes = new Times[GridInitSize];
 		for (int i = 0; i < 8; i++) {
 			days[i] = new Days(i);
 			dayCB.getItems().add(days[i]);
 		}
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < rowsInGrid; i++) {
 			StartTimes[i] = new Times(i, 1);
 			EndTimes[i] = new Times(i, 2);
 		}
@@ -292,7 +295,7 @@ public class ScheduleController {
 		CB.getItems().clear();
 		CB.getItems().add(arr[0] = new Times(0, 1));
 
-		for (int i = startIndex; i < lectTime; i++) {
+		for (int i = startIndex; i < rowsInGrid; i++) {
 			if (i != 5) {
 				if (dayCB.getValue() == null)
 					CB.getItems().add(arr[i]);
