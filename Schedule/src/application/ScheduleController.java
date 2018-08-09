@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -65,8 +64,7 @@ public class ScheduleController {
 	@FXML public ToggleGroup typeGroup; // Radio buttons group
 	@FXML public Button endBtn; // End button
 	@FXML private MenuButton MenuFile; // File Button	
-	@FXML private MenuItem saveTxtBtn; //In menu save text button
-    @FXML private MenuItem saveImgBtn; //Im menu save image button
+	@FXML private MenuItem saveBtn; //In menu save text button
     @FXML private MenuItem newGridBtn; //In menu new button
    
 	// Initialize.
@@ -88,8 +86,7 @@ public class ScheduleController {
 		colorCP.getStyleClass().add("split-button");
 		colorCP.setStyle("-fx-color-label-visible: false ;");
 		courseVbox.setVisible(false);
-		saveImgBtn.setDisable(true);
-		saveTxtBtn.setDisable(true);
+		saveBtn.setDisable(true);
 		newGridBtn.setDisable(true);
 	}
  
@@ -101,7 +98,7 @@ public class ScheduleController {
 	//Method that adds a new course.
 	private void addCourse(Course course) {
 		final Course tempCourse;
-		final VBox tempVBox;
+		final String VBoxStyle;
 		if (course == null) {
 			if (editCourseFlag == true) {
 				//Removes the old node and add a new edited one.
@@ -125,20 +122,38 @@ public class ScheduleController {
 			tempCourse = course;
 			CourseArr.add(tempCourse);
 		}
-		if (CourseArr.isEmpty() == false) {
-			saveImgBtn.setDisable(false);
-			saveTxtBtn.setDisable(false);
+		if (CourseArr.isEmpty() != true) {
+//			saveImgBtn.setDisable(false);
+			saveBtn.setDisable(false);
 			newGridBtn.setDisable(false);
 		}
-		tempVBox = tempCourse.getVBox();
-		tempVBox.setOnMouseClicked((e) -> {
-			lambdaMethod(tempVBox, tempCourse);
+		VBoxStyle = tempCourse.getVBox().getStyle(); // Save the original color of the vbox.
+		tempCourse.getVBox().setOnMouseClicked((e) -> { //If clicked  on the grid
+			lambdaMethod(tempCourse.getVBox(), tempCourse);
 		});
-		if (tempCourse.getSecondVBox() != null) {
-			final VBox tempVBox2 = tempCourse.getSecondVBox();
-			tempVBox2.setOnMouseClicked((e) -> {
-				lambdaMethod(tempVBox2, tempCourse);
+		tempCourse.getVBox().setOnMouseEntered((e) -> { //When mouse entered, change to darker color
+			tempCourse.getVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
+			if (tempCourse.getSecondVBox() != null)
+				tempCourse.getSecondVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
+		});
+		tempCourse.getVBox().setOnMouseExited((e) -> { //When mouse exited, change to the original color
+			tempCourse.getVBox().setStyle(VBoxStyle);
+			if (tempCourse.getSecondVBox() != null)
+				tempCourse.getSecondVBox().setStyle(VBoxStyle);
+	    });
+		//Same as above just for sub VBoxs
+		if (tempCourse.getSecondVBox() != null) { 
+			tempCourse.getSecondVBox().setOnMouseClicked((e) -> {
+				lambdaMethod(tempCourse.getSecondVBox(), tempCourse);
 			});
+			tempCourse.getSecondVBox().setOnMouseEntered((e) -> {
+				tempCourse.getVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
+				tempCourse.getSecondVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
+		    });
+			tempCourse.getSecondVBox().setOnMouseExited((e) -> {
+				tempCourse.getVBox().setStyle(VBoxStyle);
+				tempCourse.getSecondVBox().setStyle(VBoxStyle);
+		    });
 		}
 		clearFields();
 	}
@@ -157,42 +172,44 @@ public class ScheduleController {
 		addBtn.setDisable(false);
 	}
 	
-	 //Clear the grid for new schedule
-	   @FXML void newGrid(ActionEvent event) {
-		   	
-			ScheduleGrid.getChildren().remove(GridInitSize,ScheduleGrid.getChildren().size()); 
-			saveImgBtn.setDisable(true);
-			saveTxtBtn.setDisable(true);
-			newGridBtn.setDisable(true);
-			editCourseFlag = false;
-			CourseArr.clear();
-			endBtn.setVisible(false);
-			clearFields();
-	    }
-    //Save the schedule to a txt file.
-	@FXML void saveToFile(ActionEvent event) {
+    //Save the schedule to a txt\png file.
+	@FXML void saveToFile(ActionEvent event) throws FileNotFoundException {
 		FileChooser chooser = new FileChooser();
 		chooser.setTitle("Choose location to Save");
-		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"), new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 		File selectedFile = null;
 		selectedFile = chooser.showSaveDialog(null);
 		if (selectedFile != null) {
-			File file = new File(selectedFile.toString());
-			PrintWriter outFile = null;
-			try {
+			String fileName = selectedFile.getName();
+			if ((fileName.substring(fileName.lastIndexOf(".") + 1, selectedFile.getName().length())).equals("txt")) 
+			{ //If txt file
+				File file = new File(selectedFile.toString());
+				PrintWriter outFile = null;
 				outFile = new PrintWriter(file);
+				outFile.println("scheduleFile");
+				for (int i = 0; i < CourseArr.size(); i++) {
+					outFile.println(CourseArr.get(i));
+				}
+				outFile.close();
 			}
-			catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if ((fileName.substring(fileName.lastIndexOf(".") + 1, selectedFile.getName().length())).equals("png")) 
+			{ //If png file
+				try {
+					// Pad the capture area
+					WritableImage writableImage = new WritableImage((int) ScheduleGrid.getWidth() + 5,
+							(int) ScheduleGrid.getHeight() + 5);
+					WritableImage snapshot = ScheduleGrid.snapshot(new SnapshotParameters(), writableImage);
+					RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
+					// Write the snapshot to the chosen file
+					ImageIO.write(renderedImage, "png", selectedFile);
+				}
+				catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
-			outFile.println("scheduleFile");
-			for (int i = 0; i < CourseArr.size(); i++) {
-				outFile.println(CourseArr.get(i));
 			}
-			outFile.close();
 		}
-	}
+	
 	//Load the schedule from a txt file.
 	@FXML void loadFromFile(ActionEvent event) throws FileNotFoundException {
 		FileChooser chooser = new FileChooser();
@@ -206,16 +223,17 @@ public class ScheduleController {
 			ScheduleGrid.getChildren().removeAll();
 			Scanner inputCustomer = new Scanner(file);
 			if (inputCustomer.next().equals("scheduleFile")) {
+				clearGrid();
 				while (inputCustomer.hasNext()) {
 					addCourse(new Course(inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.next(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.nextInt(), inputCustomer.next(), inputCustomer.next(), ScheduleGrid));
-			} }
+				}
+			}
 			else {
-		        Alert alert = new Alert(AlertType.WARNING);
-		        alert.setTitle("קובץ שגוי");
-		        alert.setHeaderText(null);
-		        alert.setContentText("קובץ לא תואם, בחר אחר.");
-		 
-		        alert.showAndWait();
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("קובץ שגוי");
+				alert.setHeaderText(null);
+				alert.setContentText("קובץ לא תואם, בחר אחר.");
+				alert.showAndWait();
 			}
 			inputCustomer.close();
 			courseVbox.setVisible(true);
@@ -252,8 +270,7 @@ public class ScheduleController {
 			CourseArr.remove(indexToEdit);
 		}
 		if (CourseArr.isEmpty() == true) {
-		      saveImgBtn.setDisable(true);
-			  saveTxtBtn.setDisable(true);
+			  saveBtn.setDisable(true);
 			  newGridBtn.setDisable(true);
 		}
 		endBtn.setVisible(false);
@@ -288,11 +305,26 @@ public class ScheduleController {
 		CB.setValue(CB.getItems().get(0));
 	}
 
+	 //Clear the grid for new schedule
+	@FXML void newGrid(ActionEvent event) {
+		saveBtn.setDisable(true);
+		newGridBtn.setDisable(true);
+		clearGrid();
+	}
+	   
+	private void clearGrid() {
+		ScheduleGrid.getChildren().remove(GridInitSize, ScheduleGrid.getChildren().size());
+		CourseArr.clear();
+		clearFields();
+	}
+
 	// Function to reset all the fields.
 	private void clearFields() {
 		editCourseFlag = false;
+		endBtn.setVisible(false);
 		addBtn.setText("הוסף");
-		deleteBtn.setText("מחק");
+		addBtn.setDisable(true);
+		deleteBtn.setText("נקה");
 		courseTF.clear();
 		lectTF.clear();
 		classTF.clear();
@@ -394,27 +426,7 @@ public class ScheduleController {
 		else
 			addBtn.setDisable(true);
 	}
+	
 
 	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
-	
-	// the button pressed to save image
-	@FXML void captureAndSaveDisplay(ActionEvent event) {
-			FileChooser fileChooser = new FileChooser();
-			// Set extension filter
-			fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
-			// Prompt user to select a file
-			File file = fileChooser.showSaveDialog(null);
-			if (file != null) {
-				try {
-					// Pad the capture area
-					WritableImage writableImage = new WritableImage((int) ScheduleGrid.getWidth() + 5,
-							(int) ScheduleGrid.getHeight() + 5);
-					WritableImage snapshot = ScheduleGrid.snapshot(new SnapshotParameters(), writableImage);
-					RenderedImage renderedImage = SwingFXUtils.fromFXImage(snapshot, null);
-					// Write the snapshot to the chosen file
-					ImageIO.write(renderedImage, "png", file);
-				}
-				catch (IOException ex) { ex.printStackTrace(); }
-			}
-	}
 }

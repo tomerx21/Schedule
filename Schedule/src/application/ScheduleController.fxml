@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
       <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
         <items>
@@ -129,8 +129,7 @@
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#loadFromFile" text="פתח" />
                                     <MenuItem fx:id="newGridBtn" mnemonicParsing="false" onAction="#newGrid" text="חדש" />
-                                    <MenuItem fx:id="saveTxtBtn" mnemonicParsing="false" onAction="#saveToFile" text="שמור" />
-                                  <MenuItem fx:id="saveImgBtn" mnemonicParsing="false" onAction="#captureAndSaveDisplay" text="שמור כתמונה" />
+                                    <MenuItem fx:id="saveBtn" mnemonicParsing="false" onAction="#saveToFile" text="שמור" />
                                 </items>
                               </MenuButton>
                            </children>

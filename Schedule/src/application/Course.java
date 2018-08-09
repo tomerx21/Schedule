@@ -158,5 +158,17 @@ public class Course {
 	private int to255Int(double f) {
 		return (int) (f * 255);
 	}
+	
+	public String toDarkerRgbString() {
+		return "rgb(" + toDarker255Int(this.colorCP.getRed()) + "," + toDarker255Int(this.colorCP.getGreen()) + "," + toDarker255Int(this.colorCP.getBlue()) + ")";
+	}
+	
+	private int toDarker255Int(double f) {
+		return (int) (f * 255 * 0.9f);
+	}
+	
+	public Color getColorCP() {
+		return colorCP;
+	}
 
 }
