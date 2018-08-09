@@ -161,6 +161,10 @@ public class ScheduleController {
 	   @FXML void newGrid(ActionEvent event) {
 		   	
 			ScheduleGrid.getChildren().remove(GridInitSize,ScheduleGrid.getChildren().size()); 
+			saveImgBtn.setDisable(true);
+			saveTxtBtn.setDisable(true);
+			newGridBtn.setDisable(true);
+			editCourseFlag = false;
 			CourseArr.clear();
 			endBtn.setVisible(false);
 			clearFields();
