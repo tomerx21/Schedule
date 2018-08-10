@@ -125,7 +125,6 @@ public class ScheduleController {
 			CourseArr.add(tempCourse);
 		}
 		if (CourseArr.isEmpty() != true) {
-//			saveImgBtn.setDisable(false);
 			saveBtn.setDisable(false);
 			newGridBtn.setDisable(false);
 		}
@@ -413,6 +412,5 @@ public class ScheduleController {
 			addBtn.setDisable(true);
 	}
 	
-
 	// ***************** ALL THE FUNCTIONS ABOVE IS TO CHECK IF ALL THE FIELDS ARE FILLED TO ENABLE THE ADD BUTTON *****************
 }
