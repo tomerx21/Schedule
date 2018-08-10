@@ -227,10 +227,10 @@ public class ScheduleController {
 			Scanner inputCustomer = new Scanner(file);
 			if (inputCustomer.next().equals("scheduleFile")) {
 				clearGrid();
-				System.out.print(inputCustomer.nextLine()+"1\n");
+				inputCustomer.nextLine();
 				while (inputCustomer.hasNext()) {	
 					addCourse(new Course(inputCustomer.nextLine(), inputCustomer.nextLine(), inputCustomer.nextLine(), inputCustomer.nextLine(), Integer.valueOf(inputCustomer.nextLine()), Integer.valueOf(inputCustomer.nextLine()), Integer.valueOf(inputCustomer.nextLine()), inputCustomer.nextLine(), inputCustomer.nextLine(), ScheduleGrid));
-					System.out.print(inputCustomer.nextLine()+"1\n");
+					inputCustomer.nextLine();
 				}
 			}
 			else {
