@@ -55,7 +55,8 @@ public class Course {
 				EndTime + "\r\n" +
 				Day + "\r\n" +
 				typeRBtn.getId() + "\r\n" +
-				colorCP + "\r\n" 
+				colorCP + "\r\n"
+				
 				);
 	}
 	

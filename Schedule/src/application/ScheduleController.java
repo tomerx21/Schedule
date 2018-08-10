@@ -211,7 +211,6 @@ public class ScheduleController {
 				}
 			}
 			}
-		
 		}
 	
 	//Load the schedule from a txt file.
