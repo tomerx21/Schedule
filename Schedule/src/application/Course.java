@@ -111,6 +111,31 @@ public class Course {
 			GridPaneVBox2.getChildren().add(L3);
 			GridPaneVBox2.getChildren().add(L4);
 		}
+		else ifDoubleVBox = false;
+			String VBoxStyle = GridPaneVBox1.getStyle(); // Save the original color of the vbox.
+	
+			GridPaneVBox1.setOnMouseEntered((e) -> { //When mouse entered, change to darker color
+				GridPaneVBox1.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
+				if (GridPaneVBox2 != null)
+					GridPaneVBox2.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+			});
+			GridPaneVBox1.setOnMouseExited((e) -> { //When mouse exited, change to the original color
+				GridPaneVBox1.setStyle(VBoxStyle);
+				if (GridPaneVBox2 != null)
+					GridPaneVBox2.setStyle(VBoxStyle);
+		    });
+			//Same as above just for sub VBoxs
+			if (GridPaneVBox2 != null) {
+				GridPaneVBox2.setOnMouseEntered((e) -> {
+					GridPaneVBox1.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox2.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+			    });
+				GridPaneVBox2.setOnMouseExited((e) -> {
+					GridPaneVBox1.setStyle(VBoxStyle);
+					GridPaneVBox2.setStyle(VBoxStyle);
+			    });
+		}
+			
 	}
 	// Set for display the course info
 	public void setCourse(ToggleGroup typeGroup, Label lectLabel, TextField classTF, TextField lectTF, TextField courseTF, ColorPicker colorCP) {

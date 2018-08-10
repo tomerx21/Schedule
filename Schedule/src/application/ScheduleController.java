@@ -101,7 +101,6 @@ public class ScheduleController {
 	//Method that adds a new course.
 	private void addCourse(Course course) {
 		final Course tempCourse;
-		final String VBoxStyle;
 		if (course == null) {
 			if (editCourseFlag == true) {
 				//Removes the old node and add a new edited one.
@@ -130,33 +129,15 @@ public class ScheduleController {
 			saveBtn.setDisable(false);
 			newGridBtn.setDisable(false);
 		}
-		VBoxStyle = tempCourse.getVBox().getStyle(); // Save the original color of the vbox.
 		tempCourse.getVBox().setOnMouseClicked((e) -> { //If clicked  on the grid
 			lambdaMethod(tempCourse.getVBox(), tempCourse);
 		});
-		tempCourse.getVBox().setOnMouseEntered((e) -> { //When mouse entered, change to darker color
-			tempCourse.getVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
-			if (tempCourse.getSecondVBox() != null)
-				tempCourse.getSecondVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
-		});
-		tempCourse.getVBox().setOnMouseExited((e) -> { //When mouse exited, change to the original color
-			tempCourse.getVBox().setStyle(VBoxStyle);
-			if (tempCourse.getSecondVBox() != null)
-				tempCourse.getSecondVBox().setStyle(VBoxStyle);
-	    });
 		//Same as above just for sub VBoxs
-		if (tempCourse.getSecondVBox() != null) { 
+		if (tempCourse.getSecondVBox() != null) {
 			tempCourse.getSecondVBox().setOnMouseClicked((e) -> {
 				lambdaMethod(tempCourse.getSecondVBox(), tempCourse);
 			});
-			tempCourse.getSecondVBox().setOnMouseEntered((e) -> {
-				tempCourse.getVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
-				tempCourse.getSecondVBox().setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + tempCourse.toDarkerRgbString() + ";\n");
-		    });
-			tempCourse.getSecondVBox().setOnMouseExited((e) -> {
-				tempCourse.getVBox().setStyle(VBoxStyle);
-				tempCourse.getSecondVBox().setStyle(VBoxStyle);
-		    });
+			
 		}
 		clearFields();
 	}
