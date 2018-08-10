@@ -91,13 +91,12 @@ public class Course {
 		}
 		else ifDoubleVBox = false;
 			String VBoxStyle = GridPaneVBox1.getStyle(); // Save the original color of the vbox.
-	
 			GridPaneVBox1.setOnMouseEntered((e) -> { //When mouse entered, change to darker color
 				GridPaneVBox1.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
 				if (GridPaneVBox2 != null)
 					GridPaneVBox2.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
 			});
-			GridPaneVBox1.setOnMouseExited((e) -> { //When mouse exited, change to the original color
+			GridPaneVBox1.setOnMouseExited((e) -> { //When mouse exited, change to the original color.
 				GridPaneVBox1.setStyle(VBoxStyle);
 				if (GridPaneVBox2 != null)
 					GridPaneVBox2.setStyle(VBoxStyle);
@@ -118,10 +117,10 @@ public class Course {
 	// Set for display the course info
 	public void setCourse(ToggleGroup typeGroup, Label lectLabel, TextField classTF, TextField lectTF, TextField courseTF, ColorPicker colorCP) {
 		List<Toggle> list = typeGroup.getToggles();
-		for (Toggle toggle : list) {
+		for (Toggle toggle : list)
 			if (((RadioButton) toggle).getId().equals(typeRBtn.getId()))
 				typeGroup.selectToggle((RadioButton) toggle);
-		}
+
 		lectLabel.setText(this.lectLabel);
 		classTF.setText(this.classTF);
 		lectTF.setText(this.lectTF);
