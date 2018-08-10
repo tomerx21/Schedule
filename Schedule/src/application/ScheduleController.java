@@ -38,8 +38,8 @@ public class ScheduleController {
 	boolean courseTFFlag = false, lectTFFlag = false, classTFFlag = false, startTimeCBFlag = false, endTimeCBFlag = false, dayCBFlag = false;
 	boolean editCourseFlag = false;
 	private Days days[] = new Days[8];
-	private Times StartTimes[] = new Times[10];
-	private Times EndTimes[] = new Times[10];
+	private Times StartTimes[];
+	private Times EndTimes[];
 	private int indexToEdit;
 	private int GridInitSize;
 	private int rowsInGrid;

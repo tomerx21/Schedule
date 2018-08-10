@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -10,127 +9,25 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleController">
    <children>
-      <SplitPane dividerPositions="0.7732263910197732" prefHeight="800.0" prefWidth="1200.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <Pane maxHeight="800.0" maxWidth="1200.0" prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <Pane layoutX="926.0" prefHeight="801.0" prefWidth="275.0">
                <children>
-                  <GridPane fx:id="ScheduleGrid" alignment="CENTER" gridLinesVisible="true" hgap="1.0" prefHeight="799.0" prefWidth="923.0" vgap="1.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <TextField alignment="CENTER" editable="false" prefHeight="104.0" prefWidth="112.0" text="חמישי" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="102.0" prefWidth="112.0" text="שישי" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="107.0" prefWidth="112.0" text="שבת">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="109.0" prefWidth="112.0" text="רביעי" GridPane.columnIndex="3">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="110.0" prefWidth="112.0" text="שלישי" GridPane.columnIndex="4">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="108.0" prefWidth="112.0" text="שני" GridPane.columnIndex="5">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="135.0" prefWidth="112.0" text="ראשון" GridPane.columnIndex="6">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </TextField>
-                        <TextField alignment="CENTER" disable="true" editable="false" prefHeight="86.0" prefWidth="127.0" GridPane.columnIndex="7" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="98.0" prefWidth="127.0" text="8:30 - 9:20" GridPane.columnIndex="7" GridPane.rowIndex="1">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets></TextField>
-                        <TextField alignment="CENTER" editable="false" prefHeight="94.0" prefWidth="127.0" text="10:30 - 11:20" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="11:30 - 12:20" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="71.0" prefWidth="127.0" text="12:20 - 12:50" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="124.0" prefWidth="127.0" text="12:50 - 13:40" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="111.0" prefWidth="127.0" text="13:50 - 14:40" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="14:50 - 15:40" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="15:50 - 16:40" GridPane.columnIndex="7" GridPane.rowIndex="9" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="98.0" prefWidth="127.0" text="9:30 - 10:20" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.rowIndex="5" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="16:50 - 17:40" GridPane.columnIndex="7" GridPane.rowIndex="10" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="17:50 - 18:40" GridPane.columnIndex="7" GridPane.rowIndex="11" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="18:50 - 19:40" GridPane.columnIndex="7" GridPane.rowIndex="12" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="19:50 - 20:40" GridPane.columnIndex="7" GridPane.rowIndex="13" />
-                        <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="127.0" text="20:50 - 21:40" GridPane.columnIndex="7" GridPane.rowIndex="14" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </opaqueInsets>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="676.0" prefWidth="422.0">
-               <children>
-                  <VBox layoutX="2.0" layoutY="8.0" maxHeight="532.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="798.5454268526449" prefWidth="267.92726343580546" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox focusTraversable="true" maxHeight="801.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="800.0" prefWidth="275.0" spacing="10.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="29.0" prefWidth="258.0" spacing="110.0">
                            <children>
@@ -149,7 +46,7 @@
                         </HBox>
                         <VBox fx:id="courseVbox" spacing="10.0">
                            <children>
-                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox focusTraversable="true" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label nodeOrientation="RIGHT_TO_LEFT" text="קורס:" />
                                     <TextField fx:id="courseTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedCourseTF" prefHeight="27.0" prefWidth="243.0" promptText="שם הקורס" />
@@ -191,7 +88,7 @@
                                     <TextField fx:id="classTF" nodeOrientation="RIGHT_TO_LEFT" onKeyTyped="#keyTypedClassTF" prefHeight="27.0" prefWidth="243.0" promptText="הכנס כיתה" />
                                  </children>
                               </VBox>
-                              <VBox maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
+                              <VBox focusTraversable="true" maxHeight="100.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="243.0" spacing="5.0">
                                  <children>
                                     <Label fx:id="dayLabel" text="יום:" />
                                     <ComboBox fx:id="dayCB" onAction="#dayHiding" prefHeight="25.0" prefWidth="270.0" promptText="בחר יום" />
@@ -228,7 +125,6 @@
                                     <Insets left="26.0" />
                                  </VBox.margin>
                               </AnchorPane>
-                              <HBox prefHeight="0.0" prefWidth="260.0" spacing="10.0" />
                            </children>
                         </VBox>
                      </children>
@@ -237,8 +133,254 @@
                      </padding>
                   </VBox>
                </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+            </Pane>
+            <Pane prefHeight="800.0" prefWidth="927.0">
+               <children>
+                <AnchorPane layoutX="4.0" layoutY="1.7454545497894287" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <ScrollPane layoutX="-4.0" layoutY="-1.0" prefHeight="801.0" prefWidth="927.0">
+                           <content>
+                              <GridPane fx:id="ScheduleGrid" alignment="CENTER" gridLinesVisible="true" hgap="0.5" prefHeight="1101.0" prefWidth="909.0" vgap="0.5">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
+                                    <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextField alignment="CENTER" disable="true" editable="false" prefHeight="86.0" prefWidth="127.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.rowIndex="5" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: gray;" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label text="שישי" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label text="חמישי" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="3">
+                                       <children>
+                                          <Label text="רביעי" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="4">
+                                       <children>
+                                          <Label text="שלישי" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="5">
+                                       <children>
+                                          <Label text="שני" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="6">
+                                       <children>
+                                          <Label text="ראשון" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;">
+                                       <children>
+                                          <Label text="שבת" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label text="8:30 - 9:20" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label text="9:30 - 10:20" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                                       <children>
+                                          <Label text="10:30 - 11:20" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                                       <children>
+                                          <Label text="11:30 - 12:20" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                                       <children>
+                                          <Label text="12:20 - 12:50" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="6">
+                                       <children>
+                                          <Label text="12:50 - 13:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="7">
+                                       <children>
+                                          <Label text="13:50 - 14:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="8">
+                                       <children>
+                                          <Label text="14:50 - 15:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="9">
+                                       <children>
+                                          <Label text="15:50 - 16:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="10">
+                                       <children>
+                                          <Label text="16:50 - 17:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="11">
+                                       <children>
+                                          <Label text="17:50 - 18:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="13">
+                                       <children>
+                                          <Label text="19:50 - 20:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="14">
+                                       <children>
+                                          <Label text="20:50 - 21:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" GridPane.rowIndex="12">
+                                       <children>
+                                          <Label text="18:50 - 19:40" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: Gray;" GridPane.columnIndex="7" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </opaqueInsets>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
