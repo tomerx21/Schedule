@@ -1,6 +1,7 @@
 package application;
 
 import java.util.List;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -47,26 +48,16 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return (lectLabel + "\r\n" +
-				courseTF + "\r\n" +
-				lectTF + "\r\n" +
-				classTF + "\r\n" +
-				StartTime + "\r\n" +
-				EndTime + "\r\n" +
-				Day + "\r\n" +
-				typeRBtn.getId() + "\r\n" +
-				colorCP + "\r\n"
-				
-				);
+		return (lectLabel + "\r\n" + courseTF + "\r\n" +	lectTF + "\r\n" + classTF + "\r\n" + StartTime + "\r\n" + EndTime + "\r\n" + Day + "\r\n" + typeRBtn.getId() + "\r\n" +colorCP + "\r\n");
 	}
 	
 	public void addToGrid() {
 		
 		if (ifDoubleVBox == true) { //If there is a break
 			ScheduleGrid.add(GridPaneVBox1, Day, StartTime, 1, 5 - StartTime);
-			if (Day == 4) //if tuesday
+			if (Day == 4)  //if tuesday 
 				ScheduleGrid.add(GridPaneVBox2, Day, 8, 1, EndTime - 8);
-			else
+			else 
 				ScheduleGrid.add(GridPaneVBox2, Day, 6, 1, EndTime - 6);
 		}
 		else 
@@ -74,7 +65,7 @@ public class Course {
 	}
 	
 	private void changeGridPaneVBox() {
-		GridPaneVBox1 = new VBox(4);
+		GridPaneVBox1 = new VBox(0);
 		Label L1 = new Label(lectLabel);
 		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 		GridPaneVBox1.setStyle(cssLayout);
@@ -87,7 +78,7 @@ public class Course {
 		
 		if ((StartTime < 5) && (EndTime > 5)) {
 			ifDoubleVBox = true;
-			GridPaneVBox2 = new VBox(4);
+			GridPaneVBox2 = new VBox(0);
 			cssLayout = "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 			GridPaneVBox2.setStyle(cssLayout);
 			GridPaneVBox2.setAlignment(Pos.CENTER);
@@ -102,9 +93,9 @@ public class Course {
 			String VBoxStyle = GridPaneVBox1.getStyle(); // Save the original color of the vbox.
 	
 			GridPaneVBox1.setOnMouseEntered((e) -> { //When mouse entered, change to darker color
-				GridPaneVBox1.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
+				GridPaneVBox1.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
 				if (GridPaneVBox2 != null)
-					GridPaneVBox2.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox2.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
 			});
 			GridPaneVBox1.setOnMouseExited((e) -> { //When mouse exited, change to the original color
 				GridPaneVBox1.setStyle(VBoxStyle);
@@ -114,8 +105,8 @@ public class Course {
 			//Same as above just for sub VBoxs
 			if (GridPaneVBox2 != null) {
 				GridPaneVBox2.setOnMouseEntered((e) -> {
-					GridPaneVBox1.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
-					GridPaneVBox2.setStyle("-fx-border-color: black;\n" + "-fx-border-width: 2;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox1.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox2.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
 			    });
 				GridPaneVBox2.setOnMouseExited((e) -> {
 					GridPaneVBox1.setStyle(VBoxStyle);
@@ -179,7 +170,7 @@ public class Course {
 	}
 	
 	private int toDarker255Int(double f) {
-		return (int) (f * 255 * 0.9f);
+		return (int) (f * 255 * 0.85f);
 	}
 	
 	public Color getColorCP() {
