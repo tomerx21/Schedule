@@ -84,29 +84,42 @@ public class Course {
 	}
 	
 	private void changeGridPaneVBox() {
-		GridPaneVBox1 = new VBox(4);
+		GridPaneVBox1 = new VBox(0);
 		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 		GridPaneVBox1.setStyle(cssLayout);
 		GridPaneVBox1.setAlignment(Pos.CENTER);
 		Label L1 = new Label(lectLabel);
-		L1.setStyle("-fx-font-weight: bold;");
+		Label L2 = new Label(courseTF);
+		Label L3 = new Label(lectTF);
+		Label L4 = new Label(classTF);
+		L1.setStyle("-fx-font-weight: bold;\n"+"-fx-font-size: 7pt;");
+		L2.setStyle("-fx-font-size: 7pt;");
+		L3.setStyle("-fx-font-size: 7pt;");
+		L4.setStyle("-fx-font-size: 7pt;");
 		GridPaneVBox1.getChildren().add(L1);
-		GridPaneVBox1.getChildren().add(new Label(courseTF));
-		GridPaneVBox1.getChildren().add(new Label(lectTF));
-		GridPaneVBox1.getChildren().add(new Label(classTF));
+		GridPaneVBox1.getChildren().add(L2);
+		GridPaneVBox1.getChildren().add(L3);
+		GridPaneVBox1.getChildren().add(L4);
 		
 		if ((StartTime < 5) && (EndTime > 5)) {
 			ifDoubleVBox = true;
-			GridPaneVBox2 = new VBox(4);
+			GridPaneVBox2 = new VBox(0);
 			cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 			GridPaneVBox2.setStyle(cssLayout);
 			GridPaneVBox2.setAlignment(Pos.CENTER);
 			L1 = new Label(lectLabel + " - המשך");
 			L1.setStyle("-fx-font-weight: bold;");
+			L2 = new Label(courseTF);
+			L3 = new Label(lectTF);
+			L4 = new Label(classTF);
+			L1.setStyle("-fx-font-weight: bold;\n"+"-fx-font-size: 7pt;");
+			L2.setStyle("-fx-font-size: 7pt;");
+			L3.setStyle("-fx-font-size: 7pt;");
+			L4.setStyle("-fx-font-size: 7pt;");
 			GridPaneVBox2.getChildren().add(L1);
-			GridPaneVBox2.getChildren().add(new Label(courseTF));
-			GridPaneVBox2.getChildren().add(new Label(lectTF));
-			GridPaneVBox2.getChildren().add(new Label(classTF));
+			GridPaneVBox2.getChildren().add(L2);
+			GridPaneVBox2.getChildren().add(L3);
+			GridPaneVBox2.getChildren().add(L4);
 		}
 	}
 	// Set for display the course info
