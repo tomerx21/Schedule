@@ -44,29 +44,18 @@ public class Course {
 		addToGrid();
 	}
 
-//	@Override
-//	public String toString() {
-//		return ("lecture type: " + lectLabel + "\n" +
-//				"course: " + courseTF + "\n" +
-//				"lecturer: " + lectTF + "\n" +
-//				"class: " + classTF + "\n" +
-//				"start time " + StartTime + "\n" +
-//				"end time " + EndTime + "\n" +
-//				"day " + Day + "\n" 
-//				);
-//	}
-	
+
 	@Override
 	public String toString() {
-		return (lectLabel + " " +
-				courseTF + " " +
-				lectTF + " " +
-				classTF + " " +
-				StartTime + " " +
-				EndTime + " " +
-				Day + " " +
-				typeRBtn.getId() + " " +
-				colorCP + " " 
+		return (lectLabel + "\r\n" +
+				courseTF + "\r\n" +
+				lectTF + "\r\n" +
+				classTF + "\r\n" +
+				StartTime + "\r\n" +
+				EndTime + "\r\n" +
+				Day + "\r\n" +
+				typeRBtn.getId() + "\r\n" +
+				colorCP + "\r\n" 
 				);
 	}
 	
