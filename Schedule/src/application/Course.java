@@ -91,9 +91,9 @@ public class Course {
 		else ifDoubleVBox = false;
 			String VBoxStyle = GridPaneVBox1.getStyle(); // Save the original color of the vbox.
 			GridPaneVBox1.setOnMouseEntered((e) -> { //When mouse entered, change to darker color
-				GridPaneVBox1.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
+				GridPaneVBox1.setStyle("-fx-font-size: 14;\n" + "-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " +toDarkerRgbString() + ";\n");
 				if (GridPaneVBox2 != null)
-					GridPaneVBox2.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox2.setStyle("-fx-font-size: 14;\n" + "-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" + "-fx-background-color: " + toDarkerRgbString() + ";\n");
 			});
 			GridPaneVBox1.setOnMouseExited((e) -> { //When mouse exited, change to the original color.
 				GridPaneVBox1.setStyle(VBoxStyle);
@@ -103,8 +103,8 @@ public class Course {
 			//Same as above just for sub VBoxs
 			if (GridPaneVBox2 != null) {
 				GridPaneVBox2.setOnMouseEntered((e) -> {
-					GridPaneVBox1.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
-					GridPaneVBox2.setStyle("-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox1.setStyle("-fx-font-size: 14;\n" + "-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
+					GridPaneVBox2.setStyle("-fx-font-size: 14;\n" + "-fx-font-weight: bold;\n" + "-fx-border-color: white;\n" +  "-fx-background-color: " + toDarkerRgbString() + ";\n");
 			    });
 				GridPaneVBox2.setOnMouseExited((e) -> {
 					GridPaneVBox1.setStyle(VBoxStyle);
