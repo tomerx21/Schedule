@@ -66,7 +66,7 @@ public class Course {
 	private void changeGridPaneVBox() {
 		GridPaneVBox1 = new VBox(0);
 		Label L1 = new Label(lectLabel);
-		String cssLayout = "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
+		String cssLayout = "-fx-font-size: 14;\n" + "-fx-border-color: black;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 		GridPaneVBox1.setStyle(cssLayout);
 		GridPaneVBox1.setAlignment(Pos.CENTER);
 		L1.setStyle("-fx-font-weight: bold;\n");
@@ -78,7 +78,7 @@ public class Course {
 		if ((StartTime < 5) && (EndTime > 5)) {
 			ifDoubleVBox = true;
 			GridPaneVBox2 = new VBox(0);
-			cssLayout = "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
+			cssLayout = "-fx-font-size: 14;\n" + "-fx-border-width: 1;\n" + "-fx-background-color: " + toRgbString(colorCP) + ";\n";
 			GridPaneVBox2.setStyle(cssLayout);
 			GridPaneVBox2.setAlignment(Pos.CENTER);
 			L1 = new Label(lectLabel + " - המשך");
