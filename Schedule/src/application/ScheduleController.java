@@ -388,10 +388,13 @@ public class ScheduleController {
 	
 	// If day were chosen.
 	@FXML void dayHiding(ActionEvent event) {
+		
 		if ((dayCB.getValue() == null) || (dayCB.getValue().getNum() == 7))
 			dayCBFlag = false;
 		else {
 			dayCBFlag = true;
+			setTimeCB(1, startTimeCB, StartTimes);
+			setTimeCB(1, endTimeCB, EndTimes);
 			if (dayCB.getValue().getNum() == 4) { // if tuesday
 				setTimeCB(1, startTimeCB, StartTimes);
 				if (startTimeCB.getValue() != null) // if start time was chosen
@@ -399,6 +402,7 @@ public class ScheduleController {
 				else {
 					setTimeCB(1, endTimeCB, EndTimes);
 				}
+				
 			}
 		}
 		checkIfDisableBtn();
