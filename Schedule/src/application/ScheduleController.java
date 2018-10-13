@@ -69,7 +69,7 @@ public class ScheduleController {
    
 	// Initialize.
 	@FXML public void initialize() {
-		rowsInGrid = ScheduleGrid.getRowCount();
+		rowsInGrid = ScheduleGrid.getRowConstraints().size();
 		GridInitSize = ScheduleGrid.getChildren().size();
 		StartTimes = new Times[GridInitSize];
 		EndTimes = new Times[GridInitSize];
